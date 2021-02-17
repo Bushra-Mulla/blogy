@@ -1,0 +1,5 @@
+# Django #
+
+.env
+*/__pycache__/*
+
