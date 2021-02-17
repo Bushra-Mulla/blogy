@@ -1,4 +1,27 @@
 
+
+.card {
+  width: 320px;
+  height: 590px; 
+  padding: 5px;
+  margin: 20px;
+  float: left;
+  box-shadow: 3px 3px 3px 3px rgb(153, 150, 150);
+  position: relative;
+  bottom: 30px;
+  text-align: center;
+  display: inline;
+  /* background: linear-gradient(45deg, rgb(135, 240, 214), rgb(29, 126, 182));; */
+}
+.boot{
+  margin-bottom: 30px;
+  left: 1.4%;
+  position: relative;
+  top: 8px;
+  bottom: 1%;
+}
+
+
 .container {
   position: relative;
   text-align: center;

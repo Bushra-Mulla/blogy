@@ -7,10 +7,6 @@ from django.contrib import messages
 from .models import Post
 
 
-<<<<<<< HEAD
-def index(request):
-  return render(request, 'index.html')
-=======
 def home (request):
     last_twenty = Post.objects.all().order_by('-id')[:3]
     # last_twenty=Post.objects.all()
@@ -63,4 +59,3 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
->>>>>>> 433c13d5660322080174293daf43204426d84f2c
