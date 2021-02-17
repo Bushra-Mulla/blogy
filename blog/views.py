@@ -4,10 +4,13 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from .models import Post
 
 
-def home(request):
-    return HttpResponse('<h1>Blog</h1>')
+def home (request):
+    last_twenty = Post.objects.all().order_by('-id')[:3]
+    # last_twenty=Post.objects.all()
+    return render(request, 'index.html', {'posts':last_twenty})
 
 
 def logIn(request):
@@ -55,3 +58,4 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
