@@ -1,9 +1,7 @@
 # Django #
 
 .env
-blog/__pycache__
-db.sqlite3
-/
+*/__pycache__/*
 
 
 
