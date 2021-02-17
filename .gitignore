@@ -1,2 +1,2 @@
-.env
-project/__pycache__
+/.env
+/project/__pycache__
