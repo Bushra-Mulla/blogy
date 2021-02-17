@@ -47,6 +47,18 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 ## App Preview
 ### The Website Dimo 
 
+## API Endpoints
+These are some of the EndPoints we used in this project
+
+| #  |  Action  |  Method |  URL  |  Description  |
+| :------------ | :------------ | :------------ | :------------ | :------------ |
+|  1|  CRAETE | POST  |   /login |  To login to the user account|
+|   2|  CREATE | POST  |/signup   | To create new account|
+|   3|   create |post  |/project/new   | To create new project |
+|   4|   Add | patch  | /members/new/:id  |To Add a new member to the project |
+|   5|   delete | delete  |  /project/:id | To delete a project|
+|   6|   Remove |patch   |/members/remove/:id   | To remove a member from a project|
+|   7|    Update|patch   |/project/:id   |To edit(add/delete tasks) the project |
 
 ## Code Installation
 #### Python 3.8
