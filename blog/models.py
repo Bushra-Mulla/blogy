@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+class user_profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.CharField(max_length=255)
+    about_me = models.CharField(max_length=255)
+    position = models.CharField(max_length=100)
 class categorys(models.Model):
     category_name = models.CharField(max_length=100)
     descreption = models.CharField(max_length=250)
@@ -30,7 +35,6 @@ class likes(models.Model):
 
     def __str__(self):
         pass
-        # ordering = []
 
 
 class comment(models.Model):

@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Post
 # Create your views here.
 
 def home (request):
-    return HttpResponse('<h1>Blog</h1>')
+    last_twenty = Post.objects.all().order_by('-id')[:10]
+    return render(request, 'index.html', {'posts':last_twenty})
+
