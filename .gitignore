@@ -1,5 +1,8 @@
-/.env
+.env
 
-/project/__pycache__
+project/__pycache__
+
+
+blog/__pycache__
 
 
