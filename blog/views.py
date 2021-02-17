@@ -4,6 +4,7 @@ from .models import Post
 # Create your views here.
 
 def home (request):
-    last_twenty = Post.objects.all().order_by('-id')[:10]
+    last_twenty = Post.objects.all().order_by('-id')[:3]
+    # last_twenty=Post.objects.all()
     return render(request, 'index.html', {'posts':last_twenty})
 

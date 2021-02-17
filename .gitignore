@@ -1,2 +1,9 @@
-*.env
+# Django #
+
+/.env
 __pycache__
+db.sqlite3
+
+
+
+

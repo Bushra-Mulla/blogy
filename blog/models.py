@@ -18,15 +18,14 @@ class categorys(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    post_img = models.ImageField(upload_to='', null=True)
+    post_img = models.ImageField(
+        upload_to='', blank=True, default='../test.png')
     date_post = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category_id = models.ForeignKey(categorys, on_delete=models.CASCADE)
     isPublish = models.BooleanField(default=False)
 
-    def __str__(self):
-        pass
-
+   
 
 class likes(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
