@@ -1,2 +1,2 @@
-.env
-blog/__pycache__
+*.env
+__pycache__
