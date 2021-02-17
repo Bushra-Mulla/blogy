@@ -18,7 +18,6 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category_id = models.ForeignKey(categorys, on_delete=models.CASCADE)
     isPublish = models.BooleanField(default=False)
-    likes_count = models.IntegerField()
 
     def __str__(self):
         pass
@@ -27,6 +26,7 @@ class Post(models.Model):
 class likes(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     Post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    likes_count = models.IntegerField()
 
     def __str__(self):
         pass
