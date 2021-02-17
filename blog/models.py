@@ -8,7 +8,6 @@ class user_profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.CharField(max_length=255)
     about_me = models.CharField(max_length=255)
-    position = models.CharField(max_length=100)
 
 class categorys(models.Model):
     category_name = models.CharField(max_length=100)
@@ -19,8 +18,7 @@ class categorys(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    post_img = models.ImageField(
-        upload_to='', blank=True, default='../test.png')
+    post_img = models.ImageField(upload_to='', blank=True, default='../test.png')
     date_post = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category_id = models.ForeignKey(categorys, on_delete=models.CASCADE)

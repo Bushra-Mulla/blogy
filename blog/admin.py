@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import user_profile, Post, categorys, likes,comment,report
+from .models import *
 # Register your models here.
 
 admin.site.register(user_profile)
