@@ -2,7 +2,7 @@
 
 .card {
   width: 320px;
-  height: 590px; 
+  height: 400px; 
   padding: 5px;
   margin: 20px;
   float: left;
@@ -14,13 +14,17 @@
   /* background: linear-gradient(45deg, rgb(135, 240, 214), rgb(29, 126, 182));; */
 }
 .boot{
-  margin-bottom: 30px;
+  margin-bottom: 30%;
   left: 1.4%;
   position: relative;
   top: 8px;
   bottom: 1%;
+  
 }
 
+.fot{
+  top: 20%;
+}
 
 .container {
   position: relative;
