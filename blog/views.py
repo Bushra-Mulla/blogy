@@ -4,7 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from .models import Post
+from .models import *
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 def home (request):
@@ -37,10 +38,8 @@ def logIn(request):
         form = LoginForm()
     return render(request, 'logIn.html', {'form': form})
 
-
 # def logIn(request):
 #     return render(request, 'logIn.html')
-
 
 def signup(request):
     if request.method == 'POST':
@@ -59,3 +58,22 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+class PostCreate(CreateView):
+    model = Post
+    fields = ['title', 'content', 'post_img', 'category_id', 'author']
+    success_url = '/'
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/')
+
+class PostUpdate(UpdateView):
+  model = Post
+  fields = ['title', 'content', 'post_img', 'category_id', 'author']
+
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.save()
+    return HttpResponseRedirect('/post/' + str(self.object.pk))

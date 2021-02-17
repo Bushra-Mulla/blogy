@@ -54,7 +54,7 @@ These are some of the EndPoints we used in this project
 | :------------ | :------------ | :------------ | :------------ | :------------ |
 |  1|  CRAETE | POST  |   /login |  To login to the user account|
 |   2|  CREATE | POST  |/signup   | To create new account|
-|   3|   create |post  | | |
+|   3|   create |post  | / | |
 |   4|   Add | patch  |   | |
 |   5|   delete | delete  |  | |
 |   6|   Remove |patch   |   | |
