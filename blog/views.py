@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm, LoginForm
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 
 def home(request):
