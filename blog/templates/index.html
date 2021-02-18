@@ -1,4 +1,5 @@
-{%extends 'base.html'%}
+{%extends 'base.html' %}
+
 {% load static %}
 
 
@@ -30,28 +31,13 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+{%block post_cards%}
+{%endblock%}
 <br>
 <br>
-{%for post in posts%}
 
-<!-- <div class="boot"> -->
-    <div class="card card-custom bg-white border-white card">
-        <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
-
-        </div>
-        <div class="card-custom-avatar">
-            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
-        </div>
-        <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
-            <p class="card-text">{{post.author}} {{post.date_post}}</p>
-        </div>
-    </div>
-<!-- </div> -->
-{%endfor%}
 
 {%for a in related%}
-<p>{{a.author.User}}</p>
 {%endfor%}
 
 {%endblock%}
