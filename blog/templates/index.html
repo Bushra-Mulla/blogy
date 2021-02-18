@@ -36,19 +36,22 @@
 <body calss="boot">
     <div class="card card-custom bg-white border-white card">
         <div class="card-custom-img"
-            style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);">
+            style="background-image: url({{post.post_img.url}});">
+
         </div>
         <div class="card-custom-avatar">
             <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
         </div>
         <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title">{{post.title}}</h4>
-            <p class="card-text">Cards have minimum height set. You can use Bootstrap <a
-                    href="https://getbootstrap.com/docs/4.0/components/card/#card-decks">card-decks</a> to align them
-                nicely in a row.</p>
+            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
+            <p class="card-text">{{post.author}} {{post.date_post}}</p>
         </div>
-
     </div>
 </body>
 {%endfor%}
+
+{%for a in related%}
+<p>{{a.author.User}}</p>
+{%endfor%}
+
 {%endblock%}

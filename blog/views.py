@@ -9,9 +9,14 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 def home (request):
-    last_twenty = Post.objects.all().order_by('-id')[:20]
+    # last_twenty = Post.objects.all().order_by('-id')[:20]
+    last_twenty = Post.objects.filter(isPublish = True).order_by('-id')[:20]
+
+    related = Post.objects.select_related('author').all()
     # last_twenty=Post.objects.all()
-    return render(request, 'index.html', {'posts':last_twenty})
+    return render(request, 'index.html', {'posts': last_twenty, 'related': related})
+
+
 
 
 def logIn(request):
@@ -58,6 +63,11 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+
+def post_show(request):
+    pass
+
+
 class PostCreate(CreateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id', 'author']
@@ -77,3 +87,4 @@ class PostUpdate(UpdateView):
     self.object = form.save(commit=False)
     self.object.save()
     return HttpResponseRedirect('/post/' + str(self.object.pk))
+

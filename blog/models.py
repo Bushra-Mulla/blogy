@@ -6,25 +6,32 @@ from django.contrib.auth.models import User
 
 class user_profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.CharField(max_length=255)
-    about_me = models.CharField(max_length=255)
+    profile_picture = models.ImageField(
+        upload_to='profile_img/', blank=True, default='profile_img/profile.png')
+    about_me = models.CharField(max_length=255, blank=True ,null=True)
+    position = models.CharField(max_length=100, blank=True, null=True)
+
 
 class categorys(models.Model):
     category_name = models.CharField(max_length=100)
-    descreption = models.CharField(max_length=250)
-    image = models.ImageField()
+    descreption = models.CharField(max_length=250, blank=True, null=True)
+    image = models.ImageField(upload_to='category_img/',
+                              blank=True, default='category_img/category.png')
+
 
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    post_img = models.ImageField(upload_to='', blank=True, default='../test.png')
+    post_img = models.ImageField(
+        upload_to='post_img/', blank=True, default='post_img/test.png')
+
     date_post = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category_id = models.ForeignKey(categorys, on_delete=models.CASCADE)
     isPublish = models.BooleanField(default=False)
 
-   
+
 
 class likes(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
