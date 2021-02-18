@@ -33,8 +33,10 @@
 <br>
 <br>
 
-<!-- {%block post_cards%}
-{%endblock%} -->
+{%block post_card%}
+{% include "./blog/post_cards.html" with posts=posts %}
+
+{%endblock%}
 {%for post in posts%}
 
 <body calss="boot">

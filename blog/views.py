@@ -92,8 +92,6 @@ class PostUpdate(UpdateView):
 def userPostsList(request):
     current_user = request.user
     posts = Post.objects.all()
-    # print(current_user.id)
-    # print(current_user.username)
     print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
 
@@ -104,7 +102,8 @@ def userPublishedPostsList(request):
     # print(current_user.id)
     # print(current_user.username)
     print(posts)
-    return render(request, 'userPostsList.html', {'posts': posts})
+    # return render(request, 'userPostsList.html', {'posts': posts})
+    return HttpResponse('hhhhh')
 
 
 def userNotPublishedPostsList(request):

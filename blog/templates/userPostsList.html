@@ -8,39 +8,45 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" href="#home">All Posts</a>
+        <a href="#all">
+            <a class="nav-link active" href="/user/posts/">
+                All Posts</a></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#menu1">Published</a>
+        <a href="#published">
+            <a class="nav-link active" href="/user/posts/published/">
+                Published</a></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#menu2">Not Published</a>
+        <a href="#notPublished">
+            <a class="nav-link active" href="/user/posts/notPublished/">
+                Not Published</a></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#menu2">Refused</a>
+        <a href="#refused">
+            <a class="nav-link active" href="/user/posts/refused/">
+                Refused</a></a>
     </li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-    <div id="home" class="container tab-pane active"><br>
+    <div id="all" class="container tab-pane active"><br>
         {%block post_Cards%}
         {% include "./blog/post_cards.html" with posts=posts %}
-        {% with variable='../userPostsList.html' %}
-        {%endwith%}
         {%endblock%}
     </div>
-    <div id="menu1" class="container tab-pane fade"><br>
+    <div id="published" class="container tab-pane fade"><br>
         <h3>Menu 1</h3>
         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </p>
     </div>
-    <div id="menu2" class="container tab-pane fade"><br>
+    <div id="notPublished" class="container tab-pane fade"><br>
         <h3>Menu 2</h3>
         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
             aperiam.</p>
     </div>
-    <div id="menu2" class="container tab-pane fade"><br>
+    <div id="refused" class="container tab-pane fade"><br>
         <h3>Menu 2</h3>
         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
             aperiam.</p>
