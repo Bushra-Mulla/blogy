@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
+{% block content %}
 <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
     <div class="container">
         <div class="card login-card">
@@ -8,14 +10,15 @@
                     <img src="{% static '/images/landing-img.png' %}" alt="login" class="login-card-img">
                 </div>
                 <div class="col-md-7">
-                    <div class="card-body">
-                        <div class="brand-wrapper">
+                    <div class="card-body custom-scrollbar-css">
+                        <!-- <div class="brand-wrapper">
                             <img src="assets/images/logo.svg" alt="logo" class="logo">
-                        </div>
-                        <p class="login-card-description">Sign into your account</p>
-                        {% block content %} {% endblock %}
-
+                        </div> -->
+                        {% block body %} {% endblock %}
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 </main>
+{% endblock %}

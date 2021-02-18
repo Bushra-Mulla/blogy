@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    
+
     'blog.apps.BlogConfig',
     'crispy_forms',
     'django.contrib.admin',
@@ -126,9 +126,9 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-MEDIA_URL='/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # STATICFILES_DIRS =(
 #     os.path.join(BASE_DIR, 'static')
 # )
-
+LOGIN_REDIRECT_URL = 'home'

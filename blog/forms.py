@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 
-class LoginForm(forms.Form):
-    username = forms.CharField(label="User Name", max_length=64)
-    password = forms.CharField(widget=forms.PasswordInput())
+# class LoginForm(forms.Form):
+#     username = forms.CharField(label="User Name", max_length=64)
+#     password = forms.CharField(widget=forms.PasswordInput())
 
 
 class SignUpForm(UserCreationForm):
