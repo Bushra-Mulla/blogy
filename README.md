@@ -53,9 +53,9 @@ These are some of the EndPoints we used in this project
 | #  |  Action  |  Method |  URL  |  Description  |
 | :------------ | :------------ | :------------ | :------------ | :------------ |
 |  1|  CRAETE | POST  |   /login |  To login to the user account|
-|   2|  CREATE | POST  |/signup   | To create new account|
-|   3|  create |post  | /post/create | To create new post|
-|   4|  Edit | patch  | /post/<int:pk>/update/  | To edit a specific post|
+|   2| CREATE | POST  |/signup   | To create new account|
+|   3| CREATE | POST  | /post/create | To create new post|
+|   4| EDIT | PATCH  | /post/<int:pk>/update/  | To edit a specific post|
 |   5|   delete | delete  |  | |
 |   6|   Remove |patch   |   | |
 |   7|    Update|patch   |   | |
