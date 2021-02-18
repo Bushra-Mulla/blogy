@@ -86,3 +86,12 @@ class PostUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
+
+
+def userPostsList(request):
+    current_user = request.user
+    posts = Post.objects.all()
+    # print(current_user.id)
+    # print(current_user.username)
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})

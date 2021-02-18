@@ -32,6 +32,9 @@
 </div>
 <br>
 <br>
+
+<!-- {%block post_cards%}
+{%endblock%} -->
 {%for post in posts%}
 
 <body calss="boot">
@@ -49,7 +52,6 @@
     </div>
 </body>
 {%endfor%}
-
 {%for a in related%}
 <p>{{a.author.User}}</p>
 {%endfor%}
