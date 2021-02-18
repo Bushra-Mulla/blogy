@@ -8,7 +8,7 @@ class user_profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(
         upload_to='profile_img/', blank=True, default='profile_img/profile.png')
-    about_me = models.CharField(max_length=255, blank=True ,null=True)
+    about_me = models.CharField(max_length=255, blank=True, null=True)
     position = models.CharField(max_length=100, blank=True, null=True)
 
 
@@ -17,7 +17,6 @@ class categorys(models.Model):
     descreption = models.CharField(max_length=250, blank=True, null=True)
     image = models.ImageField(upload_to='category_img/',
                               blank=True, default='category_img/category.png')
-
 
 
 class Post(models.Model):
@@ -32,11 +31,10 @@ class Post(models.Model):
     isPublish = models.BooleanField(default=False)
 
 
-
 class likes(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     Post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
-    likes_count = models.IntegerField()
+    likes_count = models.IntegerField(blank=True)
 
     def __str__(self):
         pass
