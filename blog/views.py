@@ -10,7 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 def home (request):
     # last_twenty = Post.objects.all().order_by('-id')[:20]
-    last_twenty = Post.objects.filter(isPublish= True).order_by('-id')[:20]
+    last_twenty = Post.objects.filter(isPublish = True).order_by('-id')[:20]
 
     related = Post.objects.select_related('author').all()
     # last_twenty=Post.objects.all()
