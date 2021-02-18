@@ -45,11 +45,10 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {%for category in category_list%}
-                <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
+                <li><a class="dropdown-item" href="#">{{category}}</a></li>
                 {%endfor%}
               </ul>
             </li>
-
           </ul>
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

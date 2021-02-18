@@ -89,5 +89,5 @@ class PostUpdate(UpdateView):
 
 
 def category_list(request):
-    category=categorys.objects.all()
-    return render(request, base.html,{'category_list':category})
+    categorys.objects.all()
+    return render(request,{'category_list':category})
