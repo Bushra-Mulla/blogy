@@ -43,6 +43,7 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * As a logged User, I should be able to edit own comments
 * As a logged User, I should be able to delete own comments
 * As a logged User, I should be able to report any post
+* As a logged user, H should be able to contact with admin by life chating
 
 ## App Preview
 ### The Website Dimo 
@@ -52,13 +53,15 @@ These are some of the EndPoints we used in this project
 
 | #  |  Action  |  Method |  URL  |  Description  |
 | :------------ | :------------ | :------------ | :------------ | :------------ |
-|  1|  CRAETE | POST  |   /login |  To login to the user account|
-|   2|  CREATE | POST  |/signup   | To create new account|
-|   3|  create |post  | /post/create | To create new post|
-|   4|  Edit | patch  | /post/<int:pk>/update/  | To edit a specific post|
-|   5|   delete | delete  |  | |
-|   6|   Remove |patch   |   | |
-|   7|    Update|patch   |   | |
+|   1| View  | get  | / | To view Home page|
+|   2|  CRAETE | POST  |   /login |  To login to the user account|
+|   3| CREATE | POST  |/signup   | To create new account|
+|   4| CREATE  | post  | /post/create | To create new post|
+|   5| View | get  | /post/post_id | To veiw exist post|
+|   6| EDIT | PATCH  | /post/<int:pk>/update/  | To edit a specific post|
+|   7|   delete | delete  |  | |
+|   8|   Remove |patch   |   | |
+|   9|    Update |patch   |   | |
 
 ## Code Installation
 #### Python 3.8
