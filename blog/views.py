@@ -62,8 +62,11 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def post_show(request):
-    pass
+def post_show(request, post_id):
+    post = Post.objects.get(id=post_id)
+    return render(request, 'post/show.html', {'post': post})
+
+  
 
 
 class PostCreate(CreateView):
