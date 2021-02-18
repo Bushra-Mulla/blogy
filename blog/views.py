@@ -10,11 +10,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 def home(request):
     # last_twenty = Post.objects.all().order_by('-id')[:20]
-    last_twenty = Post.objects.filter(isPublish=True).order_by('-id')[:20]
-
-    related = Post.objects.select_related('author').all()
+    last_twenty = Post.objects.filter(isPublish=True ).order_by('-id')[:20] 
+    # author_info = Post.objects.filter(isPublish=True).order_by('-id')[:20].distinct().values('author')
+    # print(author_info.query)
     # last_twenty=Post.objects.all()
-    return render(request, 'index.html', {'posts': last_twenty, 'related': related})
+    return render(request, 'index.html', {'posts': last_twenty})
 
 
 # def logIn(request):
