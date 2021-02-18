@@ -9,9 +9,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 def home(request):
-    last_twenty Post.objects.filter(
+    last_twenty = Post.objects.filter(
         isPublish=True).select_related('author__user_profile').order_by('-id')[:20]
-
     return render(request, 'index.html', {'posts': last_twenty})
 
 
@@ -87,3 +86,5 @@ class PostUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
+
+
