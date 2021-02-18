@@ -18,6 +18,7 @@ def home (request):
 
 
 
+
 def logIn(request):
     if request.method == 'POST':
         # if post, then authenticate (user submitted username and password)
@@ -66,6 +67,7 @@ def signup(request):
 def post_show(request):
     pass
 
+
 class PostCreate(CreateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id', 'author']
@@ -85,3 +87,4 @@ class PostUpdate(UpdateView):
     self.object = form.save(commit=False)
     self.object.save()
     return HttpResponseRedirect('/post/' + str(self.object.pk))
+
