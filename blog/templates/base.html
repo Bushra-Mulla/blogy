@@ -44,7 +44,9 @@
                 Catagories
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-           
+                {%for category in category_list%}
+                <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
+                {%endfor%}
               </ul>
             </li>
 
