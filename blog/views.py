@@ -127,3 +127,7 @@ def userRefusedPostsList(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def categoryCreate(request):
+    print('create new category')

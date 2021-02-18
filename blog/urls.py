@@ -18,4 +18,6 @@ urlpatterns = [
          name='userNotPublishedPostsList'),
     path('user/posts/refused/', views.userRefusedPostsList,
          name='userRefusedPostsList'),
+    path('category/create/', views.categoryCreate, name="categoryCreate"),
+
 ]
