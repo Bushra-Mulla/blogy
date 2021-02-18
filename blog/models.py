@@ -36,7 +36,7 @@ class Post(models.Model):
 class likes(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     Post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
-    likes_count = models.IntegerField()
+    likes_count = models.IntegerField(blank=True)
 
     def __str__(self):
         pass
