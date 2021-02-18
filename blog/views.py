@@ -96,3 +96,30 @@ def userPostsList(request):
     # print(current_user.username)
     print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def userPublishedPostsList(request):
+    current_user = request.user
+    posts = Post.objects.all()
+    # print(current_user.id)
+    # print(current_user.username)
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def userNotPublishedPostsList(request):
+    current_user = request.user
+    posts = Post.objects.all()
+    # print(current_user.id)
+    # print(current_user.username)
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def userRefusedPostsList(request):
+    current_user = request.user
+    posts = Post.objects.all()
+    # print(current_user.id)
+    # print(current_user.username)
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})

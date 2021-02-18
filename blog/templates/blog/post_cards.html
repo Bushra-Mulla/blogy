@@ -1,8 +1,8 @@
 {%autoescape off%}
 
-<h1>hhhhhhhhhhhhhhhhhhhhhh,</h1>
-
-<!-- {%for post in posts%}
+{% if posts %}
+{%for post in posts%}
+<!-- <h1>{{post.title}}</h1> -->
 
 <body calss="boot">
     <div class="card card-custom bg-white border-white card">
@@ -18,5 +18,9 @@
         </div>
     </div>
 </body>
-{%endfor%} -->
+{%endfor%}
+{% else %}
+<h3>Nothing To Show</h3>
+{% endif %}
+
 {%endautoescape %}

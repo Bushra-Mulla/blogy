@@ -4,11 +4,7 @@
 
 {%block content%}
 
-{%block post_Cards%}
-{% include "./blog/post_cards.html" with posts=posts %}
-{% with variable='../userPostsList.html' %}
-{%endwith%}
-{%endblock%}
+
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -28,9 +24,11 @@
 <!-- Tab panes -->
 <div class="tab-content">
     <div id="home" class="container tab-pane active"><br>
-        <h3>HOME</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.</p>
+        {%block post_Cards%}
+        {% include "./blog/post_cards.html" with posts=posts %}
+        {% with variable='../userPostsList.html' %}
+        {%endwith%}
+        {%endblock%}
     </div>
     <div id="menu1" class="container tab-pane fade"><br>
         <h3>Menu 1</h3>
@@ -49,28 +47,4 @@
     </div>
 </div>
 </div>
-<h1>User posts list</h1>
-
-{%for post in posts%}
-
-<body calss="boot">
-    <div class="card card-custom bg-white border-white card">
-        <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
-
-        </div>
-        <div class="card-custom-avatar">
-            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
-        </div>
-        <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
-            <p class="card-text">{{post.author}} {{post.date_post}}</p>
-        </div>
-    </div>
-</body>
-{%endfor%}
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">Home</a></li>
-    <li role="presentation"><a href="#">Profile</a></li>
-    <li role="presentation"><a href="#">Messages</a></li>
-</ul>
 {%endblock%}

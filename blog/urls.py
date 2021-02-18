@@ -11,4 +11,7 @@ urlpatterns = [
     path('post/<int:pk>/update/', views.PostUpdate.as_view(),
          name='blog-post-Update'),
     path('user/posts/', views.userPostsList, name='userPostsList'),
+    path('user/posts/published', views.userPublishedPostsList, name='userPublishedPostsList'),
+    path('user/posts/notPublished', views.userNotPublishedPostsList, name='userNotPublishedPostsList'),
+    path('user/posts/refused', views.userRefusedPostsList, name='userRefusedPostsList'),
 ]
