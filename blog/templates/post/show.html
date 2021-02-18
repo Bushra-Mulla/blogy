@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- templates/cats/detail.html -->
+<div class="card-content">    
+  <img class="img-fluid" src="{{post.post_img.url}}"  height="350" >
+
+    <h1> title: {{ post.title }} </h1>
+   {{ post.content | safe}}
+   <h5> Published: {{ post.date_post }} </h5>
+   <h5> by: {{ post.author }} </h5>
+  
+</div>
+<a href="{% url 'blog-post-Update' post.id %}">Update Details</a> | 
+
+    {% endblock %}
