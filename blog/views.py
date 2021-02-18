@@ -88,28 +88,28 @@ class PostUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
 
+# Query to
+
 
 def userPostsList(request):
     current_user = request.user
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-id')
     print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
 
 
 def userPublishedPostsList(request):
     current_user = request.user
-    posts = Post.objects.all()
+    posts = Post.objects.filter(isPublish="published")
     # print(current_user.id)
     # print(current_user.username)
     print(posts)
-    # return render(request, 'userPostsList.html', {'posts': posts})
-    return HttpResponse('hhhhh')
+    return render(request, 'userPostsList.html', {'posts': posts})
 
 
 def userNotPublishedPostsList(request):
     current_user = request.user
-    posts = Post.objects.all()
-    # print(current_user.id)
+    posts = Post.objects.filter(isPublish="notPublished")
     # print(current_user.username)
     print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
@@ -117,7 +117,7 @@ def userNotPublishedPostsList(request):
 
 def userRefusedPostsList(request):
     current_user = request.user
-    posts = Post.objects.all()
+    posts = Post.objects.filter(isPublish="refused")
     # print(current_user.id)
     # print(current_user.username)
     print(posts)
