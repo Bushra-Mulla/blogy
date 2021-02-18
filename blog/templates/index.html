@@ -33,7 +33,7 @@
 <br>
 {%for post in posts%}
 
-<body calss="boot">
+<!-- <div class="boot"> -->
     <div class="card card-custom bg-white border-white card">
         <div class="card-custom-img"
             style="background-image: url({{post.post_img.url}});">
@@ -47,7 +47,7 @@
             <p class="card-text">{{post.author}} {{post.date_post}}</p>
         </div>
     </div>
-</body>
+<!-- </div> -->
 {%endfor%}
 
 {%for a in related%}
