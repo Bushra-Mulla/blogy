@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="card login-card">
+            <div class="row no-gutters">
+                <div class="col-md-5">
+                    <img src="{% static '/images/landing-img.png' %}" alt="login" class="login-card-img">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <div class="brand-wrapper">
+                            <img src="assets/images/logo.svg" alt="logo" class="logo">
+                        </div>
+                        <p class="login-card-description">Sign into your account</p>
+                        <form method="POST">
+                            <div class="form-group">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <div class="form-group">
+                                    <button type="submit">Sign up</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="border-top pt-3">
+                            {% if message %}
+                            <small class="test-mute">{{ message }}</small>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+</main>
+{% endblock %}
