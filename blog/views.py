@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -122,3 +122,8 @@ def userRefusedPostsList(request):
     # print(current_user.username)
     print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
