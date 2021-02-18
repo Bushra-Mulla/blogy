@@ -47,6 +47,18 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 ## App Preview
 ### The Website Dimo 
 
+## API Endpoints
+These are some of the EndPoints we used in this project
+
+| #  |  Action  |  Method |  URL  |  Description  |
+| :------------ | :------------ | :------------ | :------------ | :------------ |
+|  1|  CRAETE | POST  |   /login |  To login to the user account|
+|   2|  CREATE | POST  |/signup   | To create new account|
+|   3|  create |post  | /post/create | To create new post|
+|   4|  Edit | patch  | /post/<int:pk>/update/  | To edit a specific post|
+|   5|   delete | delete  |  | |
+|   6|   Remove |patch   |   | |
+|   7|    Update|patch   |   | |
 
 ## Code Installation
 #### Python 3.8
@@ -68,7 +80,7 @@ python manage.py runserver
 ```
 3- Open browser to `http://127.0.0.1:8000` to see the website.
 
-4- Open a tab to `http://127.0.0.1:8000/admin/` to open the admin panel and add some.
+4- Open a tab to `http://127.0.0.1:8000/admin/` to open the admin panel and add some data.
 
 
 ## Future Features:

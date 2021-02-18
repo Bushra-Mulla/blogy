@@ -2,7 +2,7 @@
 
 .card {
   width: 320px;
-  height: 590px; 
+  height: 400px; 
   padding: 5px;
   margin: 20px;
   float: left;
@@ -14,13 +14,17 @@
   /* background: linear-gradient(45deg, rgb(135, 240, 214), rgb(29, 126, 182));; */
 }
 .boot{
-  margin-bottom: 30px;
+  margin-bottom: 30%;
   left: 1.4%;
   position: relative;
   top: 8px;
-  bottom: 1%;
+  bottom: 5%;
+  
 }
 
+.fot{
+  top: 20%;
+}
 
 .container {
   position: relative;
@@ -39,7 +43,7 @@
   width: 20%;
   min-width: 200px;
   overflow: hidden;
-  min-height: 450px;
+  min-height: 400px;
   border: 0;
   box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
 }
@@ -47,10 +51,11 @@
 .card-custom-img {
   height: 200px;
   min-height: 200px;
-  /* background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  border-color: inherit; */
+  border-color: inherit;
+
 }
 
 /* First border-left-width setting is a fallback */
