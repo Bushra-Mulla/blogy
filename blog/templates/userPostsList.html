@@ -5,9 +5,9 @@
 {%block content%}
 
 {%block post_Cards%}
-{% with variable='userPostsList.html' %}
+{% include "./blog/post_cards.html" with posts=posts %}
+{% with variable='../userPostsList.html' %}
 {%endwith%}
-<h1>cvbnhjm,</h1>
 {%endblock%}
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
