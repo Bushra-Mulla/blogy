@@ -40,11 +40,13 @@
 
         </div>
         <div class="card-custom-avatar">
-            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
+            <img class="img-fluid" src={{post.author.user_profile.profile_picture.url}} alt="Avatar" />
         </div>
         <div class="card-body" style="overflow-y: auto">
             <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
             <p class="card-text">{{post.author}} {{post.date_post}}</p>
+            <p class="card-text">{{post.author.user_profile.about_me}}</p>
+
         </div>
     </div>
 </body>
