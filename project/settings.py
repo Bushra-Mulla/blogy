@@ -68,7 +68,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'blog.context_processors.add_variable_to_context',
                 'blog.context_processors.reports',
-
+                'blog.context_processors.countNotArchivedReport',
             ],
         },
     },

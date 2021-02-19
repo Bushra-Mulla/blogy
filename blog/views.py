@@ -185,7 +185,7 @@ def archiveReport(request, report_id):
 # Query: Retrive number of not archived reports , make it a badge for admin anounncemnt
 
 
-def countNotArchivedReport():
-    countReports = report.objects.filter(is_archived=False).count()
-    print(countReports)
-    return countReports
+# def countNotArchivedReport():
+#     countReports = report.objects.filter(is_archived=False).count()
+#     print(countReports)
+#     return countReports
