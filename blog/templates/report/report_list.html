@@ -36,7 +36,7 @@
                             alt="List user"> -->
                         <i class="fa fa-user"></i>
                         <div class="gaadiex-list-item-text">
-                            <h3><a href="#">{{report.title}}</a></h3>
+                            <h3><a href="{% url 'reportDetails' report.id %}">{{report.title}}</a></h3>
                             <p>{{report.report_date}}</p>
                         </div>
                     </div>
@@ -57,7 +57,23 @@
                 {% endif %}
             </div>
         </div>
-        
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Images with text items</h4>
+                </div>
+                <div class="card-body">
+                    {% if report_details %}
+
+                    {%block report_details%}
+                    {% include "./report_details.html" with report=report_details %}
+                    {%endblock%}
+                    {% else %}
+                    <h3>Nothing To Show</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

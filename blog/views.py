@@ -143,9 +143,13 @@ class categoryCreate(CreateView):
 
 
 def reports(request):
-    current_user = request.user
+    # reports = report.objects.all().order_by('-id')
+    return render(request, 'report/report_list.html', {'reports': allReports()})
+
+
+def allReports():
     reports = report.objects.all().order_by('-id')
-    return render(request, 'report/report_list.html', {'reports': reports})
+    return reports
 
 
 class reportCreate(CreateView):
@@ -163,3 +167,9 @@ class reportCreate(CreateView):
         self.object.Post_id = post
         self.object.save()
         return HttpResponseRedirect('/')
+
+
+def reportDetails(request, report_id):
+    report_details = report.objects.get(id=report_id)
+    print(allReports())
+    return render(request, 'report/report_list.html', {'reports': allReports(), 'report_details': report_details})
