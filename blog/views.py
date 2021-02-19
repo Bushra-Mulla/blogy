@@ -146,7 +146,7 @@ def reports(request):
     current_user = request.user
     reports = report.objects.all().order_by('-id')
     print(posts)
-    return render(request, 'userPostsList.html', {'posts': posts})
+    return render(request, 'userPostsList.html', {'reports': reports})
 
 
 class reportCreate(CreateView):
