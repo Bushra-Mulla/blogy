@@ -1,5 +1,60 @@
 {% extends 'base.html' %}
-
+{% load static%}
 {% block content %}
-<h>Hello</h>
+
+<!-- <h1>{{report.title}}</h1> -->
+<link rel="stylesheet" type="text/css" href="{% static 'reports_list.css' %}" />
+
+<!-- <body calss="boot">
+    <div class="card card-custom bg-white border-white card">
+        <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
+
+        </div>
+        <div class="card-custom-avatar">
+            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
+        </div>
+        <div class="card-body" style="overflow-y: auto">
+            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
+            <p class="card-text">{{post.author}} {{post.date_post}}</p>
+        </div>
+    </div>
+</body> -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Images with text items</h4>
+                </div>
+                {% if reports %}
+                {%for report in reports%}
+                <div class="gaadiex-list">
+                    <div class="gaadiex-list-item"><img class="gaadiex-list-item-img"
+                            src="http://www.free-icons-download.net/images/commercial-male-user-icon-32765.png"
+                            alt="List user">
+                        <div class="gaadiex-list-item-text">
+                            <h3><a href="#">{{report.title}}</a></h3>
+                            <p>{{report.date}}</p>
+                        </div>
+                    </div>
+                    <!-- <div class="gaadiex-list-item"><img class="gaadiex-list-item-img"
+                            src="http://www.free-icons-download.net/images/commercial-male-user-icon-32765.png"
+                            alt="List user">
+                        <div class="gaadiex-list-item-text">
+                            <h3><a href="#">Catherine Crawford</a></h3>
+                            <h4>Brunch this weekend?</h4>
+                            <p> I'll be in your neighborhood doing errands</p>
+                        </div>
+                    </div> -->
+
+                </div>
+                {%endfor%}
+                {% else %}
+                <h3>Nothing To Show</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

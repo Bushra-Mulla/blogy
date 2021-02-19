@@ -145,8 +145,7 @@ class categoryCreate(CreateView):
 def reports(request):
     current_user = request.user
     reports = report.objects.all().order_by('-id')
-    print(posts)
-    return render(request, 'userPostsList.html', {'reports': reports})
+    return render(request, 'report/report_list.html', {'reports': reports})
 
 
 class reportCreate(CreateView):
