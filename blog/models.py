@@ -59,3 +59,4 @@ class report(models.Model):
     report_date = models.DateTimeField(default=timezone.now)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     Post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    is_archived = models.BooleanField(default=False)
