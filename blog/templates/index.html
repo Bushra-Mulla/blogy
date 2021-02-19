@@ -32,30 +32,9 @@
 </div>
 <br>
 <br>
-
-{%block post_card%}
-{% include "./blog/post_cards.html" with posts=posts %}
-
+{%block refused_post%}
+    {% include "./blog/post_cards.html" with posts=posts %}
 {%endblock%}
-{%for post in posts%}
 
-<body calss="boot">
-    <div class="card card-custom bg-white border-white card">
-        <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
-
-        </div>
-        <div class="card-custom-avatar">
-            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
-        </div>
-        <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
-            <p class="card-text">{{post.author}} {{post.date_post}}</p>
-        </div>
-    </div>
-</body>
-{%endfor%}
-{%for a in related%}
-<p>{{a.author.User}}</p>
-{%endfor%}
 
 {%endblock%}
