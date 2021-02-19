@@ -48,10 +48,12 @@
                                 <h6 style="padding-top: 15px;">From: {{report_details.user_id}}</h6>
                                 <h6 style="padding-bottom: 5px;">{{report_details.report_date}}</h6>
                                 <hr />
-                                
+
                                 <p>{{report_details.message}}</p>
                                 <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
                                     class="btn btn-success">Jump to post</a>
+                                <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
+                                    class="btn btn-default">Make resolve and archive</a>
                             </div>
                         </div>
                     </h1>
