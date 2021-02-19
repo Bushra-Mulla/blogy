@@ -10,10 +10,25 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h4>Images with text items</h4>
+                    <h4>Reports List</h4>
                 </div>
                 {% if reports %}
                 {%for report in reports%}
+                {% if not report.is_archived %}
+                <div class="gaadiex-list " style="border-left: solid #FF2C9C ; background-color: #D3EBFF;">
+                    <div class="gaadiex-list-item">
+                        <!-- <img class="gaadiex-list-item-img"
+                            src="http://www.free-icons-download.net/images/commercial-male-user-icon-32765.png"
+                            alt="List user"> -->
+                        <i class="fa fa-user"></i>
+                        <div class="gaadiex-list-item-text">
+                            <h3><a href="{% url 'reportDetails' report.id %}">{{report.title}}</a></h3>
+                            <p>{{report.report_date}}</p>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                {% else %}
                 <div class="gaadiex-list">
                     <div class="gaadiex-list-item">
                         <!-- <img class="gaadiex-list-item-img"
@@ -26,6 +41,8 @@
                         </div>
                     </div>
                 </div>
+                <hr />
+                {% endif %}
                 {%endfor%}
                 {% else %}
                 <h3>Nothing To Show</h3>
