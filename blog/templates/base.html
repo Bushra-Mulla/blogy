@@ -59,7 +59,7 @@
           </ul>
           {% if user.is_staff %}
           <a class="btn btn-primary" href="{% url 'reports' %}">
-            Announcement <span class="badge badge-light">{{countReports}}</span>
+            Announcement <span class="badge badge-light">{{countNotArchivedReport}}</span>
           </a>
           {% endif %}
           <!-- <a>{{testme}}</a> -->

@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-
+from . import context_processors
 urlpatterns = [
     path('', views.home, name='home'),
     path('logIn/', auth_views.LoginView.as_view(template_name='logIn.html'), name='logIn'),
@@ -26,4 +26,6 @@ urlpatterns = [
     path('reports/<int:report_id>', views.reportDetails, name="reportDetails"),
     path('reports/<int:report_id>/archived',
          views.archiveReport, name="archiveReport"),
+    path('reports/<str:archived>/',
+         context_processors.reports, name="notArchivedReport"),
 ]
