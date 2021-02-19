@@ -4,25 +4,10 @@
 
 <!-- <h1>{{report.title}}</h1> -->
 <link rel="stylesheet" type="text/css" href="{% static 'reports_list.css' %}" />
-
-<!-- <body calss="boot">
-    <div class="card card-custom bg-white border-white card">
-        <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
-
-        </div>
-        <div class="card-custom-avatar">
-            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
-        </div>
-        <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
-            <p class="card-text">{{post.author}} {{post.date_post}}</p>
-        </div>
-    </div>
-</body> -->
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 fixed-left">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
                     <h4>Images with text items</h4>
@@ -40,16 +25,6 @@
                             <p>{{report.report_date}}</p>
                         </div>
                     </div>
-                    <!-- <div class="gaadiex-list-item"><img class="gaadiex-list-item-img"
-                            src="http://www.free-icons-download.net/images/commercial-male-user-icon-32765.png"
-                            alt="List user">
-                        <div class="gaadiex-list-item-text">
-                            <h3><a href="#">Catherine Crawford</a></h3>
-                            <h4>Brunch this weekend?</h4>
-                            <p> I'll be in your neighborhood doing errands</p>
-                        </div>
-                    </div> -->
-
                 </div>
                 {%endfor%}
                 {% else %}
@@ -60,14 +35,25 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h4>Images with text items</h4>
+                    {% if report_details %}
+                    <h4>{{report_details.title}}</h4>
                 </div>
                 <div class="card-body">
-                    {% if report_details %}
-
-                    {%block report_details%}
-                    {% include "./report_details.html" with report=report_details %}
-                    {%endblock%}
+                    <h1>
+                        <div class="gaadiex-list-item">
+                            <img class="gaadiex-list-item-img" src="../../static/images/landing-img.png"
+                                alt="List user">
+                            <!-- <i class="fa fa-user"></i> -->
+                            <div class="gaadiex-list-item-text">
+                                <h6 style="padding-top: 15px;">From: {{report_details.user_id}}</h6>
+                                <h6 style="padding-bottom: 5px;">{{report_details.report_date}}</h6>
+                                <hr />
+                                <p>{{report_details.message}}</p>
+                                <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
+                                    class="btn btn-success">Jump to post</a>
+                            </div>
+                        </div>
+                    </h1>
                     {% else %}
                     <h3>Nothing To Show</h3>
                     {% endif %}

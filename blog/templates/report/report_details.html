@@ -1,6 +1,6 @@
 {%autoescape off%}
 
-{% if report_details %}
+{% if report_detail %}
 <!-- {%for report in reports%} -->
 
 <div class="gaadiex-list-item">
@@ -9,8 +9,9 @@
                     alt="List user"> -->
     <i class="fa fa-user"></i>
     <div class="gaadiex-list-item-text">
-        <h3><a href="#">{{report_details.title}}</a></h3>
-        <p>{{report_details.message}}</p>
+        <h2>From: {{report_detail.Post_id.title}}</h2>
+        <h3><a href="#">{{report_detail.title}}</a></h3>
+        <p>{{report_detail.message}}</p>
     </div>
 </div>
 

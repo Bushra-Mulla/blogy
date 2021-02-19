@@ -171,5 +171,5 @@ class reportCreate(CreateView):
 
 def reportDetails(request, report_id):
     report_details = report.objects.get(id=report_id)
-    print(allReports())
+    print(report_details.title)
     return render(request, 'report/report_list.html', {'reports': allReports(), 'report_details': report_details})
