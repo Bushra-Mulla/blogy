@@ -140,3 +140,18 @@ class categoryCreate(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/')
+
+
+class reportCreate(CreateView):
+    print('create new category')
+    model = categorys
+    fields = '__all__'
+    success_url = '/'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/')
+
+
