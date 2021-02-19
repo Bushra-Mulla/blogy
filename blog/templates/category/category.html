@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <div class="container">
+        <img src={{category_info.image.url}} class="img-fluid" style='opacity: 0.5'alt="Responsive image">
+        <div class="centered">  
+            <h2 >{{category_info.category_name}}</h2>
+            <h4 >{{category_info.descreption}}</h4>
+        </div>
+    </div>
+
+
+{%block refused_post%}
+    {% include "../blog/post_cards.html" with posts=posts %}
+{%endblock%}
+
+{%endblock%}

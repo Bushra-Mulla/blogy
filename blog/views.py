@@ -8,16 +8,13 @@ from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.views.generic.list import ListView
 
 
 def home(request):
-    # last_twenty = Post.objects.all().order_by('-id')[:20]
-    last_twenty = Post.objects.filter(isPublish=True).order_by('-id')[:20]
-
-    related = Post.objects.select_related('author').all()
-    # last_twenty=Post.objects.all()
-    return render(request, 'index.html', {'posts': last_twenty, 'related': related})
+    last_twenty = Post.objects.filter(
+        isPublish=True).select_related('author__user_profile').order_by('-id')[:20]
+    return render(request, 'index.html', {'posts': last_twenty})
 
 
 # def logIn(request):
@@ -103,6 +100,16 @@ def profile(request, username):
     return render(request, 'profile.html', {'username': username, 'post': post})
 
   
+
+def category_view(request, category_name):
+    categorys_post = categorys.objects.get(category_name=category_name)
+    post = Post.objects.filter(category_id=categorys_post)
+    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post , 'category_info':categorys_post})
+ 
+
+def published(request):
+    notPublished = Post.objects.filter(isPublish='notPublished')
+    return render(request, 'post/publish_manage.html', {'notPublished': notPublished})
 # Query to
 
 

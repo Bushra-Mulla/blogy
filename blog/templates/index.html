@@ -11,13 +11,14 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="{% static '/images/ba1.jpg' %}" alt="First slide" max-height="700px">
+            <img class="d-block w-100" src="{% static '/images/ba1.jpg' %}" alt="First slide" height="700px">
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{% static '/images/ba2.jpg' %}" alt="Second slide" max-height="700px">
+            <img class="d-block w-100" src="{% static '/images/ba2.jpg' %}" alt="Second slide" height="700px">
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{% static '/images/ba4.jpg' %}" alt="Third slide"  max-height="700px">
+            <img class="d-block w-100" src="https://image.freepik.com/free-vector/business-concept-puzzle_39422-957.jpg"
+                alt="Third slide" height="700px">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -31,31 +32,9 @@
 </div>
 <br>
 <br>
-
-{%block post_card%}
-{% include "./blog/post_cards.html" with posts=posts %}
-
-{%endblock%}
-{%for post in posts%}
-
-<body>
-    <div class="card card-custom bg-white border-white">
-        <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
-
-        </div>
-        <div class="card-custom-avatar">
-            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
-        </div>
-        <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
-            <p class="card-text">{{post.author}} {{post.date_post}}</p>
-        </div>
-    </div>
-</body>
-{%endfor%}
-{%for a in related%}
-<p>{{a.author.User}}</p>
-{%endfor%}
-
+{%block refused_post%}
+    {% include "./blog/post_cards.html" with posts=posts %}
 {%endblock%}
 
+
+{%endblock%}
