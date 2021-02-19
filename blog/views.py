@@ -148,10 +148,13 @@ class reportCreate(CreateView):
     fields = ['title', 'message']
     success_url = '/'
 
-    def form_valid(self, form):
+    def form_valid(self, form, *kwargs):
         self.object = form.save(commit=False)
         self.object.user_id = self.request.user
-        self.object.Post_id = 1
+        # get post instance by id
+        post = Post.objects.get(id=self.kwargs['post_id'])
+        # print(post)
+        self.object.Post_id = post
         # current_user = self.request.user.id
         # current_post = 1
         # report.objects.create(user_id=current_user)
