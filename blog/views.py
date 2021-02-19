@@ -173,3 +173,11 @@ def reportDetails(request, report_id):
     report_details = report.objects.get(id=report_id)
     print(report_details.title)
     return render(request, 'report/report_list.html', {'reports': allReports(), 'report_details': report_details})
+
+
+def archiveReport(request, report_id):
+    report = report.objects.get(id=self.kwargs['report_id'])
+    report.is_archived = True
+    report.save()
+    print(report.is_archived)
+    return HttpResponseRedirect('reports/', {'reports': allReports()})
