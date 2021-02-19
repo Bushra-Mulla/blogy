@@ -20,6 +20,6 @@ urlpatterns = [
          name='userRefusedPostsList'),
     path('category/create/', views.categoryCreate.as_view(
         template_name='category/categorys_form.html'), name="categoryCreate"),
-    path('report/create/', views.reportCreate.as_view(
+    path('report/<int:post_id>/create/', views.reportCreate.as_view(
         template_name='report/reports_form.html'), name="reportCreate"),
 ]
