@@ -155,21 +155,5 @@ class reportCreate(CreateView):
         post = Post.objects.get(id=self.kwargs['post_id'])
         # print(post)
         self.object.Post_id = post
-        # current_user = self.request.user.id
-        # current_post = 1
-        # report.objects.create(user_id=current_user)
-        # report.objects.create(Post_id=current_post)
-        # self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/')
-
-    # def get_form_kwargs(self, request):
-    #     # update super call if python < 3
-    #     form_kwargs = super().get_form_kwargs()
-    #     current_user = request.user.id
-    #     current_post = request.post.id
-    #     # report.objects.create(user_id=current_user)
-    #     # report.objects.create(Post_id=current_post)
-    #     form_kwargs['report']['user_id'] = current_user
-    #     form_kwargs['report']['Post_id'] = current_post
-    #     return form_kwargs
