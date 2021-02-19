@@ -44,16 +44,9 @@
                 Catagories
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <!-- {% for category in categories %}
-                <li><a class="dropdown-item" href="#">{{category}}</a></li>
-                {% endfor %} -->
-                <li><a class="dropdown-item" href="/category/create/">Create new category</a></li>
-                <li><a class="dropdown-item" href="#">Cooking</a></li>
-                <li><a class="dropdown-item" href="#">Programmer</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">E-marketing</a></li>
+                {%for object in categorys_list %}
+                <li><a class="dropdown-item" href="{% url 'blog-category_view' object %}">{{object}}</a></li>
+                {%endfor%}
               </ul>
             </li>
           </ul>

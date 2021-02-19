@@ -9,7 +9,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 def home(request):
-    last_twenty Post.objects.filter(
+    last_twenty= Post.objects.filter(
         isPublish=True).select_related('author__user_profile').order_by('-id')[:20]
 
     return render(request, 'index.html', {'posts': last_twenty})
@@ -138,3 +138,13 @@ class categoryCreate(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/')
+
+
+def category_view(request, category_name):
+    categorys_post = categorys.objects.get(category_name=category_name)
+    post = Post.objects.filter(category_id=categorys_post)
+    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
+
+
+def published(request):
+    pass
