@@ -144,7 +144,7 @@ class categoryCreate(CreateView):
 
 class reportCreate(CreateView):
     model = report
-    fields = ['title', 'message', 'report_date']
+    fields = '__all__'
     success_url = '/'
 
     def form_valid(self, form):
