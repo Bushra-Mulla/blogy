@@ -144,7 +144,7 @@ class categoryCreate(CreateView):
 
 def reports(request):
     # reports = report.objects.all().order_by('-id')
-    return render(request, 'report/report_list.html', {'reports': allReports()})
+    return render(request, 'report/report_list.html')
 
 
 def allReports():
