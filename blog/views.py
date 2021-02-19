@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from django.views.generic.list import ListView
 
 def home(request):
     last_twenty = Post.objects.filter(
@@ -88,6 +88,6 @@ class PostUpdate(UpdateView):
         return HttpResponseRedirect('/post/' + str(self.object.pk))
 
 
-def category_list(request):
-    categorys.objects.all()
-    return render(request,{'category_list':category})
+def category_view(request):
+    categorys_list=categorys.objects.all()
+    return render(request, '/category/category.himl', {'categorys_list': categorys_list})
