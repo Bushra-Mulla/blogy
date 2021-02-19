@@ -130,7 +130,7 @@ def logout_view(request):
 
 
 class categoryCreate(CreateView):
-    print('create new category')
+    # print('create new category')
     model = categorys
     fields = '__all__'
     success_url = '/'
@@ -143,9 +143,8 @@ class categoryCreate(CreateView):
 
 
 class reportCreate(CreateView):
-    print('create new category')
-    model = categorys
-    fields = '__all__'
+    model = report
+    fields = ['title', 'message', 'report_date']
     success_url = '/'
 
     def form_valid(self, form):
@@ -153,5 +152,3 @@ class reportCreate(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/')
-
-
