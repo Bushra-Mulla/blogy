@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 
 def home(request):
@@ -66,7 +69,7 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
-
+@method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id', 'author']
@@ -78,7 +81,7 @@ class PostCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/')
 
-
+@method_decorator(login_required, name='dispatch')
 class PostUpdate(UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id', 'author']
@@ -88,6 +91,18 @@ class PostUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
 
+@method_decorator(login_required, name='dispatch')
+class PostDelete(DeleteView):
+  model = Post
+  success_url = '/'
+
+@login_required           
+def profile(request, username):
+    user = User.objects.get(username=username)
+    post = Post.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'post': post})
+
+  
 # Query to
 
 

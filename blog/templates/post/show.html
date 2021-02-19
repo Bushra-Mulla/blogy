@@ -12,6 +12,10 @@
    <h5> by: {{ post.author }} </h5>
   
 </div>
-<a href="{% url 'blog-post-Update' post.id %}">Update Details</a> | 
+{% if user.is_authenticated %}
+<a href="{% url 'blog-post-Update' post.id %}">Update Details</a> |
+<a href="{% url 'blog-post-delete' post.id %}">DELETE This Post</a>
+ 
+{% endif %}
 
     {% endblock %}

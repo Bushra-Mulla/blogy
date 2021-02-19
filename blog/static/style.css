@@ -1,4 +1,69 @@
 
+.custom-scrollbar-js,
+.custom-scrollbar-css {
+  height: 200px;
+}
+
+/* Custom Scrollbar using CSS */
+.custom-scrollbar-css {
+  overflow-y: scroll;
+}
+
+/* scrollbar width */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* scrollbar track */
+body::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+/* scrollbar handle */
+body::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #00d2ff;
+  background-image: linear-gradient(to top, #00d2ff 0%, #3a7bd5 100%);
+}
+
+.buttonBorder{
+  padding: 0;
+border: none;
+background: none;
+}
+.gradient-button {
+  margin: 5px;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #FFF;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  width: 90px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
+  display: inline-block;
+}
+.gradient-button:hover{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  margin: 8px 10px 12px;
+}
+.gradient-button-1 {background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97 51%, #DD5E89 100%)}
+.gradient-button-1:hover { background-position: right center; }
+
+.gradient-button-2 {background-image: linear-gradient(to right, #2BC0E4 0%, #EAECC6 51%, #2BC0E4 100%)}
+.gradient-button-2:hover { background-position: right center; }
+
+.gradient-button-3 {background-image: linear-gradient(to right, #7474BF 0%, #348AC7 51%, #7474BF 100%)}
+.gradient-button-3:hover { background-position: right center; }
+
+.gradient-button-4 {background-image: linear-gradient(to right, #00d2ff 0%, #3a7bd5 51%, #00d2ff 100%)}
+.gradient-button-4:hover { background-position: right center; }
 
 .card {
   width: 320px;
@@ -13,18 +78,14 @@
   display: inline;
   /* background: linear-gradient(45deg, rgb(135, 240, 214), rgb(29, 126, 182));; */
 }
-.boot{
+/* .boot{
   margin-bottom: 30%;
   left: 1.4%;
   position: relative;
   top: 8px;
   bottom: 5%;
   
-}
-
-.fot{
-  top: 20%;
-}
+} */
 
 .container {
   position: relative;
@@ -86,5 +147,4 @@
   left: 1.25rem;
   width: 100px;
   height: 100px;
-
 }
