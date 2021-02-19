@@ -142,6 +142,12 @@ class categoryCreate(CreateView):
         return HttpResponseRedirect('/')
 
 
+class reports(CreateView):
+    current_user = request.user
+    reports = report.objects.all().order_by('-id')
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
 class reportCreate(CreateView):
     model = report
     # fields = '__all__'
