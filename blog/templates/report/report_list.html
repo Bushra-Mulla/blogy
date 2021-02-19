@@ -52,8 +52,8 @@
                                 <p>{{report_details.message}}</p>
                                 <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
                                     class="btn btn-success">Jump to post</a>
-                                <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
-                                    class="btn btn-default">Make resolve and archive</a>
+                                <a href="{% url 'archiveReport' report_details.id%}" class="btn btn-default">Make
+                                    resolve and archive</a>
                             </div>
                         </div>
                     </h1>

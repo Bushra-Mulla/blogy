@@ -176,8 +176,16 @@ def reportDetails(request, report_id):
 
 
 def archiveReport(request, report_id):
-    report = report.objects.get(id=self.kwargs['report_id'])
-    report.is_archived = True
-    report.save()
-    print(report.is_archived)
-    return HttpResponseRedirect('reports/', {'reports': allReports()})
+    reportDetails = report.objects.get(id=report_id)
+    reportDetails.is_archived = True
+    reportDetails.save()
+    print(reportDetails.is_archived)
+    return HttpResponseRedirect('/reports/', {'reports': allReports()})
+
+# Query: Retrive number of not archived reports , make it a badge for admin anounncemnt
+
+
+def countNotArchivedReport():
+    countReports = report.objects.filter(is_archived=False).count()
+    print(countReports)
+    return countReports
