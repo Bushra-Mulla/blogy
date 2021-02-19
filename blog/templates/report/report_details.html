@@ -1,0 +1,39 @@
+{%autoescape off%}
+
+{% if reports %}
+{%for report in reports%}
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <h4>Images with text items</h4>
+        </div>
+        <div class="gaadiex-list">
+            <div class="gaadiex-list-item">
+                <!-- <img class="gaadiex-list-item-img"
+                    src="http://www.free-icons-download.net/images/commercial-male-user-icon-32765.png"
+                    alt="List user"> -->
+                <i class="fa fa-user"></i>
+                <div class="gaadiex-list-item-text">
+                    <h3><a href="#">aaaaaa</a></h3>
+                    <p>aaaaaaaaaaaa</p>
+                </div>
+            </div>
+            <!-- <div class="gaadiex-list-item"><img class="gaadiex-list-item-img"
+                    src="http://www.free-icons-download.net/images/commercial-male-user-icon-32765.png"
+                    alt="List user">
+                <div class="gaadiex-list-item-text">
+                    <h3><a href="#">Catherine Crawford</a></h3>
+                    <h4>Brunch this weekend?</h4>
+                    <p> I'll be in your neighborhood doing errands</p>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+</div>
+{%endfor%}
+{% else %}
+<h3>Nothing To Show</h3>
+{% endif %}
+
+{%endautoescape %}
