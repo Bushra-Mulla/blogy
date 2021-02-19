@@ -29,7 +29,8 @@ class Post(models.Model):
     date_post = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category_id = models.ForeignKey(categorys, on_delete=models.CASCADE)
-    isPublish = models.BooleanField(default=False)
+    isPublish = models.CharField(max_length=255, default='notPublished')
+    # cases: notPublished, published, refused
 
 
 class likes(models.Model):

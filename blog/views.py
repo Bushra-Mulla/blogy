@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -64,8 +64,6 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
-  
-
 
 class PostCreate(CreateView):
     model = Post
@@ -87,3 +85,56 @@ class PostUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
+
+# Query to
+
+
+def userPostsList(request):
+    current_user = request.user
+    posts = Post.objects.all().order_by('-id')
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def userPublishedPostsList(request):
+    current_user = request.user
+    posts = Post.objects.filter(isPublish="published")
+    # print(current_user.id)
+    # print(current_user.username)
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def userNotPublishedPostsList(request):
+    current_user = request.user
+    posts = Post.objects.filter(isPublish="notPublished")
+    # print(current_user.username)
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def userRefusedPostsList(request):
+    current_user = request.user
+    posts = Post.objects.filter(isPublish="refused")
+    # print(current_user.id)
+    # print(current_user.username)
+    print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+
+class categoryCreate(CreateView):
+    print('create new category')
+    model = categorys
+    fields = '__all__'
+    success_url = '/'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/')

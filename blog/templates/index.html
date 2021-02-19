@@ -32,6 +32,11 @@
 </div>
 <br>
 <br>
+
+{%block post_card%}
+{% include "./blog/post_cards.html" with posts=posts %}
+
+{%endblock%}
 {%for post in posts%}
 
 <body calss="boot">
@@ -51,7 +56,6 @@
     </div>
 </body>
 {%endfor%}
-
 {%for a in related%}
 <p>{{a.author.User}}</p>
 {%endfor%}
