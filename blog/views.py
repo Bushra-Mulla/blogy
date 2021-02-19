@@ -91,5 +91,8 @@ class PostUpdate(UpdateView):
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
     post = Post.objects.filter(category_id=categorys_post)
-    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post})
+    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post , 'category_info':categorys_post})
  
+
+def published(request):
+    pass

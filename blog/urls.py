@@ -12,5 +12,5 @@ urlpatterns = [
          name='blog-post-Update'),
     path('category/<category_name>/',
          views.category_view, name='blog-category_view'),
-
+    path('post/published', views.published, name='blog-post-published')
 ]

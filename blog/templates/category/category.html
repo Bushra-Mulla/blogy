@@ -2,9 +2,14 @@
 
 {%block content%}
     <div class="container">
-        <img src="https://image.freepik.com/free-vector/group-students-watching-online-webinar_74855-5514.jpg" class="img-fluid" alt="Responsive image">
-        <div class="centered">Centered</div>
+        <img src={{category_info.image.url}} class="img-fluid" style='opacity: 0.5'alt="Responsive image">
+        <div class="centered">  
+            <h2 >{{category_info.category_name}}</h2>
+            <h4 >{{category_info.descreption}}</h4>
+        </div>
     </div>
+
+
 {%block refused_post%}
     {% include "../blog/post_cards.html" with posts=posts %}
 {%endblock%}
