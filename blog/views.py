@@ -88,6 +88,8 @@ class PostUpdate(UpdateView):
         return HttpResponseRedirect('/post/' + str(self.object.pk))
 
 
-def category_view(request):
-    categorys_list=categorys.objects.all()
-    return render(request, '/category/category.himl', {'categorys_list': categorys_list})
+def category_view(request, category_name):
+    categorys_post = categorys.objects.get(category_name=category_name)
+    post = Post.objects.filter(category_id=categorys_post)
+    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post})
+ 

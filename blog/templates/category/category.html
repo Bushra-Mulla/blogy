@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <div class="container">
+        <img src="https://image.freepik.com/free-vector/group-students-watching-online-webinar_74855-5514.jpg" class="img-fluid" alt="Responsive image">
+        <div class="centered">Centered</div>
+    </div>
+{%block refused_post%}
+    {% include "../blog/post_cards.html" with posts=posts %}
+{%endblock%}
+
+{%endblock%}
