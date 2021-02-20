@@ -14,6 +14,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Reports List</h4>
+                    <p>{{request.path}}</p>
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-pills">
@@ -31,11 +32,12 @@
                     <br>
                     <!-- add tabs -->
                     {% if reports %}
+
                     {%for report in reports%}
                     {% if not report.is_archived %}
                     <div class="gaadiex-list">
                         <div class="gaadiex-list-item" style="border-left: solid #FF2C9C ; background-color: #D3EBFF;">
-                            <img class="gaadiex-list-item-img" src="../../static/images/landing-img.png"
+                            <img class="gaadiex-list-item-img" src={{report.user_id.user_profile.profile_picture.url}}
                                 alt="List user">
                             <!-- <i class="fa fa-user"></i> -->
                             <div class="gaadiex-list-item-text">
@@ -48,7 +50,7 @@
                     {% else %}
                     <div class="gaadiex-list">
                         <div class="gaadiex-list-item">
-                            <img class="gaadiex-list-item-img" src="../../static/images/landing-img.png"
+                            <img class="gaadiex-list-item-img" src={{report.user_id.user_profile.profile_picture.url}}
                                 alt="List user">
                             <!-- <i class="fa fa-user"></i> -->
                             <div class="gaadiex-list-item-text">
@@ -76,8 +78,8 @@
                 <div class="card-body">
                     <h1>
                         <div class="gaadiex-list-item">
-                            <img class="gaadiex-list-item-img" src="../../static/images/landing-img.png"
-                                alt="List user">
+                            <img class="gaadiex-list-item-img"
+                                src={{report_details.user_id.user_profile.profile_picture.url}} alt="List user">
                             <!-- <i class="fa fa-user"></i> -->
                             <div class="gaadiex-list-item-text">
                                 <h3 style="padding-top: 10px;">From: {{report_details.user_id}}</h3>
@@ -88,6 +90,7 @@
                                 <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
                                     class="btn btn-success">Jump
                                     to post</a>
+                                <!-- <p>{{report_details.user_id.user_profile.profile_picture.url}}</p> -->
 
                                 {% if not report_details.is_archived %}
                                 <a href="{% url 'archiveReport' report_details.id%}" class="btn btn-default">Make

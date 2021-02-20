@@ -148,7 +148,8 @@ def reports(request):
 
 
 def allReports():
-    reports = report.objects.all().order_by('-id')
+    reports = report.objects.all().select_related(
+        'user_id__user_profile').all().order_by('-id')
     return reports
 
 
@@ -170,13 +171,15 @@ class reportCreate(CreateView):
 
 
 def reportDetails(request, report_id):
-    report_details = report.objects.get(id=report_id)
+    report_details = report.objects.get(
+        id=report_id)
     print(report_details.title)
     return render(request, 'report/report_list.html', {'reports': allReports(), 'report_details': report_details})
 
 
 def archiveReport(request, report_id):
-    reportDetails = report.objects.get(id=report_id)
+    reportDetails = report.objects.get(
+        id=report_id).select_related('user_id__user_profile').all()
     reportDetails.is_archived = True
     reportDetails.save()
     print(reportDetails.is_archived)
@@ -186,7 +189,8 @@ def archiveReport(request, report_id):
 
 
 def notArchivedReport(request):
-    reports = report.objects.filter(is_archived=False)
+    reports = report.objects.filter(is_archived=False).select_related(
+        'user_id__user_profile').all()
     print(reports)
     return render(request, 'report/report_list.html', {'reports': reports})
 

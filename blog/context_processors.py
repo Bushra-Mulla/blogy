@@ -31,7 +31,25 @@ def countArchivedReport(request):
     return {'countArchivedReport': countReports}
 
 
-# def notArchivedReport(request):
-#     reports = report.objects.filter(is_archived=False)
-#     print(reports)
-#     # return HttpResponseRedirect('/reports/', {'reports': reports})
+def getAllNotArchivedReport(request):
+    reports = report.objects.filter(is_archived=False).select_related(
+        'user_id__user_profile').all().order_by('-id')
+    print(reports)
+    return {'notArchivedReport': reports}
+
+
+def getReports(report):
+    return {'report': report}
+
+
+def getAllArchivedReport(request):
+    reports = report.objects.filter(is_archived=True).select_related(
+        'user_id__user_profile').all().order_by('-id')
+    print(reports)
+    return {'archivedReport': reports}
+
+
+def all(request):
+    reports = report.objects.all().select_related(
+        'user_id__user_profile').all().order_by('-id')
+    return {'allReport': reports}

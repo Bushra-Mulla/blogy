@@ -71,7 +71,9 @@ TEMPLATES = [
                 'blog.context_processors.countReports',
                 'blog.context_processors.countArchivedReport',
                 'blog.context_processors.countNotArchivedReport',
-                # 'blog.context_processors.notArchivedReport',
+                # 'blog.context_processors.all',
+                # 'blog.context_processors.getAllNotArchivedReport',
+                # 'blog.context_processors.getAllArchivedReport',
 
             ],
         },
