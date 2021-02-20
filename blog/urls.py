@@ -26,6 +26,8 @@ urlpatterns = [
     path('reports/<int:report_id>', views.reportDetails, name="reportDetails"),
     path('reports/<int:report_id>/archived',
          views.archiveReport, name="archiveReport"),
-    path('reports/<str:archived>/',
-         context_processors.reports, name="notArchivedReport"),
+    path('reports/notArchived',
+         views.notArchivedReport, name="notArchivedReport"),
+    path('reports/archived',
+         views.archivedReport, name="archivedReport"),
 ]

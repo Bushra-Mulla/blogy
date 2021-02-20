@@ -8,11 +8,9 @@ def add_variable_to_context(request):
     }
 
 
-def reports(request, archived):
-    reports = report.objects.all().order_by('-id')
-    # if kwargs['request']:
-    # print(kwargs[/'request'])
-    return {'reports': reports}
+# def reports(request):
+#     reports = report.objects.all().order_by('-id')
+#     return {'reports': reports}
 
 
 def countReports(request):
@@ -24,7 +22,7 @@ def countReports(request):
 def countNotArchivedReport(request):
     countReports = report.objects.filter(is_archived=False).count()
     print(countReports)
-    return {'countReports': countReports}
+    return {'countNotArchivedReport': countReports}
 
 
 def countArchivedReport(request):
@@ -33,7 +31,7 @@ def countArchivedReport(request):
     return {'countArchivedReport': countReports}
 
 
-def notArchivedReport():
-    reports = report.objects.filter(is_archived=False)
-    print('reports', reports)
-    # return HttpResponseRedirect('/reports/', {'reports': reports})
+# def notArchivedReport(request):
+#     reports = report.objects.filter(is_archived=False)
+#     print(reports)
+#     # return HttpResponseRedirect('/reports/', {'reports': reports})

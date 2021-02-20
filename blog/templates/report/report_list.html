@@ -17,16 +17,17 @@
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-pills">
-                        <li class="active"><a href="#">All <span class="badge badge-light">{{countReports}}</span></a>
+                        <li class="active"><a href="#" onclick="location.href='{% url 'reports' %}'">All <span
+                                    class="badge badge-light">{{countReports}}</span></a>
                         </li>
-                        <li class="active"><a href="#">Archived <span
-                                    class="badge badge-light">{{countArchivedReport}}</span></a>
+                        <li class="active"><a href="#" onclick="location.href='{% url 'archivedReport' %}'">Archived
+                                <span class="badge badge-light">{{countArchivedReport}}</span></a>
                         </li>
-                        <li class="active"><a href="#">Not Archived <span
-                                    class="badge badge-light">{{countNotArchivedReport}}</span></a>
+                        <li class="active"><a href="#" onclick="location.href='{% url 'notArchivedReport' %}'">Not
+                                Archived
+                                <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
                         </li>
                     </ul>
-                    <button onclick="location.href='{% url 'notArchivedReport' %}'">not</button>
                     <!-- add tabs -->
                     {% if reports %}
                     {%for report in reports%}

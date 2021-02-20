@@ -144,7 +144,7 @@ class categoryCreate(CreateView):
 
 def reports(request):
     # reports = report.objects.all().order_by('-id')
-    return render(request, 'report/report_list.html')
+    return render(request, 'report/report_list.html', {"reports": allReports()})
 
 
 def allReports():
@@ -188,4 +188,10 @@ def archiveReport(request, report_id):
 def notArchivedReport(request):
     reports = report.objects.filter(is_archived=False)
     print(reports)
-    return HttpResponseRedirect('/reports/', {'reports': reports})
+    return render(request, 'report/report_list.html', {'reports': reports})
+
+
+def archivedReport(request):
+    reports = report.objects.filter(is_archived=True)
+    print(reports)
+    return render(request, 'report/report_list.html', {'reports': reports})
