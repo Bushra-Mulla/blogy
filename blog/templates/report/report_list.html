@@ -2,11 +2,11 @@
 {% load static%}
 {% block content %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
 <!-- <h1>{{report.title}}</h1> -->
-<link rel="stylesheet" type="text/css" href="{% static 'reports_list.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'reports_lists.css' %}" />
 <br>
 <div class="container-fluid">
     <div class="row">
@@ -32,8 +32,8 @@
                     {% if reports %}
                     {%for report in reports%}
                     {% if not report.is_archived %}
-                    <div class="gaadiex-list " style="border-left: solid #FF2C9C ; background-color: #D3EBFF;">
-                        <div class="gaadiex-list-item">
+                    <div class="gaadiex-list">
+                        <div class="gaadiex-list-item" style="border-left: solid #FF2C9C ; background-color: #D3EBFF;">
                             <!-- <img class="gaadiex-list-item-img"
                             src="http://www.free-icons-download.net/images/commercial-male-user-icon-32765.png"
                             alt="List user"> -->
@@ -89,8 +89,11 @@
                                 <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
                                     class="btn btn-success">Jump
                                     to post</a>
+
+                                {% if not report_details.is_archived %}
                                 <a href="{% url 'archiveReport' report_details.id%}" class="btn btn-default">Make
                                     resolve and archive</a>
+                                {% endif %}
                             </div>
                         </div>
                     </h1>
