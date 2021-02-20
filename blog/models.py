@@ -19,6 +19,9 @@ class categorys(models.Model):
     image = models.ImageField(upload_to='category_img/',
                               blank=True, default='category_img/category.png')
 
+    def __str__(self):
+        return self.category_name
+
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
