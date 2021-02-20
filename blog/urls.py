@@ -23,7 +23,7 @@ urlpatterns = [
     path('report/<int:post_id>/create/', views.reportCreate.as_view(
         template_name='report/reports_form.html'), name="reportCreate"),
     path('reports/', views.reports, name="reports"),
-    path('reports/<int:report_id>', views.reportDetails, name="reportDetails"),
+    path('reports/<int:report_id>/', views.reportDetails, name="reportDetails"),
     path('reports/<int:report_id>/archived',
          views.archiveReport, name="archiveReport"),
     path('reports/notArchived',
