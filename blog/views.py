@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
@@ -9,14 +9,23 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.list import ListView
-
+from django.views import View
 
 def home(request):
     last_twenty = Post.objects.filter(
         isPublish=True).select_related('author__user_profile').order_by('-id')[:20]
     return render(request, 'index.html', {'posts': last_twenty})
-
-
+    
+# def PostDeleteView(View):
+#     def post(self, request, id=None, *args, **kwargs):
+#         context = {}
+#         obj = self.get_object()
+#         if obj is not None:
+#             obj.delete()
+#             context['object'] = None
+#             return redirect('/')
+#             return render(request, self.template_name, context)
+        
 # def logIn(request):
 #     if request.method == 'POST':
 #         # if post, then authenticate (user submitted username and password)
@@ -70,13 +79,13 @@ def post_show(request, post_id):
 class PostCreate(CreateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id', 'author']
-    success_url = '/'
+    success_url = 'user/posts/'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/user/posts/')
 
 @method_decorator(login_required, name='dispatch')
 class PostUpdate(UpdateView):
@@ -100,6 +109,7 @@ def profile(request, username):
     return render(request, 'profile.html', {'username': username, 'post': post})
 
   
+
 
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
@@ -162,3 +172,9 @@ class categoryCreate(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/')
+
+
+def profile(request):
+    # current_user = request.user.id
+    # posts = user_profile.objects.filter(id=current_user)
+    return render(request, 'user/profile.html')

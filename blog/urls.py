@@ -24,4 +24,6 @@ urlpatterns = [
          name='userRefusedPostsList'),
     path('category/create/', views.categoryCreate.as_view(
         template_name='category/categorys_form.html'), name="categoryCreate"),
+    path('profile/', views.profile, name="profile"),
+
 ]

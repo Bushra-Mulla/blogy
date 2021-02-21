@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+
 # Create your models here.
 
 
@@ -24,7 +25,7 @@ class categorys(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=200)
     content = RichTextField(blank=True, null=True)
     # content = models.TextField()
     post_img = models.ImageField(

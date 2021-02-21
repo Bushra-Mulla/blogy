@@ -2,20 +2,85 @@
 
 {% block content %}
 <!-- templates/cats/detail.html -->
+<header>
 
-<div class="card-content">    
-  <img class="img-fluid" src="{{post.post_img.url}}"  height="350" >
+  <section>
+    <div class="">
+      <img src="{{post.post_img.url}}" width="100%" height="30%">
+    </div>
+  </section>
 
-    <h1> title: {{ post.title }} </h1>
-   {{ post.content | safe}}
-   <h5> Published: {{ post.date_post }} </h5>
-   <h5> by: {{ post.author }} </h5>
-  
+</header>
+<div class="container-fluid mb-5">
+  <div class="col-md-12 px-lg-5 ">
+    <!--Card-->
+    <div class="PostCard">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="col-sm-2 col-12 mb-3">
+            <img src={{post.author.user_profile.profile_picture.url}} alt="Avatar"
+              class="avatar rounded-circle z-depth-1-half">
+          </div>
+        </div>
+        <div class="col">
+          <h2>
+           <a href="user/{{post.id}}""> <strong>By: {{post.author.first_name}} {{post.author.last_name}}</strong> </a>
+          </h2>
+          <p>{{post.author.user_profile.position}} </p>
+        </div>
+        <div class="col">
+          {% if user.is_authenticated %} 
+          <ul class=postButton>
+            <li>
+              <a class="gradient-button gradient-button-2" href="{% url 'blog-post-Update' post.id %}">Edit</a>
+            </li>
+            <li>
+              <a class="gradient-button gradient-button-1" href="{% url 'blog-post-delete' post.id %}">DELETE</a>
+
+            </li>
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+
+
+    </div>
+  </div>
 </div>
-{% if user.is_authenticated %}
-<a href="{% url 'blog-post-Update' post.id %}">Update Details</a> |
-<a href="{% url 'blog-post-delete' post.id %}">DELETE This Post</a>
- 
-{% endif %}
 
-    {% endblock %}
+<div class="container-fluid mb-5">
+  <div class="col-md-12 px-lg-5">
+    <!--Card-->
+    <div class="PostCard pb-5 mx-md-3">
+      <div>
+        <div>
+          <h1>
+            <strong>{{ post.title }}</strong>
+          </h1>
+          <div class="row">
+            <div class="col-md-12 col-xl-12 d-flex justify-content-center">
+              <p class="font-small dark-grey-text mb-1">
+
+              </p>
+              <p class="font-small grey-text mb-0 ml-3">
+                <i class="dark-grey-text">{{ post.date_post }}</i>
+              </p>
+            </div>
+          </div>
+          <hr>
+          {{ post.content | safe}}
+          <hr>
+          <h3>Share this post:</h3>
+
+          <div class="template-demo">
+            <button type="button" class="btn btn-social-icon btn-facebook">
+              <i class="fa fa-facebook"> </i></button> <button type="button" class="btn btn-social-icon btn-youtube">
+              <i class="fa fa-twitter"></i></button> <button type="button" class="btn btn-social-icon btn-dribbble">
+              <i class="fa fa-linkedin"></i></button> <button type="button" class="btn btn-social-icon btn-instagram">
+              <i class="fa fa-instagram"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
