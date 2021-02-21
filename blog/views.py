@@ -8,6 +8,7 @@ from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
+
 def home(request):
     last_twenty = Post.objects.filter(
         isPublish=True).select_related('author__user_profile').order_by('-id')[:20]
@@ -89,8 +90,8 @@ class PostUpdate(UpdateView):
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
     post = Post.objects.filter(category_id=categorys_post)
-    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post , 'category_info':categorys_post})
- 
+    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
+
 
 def published(request):
     notPublished = Post.objects.filter(isPublish='notPublished')
@@ -186,7 +187,7 @@ def reportDetails(request, report_id):
 
 def archiveReport(request, report_id):
     reportDetails = report.objects.get(
-        id=report_id).select_related('user_id__user_profile').all()
+        id=report_id)
     reportDetails.is_archived = True
     reportDetails.save()
     print(reportDetails.is_archived)

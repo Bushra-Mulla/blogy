@@ -44,6 +44,7 @@
                 Catagories
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- <li><a class="dropdown-item" href="/category/create/">Create new category</a></li> -->
                 {%for object in categorys_list %}
                 <li><a class="dropdown-item" href="{% url 'blog-category_view' object %}">{{object}}</a></li>
                 {%endfor%}
