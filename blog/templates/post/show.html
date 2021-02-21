@@ -83,4 +83,11 @@
       </div>
     </div>
   </div>
-  {% endblock %}
+  <a href="{% url 'reportCreate' post.id %}">report</a>
+</div>
+{%block like%}
+    {% include "./like.html" with post=post show=True %}
+{%endblock%}
+
+{% endblock %}
+

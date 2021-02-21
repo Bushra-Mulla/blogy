@@ -24,27 +24,32 @@ class categorys(models.Model):
         return self.category_name
 
 
+cases = [('notPublished', 'notPublished'),
+         ('published', 'published'), ('refused', 'refused')]
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = RichTextField(blank=True, null=True)
-    # content = models.TextField()
     post_img = models.ImageField(
         upload_to='post_img/', blank=True, default='post_img/test.png')
     date_post = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category_id = models.ForeignKey(categorys, on_delete=models.CASCADE)
-    isPublish = models.CharField(max_length=255, default='notPublished')
-    # cases: notPublished, published, refused
+    isPublish = models.CharField(max_length=255,choices=cases, default='notPublished')
+    likes = models.ManyToManyField(User, related_name='like', blank=True)
+    
+    def like_count(self):
+        return self.likes.count()
+    
+    def published_update(self, *args, **kwargs):
+        self.isPublish = 'published'
+        super().save(*args, **kwargs)
+        return
 
-
-class likes(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    Post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
-    likes_count = models.IntegerField(blank=True)
-
-    def __str__(self):
-        pass
-
+    def refused_update(self):
+        self.isPublish = 'refused'
+        self.save()
+        
 
 class comment(models.Model):
     content = models.TextField()
@@ -63,3 +68,4 @@ class report(models.Model):
     report_date = models.DateTimeField(default=timezone.now)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     Post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    is_archived = models.BooleanField(default=False)
