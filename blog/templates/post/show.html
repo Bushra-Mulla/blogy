@@ -70,6 +70,10 @@
           <hr>
           {{ post.content | safe}}
           <hr>
+          <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}">report</a>
+          {%block like%}
+          {% include "./like.html" with post=post show=True %}
+          {%endblock%}
           <h3>Share this post:</h3>
 
           <div class="template-demo">
@@ -83,11 +87,8 @@
       </div>
     </div>
   </div>
-  <a href="{% url 'reportCreate' post.id %}">report</a>
 </div>
-{%block like%}
-    {% include "./like.html" with post=post show=True %}
-{%endblock%}
+
 
 {% endblock %}
 

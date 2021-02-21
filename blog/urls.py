@@ -12,8 +12,6 @@ urlpatterns = [
     path('post/<int:pk>/update/', views.PostUpdate.as_view(),
          name='blog-post-Update'),
     path('post/<int:pk>/delete/', views.PostDelete.as_view(), name='blog-post-delete'),
-    path('category/<category_name>/',
-         views.category_view, name='blog-category_view'),
     path('post/publish_manage', views.published, name='blog-post-published'),
     path('user/posts/', views.userPostsList, name='userPostsList'),
     path('user/posts/published/', views.userPublishedPostsList,
