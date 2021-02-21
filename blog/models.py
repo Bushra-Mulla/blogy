@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+
 # Create your models here.
 
 
@@ -27,7 +28,7 @@ cases = [('notPublished', 'notPublished'),
          ('published', 'published'), ('refused', 'refused')]
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=200)
     content = RichTextField(blank=True, null=True)
     post_img = models.ImageField(
         upload_to='post_img/', blank=True, default='post_img/test.png')

@@ -11,6 +11,7 @@ urlpatterns = [
     path('post/create/', views.PostCreate.as_view(), name='blog-post-create'),
     path('post/<int:pk>/update/', views.PostUpdate.as_view(),
          name='blog-post-Update'),
+    path('post/<int:pk>/delete/', views.PostDelete.as_view(), name='blog-post-delete'),
     path('post/publish_manage', views.published, name='blog-post-published'),
     path('user/posts/', views.userPostsList, name='userPostsList'),
     path('user/posts/published/', views.userPublishedPostsList,
@@ -23,6 +24,7 @@ urlpatterns = [
         template_name='category/categorys_form.html'), name="categoryCreate"),
     path('category/<category_name>/',
          views.category_view, name='blog-category_view'),
+    path('profile/', views.profile, name="profile"),
     path('report/<int:post_id>/create/', views.reportCreate.as_view(
         template_name='report/reports_form.html'), name="reportCreate"),
     path('reports/', views.reports, name="reports"),
