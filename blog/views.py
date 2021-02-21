@@ -1,3 +1,5 @@
+from django.shortcuts import redirect, render
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
@@ -6,8 +8,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic.list import ListView
-from django.urls import reverse_lazy, reverse
+from django.views import View
+from django.urls import reverse_lazy ,reverse
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,34 +20,6 @@ def home(request):
     last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
     return render(request, 'index.html', {'posts': last_twenty})
-
-
-# def logIn(request):
-#     if request.method == 'POST':
-#         # if post, then authenticate (user submitted username and password)
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 if user.is_active:
-#                     login(request, user)
-#                     # return HttpResponse('<h1>Success</h1>')
-#                     print(user.id)
-#                     return HttpResponseRedirect('/')
-#                 else:
-#                     HttpResponse('<h1>Try Again</h1>')
-
-#                     # print("The account has been disabled.")
-#             else:
-#                 print("The username and/or password is incorrect.")
-#     else:
-#         form = LoginForm()
-#     return render(request, 'logIn.html', {'form': form})
-
-# def logIn(request):
-#     return render(request, 'logIn.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -66,19 +43,19 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
-
+@method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id', 'author']
-    success_url = '/'
+    success_url = 'user/posts/'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/user/posts/')
 
-
+@method_decorator(login_required, name='dispatch')
 class PostUpdate(UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id', 'author']
@@ -87,6 +64,19 @@ class PostUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
+
+@method_decorator(login_required, name='dispatch')
+class PostDelete(DeleteView):
+  model = Post
+  success_url = '/'
+
+@login_required           
+def profile(request, username):
+    user = User.objects.get(username=username)
+    post = Post.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'post': post})
+
+  
 
 
 def category_view(request, category_name):
@@ -152,6 +142,10 @@ class categoryCreate(CreateView):
         return HttpResponseRedirect('/')
 
 
+def profile(request):
+    # current_user = request.user.id
+    # posts = user_profile.objects.filter(id=current_user)
+    return render(request, 'user/profile.html')
 def reports(request):
     # reports = report.objects.all().order_by('-id')
     return render(request, 'report/report_list.html', {"reports": allReports()})
@@ -229,13 +223,6 @@ def update_publish_state(request, state):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
     post.isPublish.update(isPublish=state)
     return HttpResponse(status=204)
-
-
-# def likeviewf(request,pk):
-#     post = get_object_or_404(Post, id=request.POST.get('post_id'))
-#     post.likes.add(request.user)
-#     #  post.refresh_from_db()
-#     # return HttpResponseRedirect(reverse('blog-post-show', args=[str(pk)]))
 
 
 @login_required

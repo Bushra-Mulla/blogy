@@ -2,6 +2,7 @@
 ​
 <form action="{% url 'like_post'  %}" method="POST" class='like_form' id='{{post.id}}'>
   {% csrf_token %}
+<<<<<<< HEAD
   ​
   <input type="hidden" name="post_id" class='btn btn-warning btn-sm' value="{{post.id}}">
   <button type='submit' class='like_button{{post.id}} btn btn-info'>
@@ -11,6 +12,17 @@
     Unlike
     {% endif %}
   </button>
+=======
+​
+  <input type="hidden"name="post_id"class='btn btn-warning btn-sm' value="{{post.id}}">
+    <button type='submit'class='like_button{{post.id}} btn btn-info'>
+      {% if profile not in post.likes.all %}
+        Like
+      {% else %}
+        Unlike
+      {% endif %}
+    </button>
+>>>>>>> a7366fec4833d28b543eab7796d05b4804b6dfcd
 </form>
 {% if show %}
 <p class='like_count{{post.id}}'>{{post.like_count}}</p>
@@ -28,7 +40,7 @@
     let res;
     const like_count = $(`.like_count${post_id}`).text()
     const trimCount = parseInt(like_count)
-
+​
     $.ajax({
       type: 'POST',
       url: url,
