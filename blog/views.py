@@ -16,50 +16,10 @@ from django.urls import reverse_lazy ,reverse
 from django.contrib.auth.decorators import login_required
 
 
-
 def home(request):
-    last_twenty= Post.objects.filter(
+    last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
     return render(request, 'index.html', {'posts': last_twenty})
-    
-# def PostDeleteView(View):
-#     def post(self, request, id=None, *args, **kwargs):
-#         context = {}
-#         obj = self.get_object()
-#         if obj is not None:
-#             obj.delete()
-#             context['object'] = None
-#             return redirect('/')
-#             return render(request, self.template_name, context)
-        
-   
-
-# def logIn(request):
-#     if request.method == 'POST':
-#         # if post, then authenticate (user submitted username and password)
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 if user.is_active:
-#                     login(request, user)
-#                     # return HttpResponse('<h1>Success</h1>')
-#                     print(user.id)
-#                     return HttpResponseRedirect('/')
-#                 else:
-#                     HttpResponse('<h1>Try Again</h1>')
-
-#                     # print("The account has been disabled.")
-#             else:
-#                 print("The username and/or password is incorrect.")
-#     else:
-#         form = LoginForm()
-#     return render(request, 'logIn.html', {'form': form})
-
-# def logIn(request):
-#     return render(request, 'logIn.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -211,7 +171,7 @@ class reportCreate(CreateView):
         # print(post)
         self.object.Post_id = post
         self.object.save()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/post/'+str(post.id))
 
 
 def reportDetails(request, report_id):
@@ -244,6 +204,7 @@ def archivedReport(request):
     print(reports)
     return render(request, 'report/report_list.html', {'reports': reports})
 
+
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
     post = Post.objects.filter(
@@ -253,9 +214,10 @@ def category_view(request, category_name):
 
 def published(request):
     notPublished = Post.objects.filter(isPublish='notPublished')
-    publishe ='' 
+    publishe = ''
     # notPublished.published_update()
     return render(request, 'post/publish_manage.html', {'notPublished': notPublished, 'publishe': publishe})
+
 
 def update_publish_state(request, state):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
@@ -263,28 +225,20 @@ def update_publish_state(request, state):
     return HttpResponse(status=204)
 
 
-# def likeviewf(request,pk):
-#     post = get_object_or_404(Post, id=request.POST.get('post_id'))
-#     post.likes.add(request.user)
-#     #  post.refresh_from_db()
-#     # return HttpResponseRedirect(reverse('blog-post-show', args=[str(pk)]))
-
-
-
 @login_required
 def likeview(request):
-    user=request.user
+    user = request.user
     print(user)
     if request.method == 'POST':
         post_id = request.POST.get('post_id')
-        post=Post.objects.get(id=post_id)
+        post = Post.objects.get(id=post_id)
         profile = User.objects.get(username=user)
 
         if profile in post.likes.all():
             post.likes.remove(user)
         else:
             post.likes.add(user)
-        
+
     return HttpResponse(status=204)
 
     # return HttpResponseRedirect('/post/'+post_id)

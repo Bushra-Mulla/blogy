@@ -13,15 +13,15 @@
     </button>
 </form>
 {% if show %}
- <p class='like_count{{post.id}}'>{{post.like_count}}</p>
+<p class='like_count{{post.id}}'>{{post.like_count}}</p>
 {%endif%}
 {% endblock %}
 ​
 {% block script %}
 <script>
-  $('.like_form').submit(function(e){
+  $('.like_form').submit(function (e) {
     e.preventDefault()
-    const post_id = $(this).attr('id')                
+    const post_id = $(this).attr('id')
     const like_button = $(`.like_button${post_id}`).text()
     const trim = $.trim(like_button)
     const url = $(this).attr('action')
@@ -34,25 +34,25 @@
       url: url,
       data: {
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-        'post_id':post_id,
+        'post_id': post_id,
       },
-      success: function(response) {
-        if(trim === 'Unlike') {
+      success: function (response) {
+        if (trim === 'Unlike') {
           $(`.like_button${post_id}`).text('Like')
           res = trimCount - 1
-        //   $(`.like_button${post_id}`).hide();
+          //   $(`.like_button${post_id}`).hide();
         } else {
           $(`.like_button${post_id}`).text('Unlike')
           res = trimCount + 1
         }
-        console.log('success',response)
-​
+        console.log('success', response)
+
         $(`.like_count${post_id}`).text(res)
       },
-      error: function(response) {
+      error: function (response) {
         console.log('error', response)
       }
-    })            
-})
+    })
+  })
 </script>
 {%endblock%}
