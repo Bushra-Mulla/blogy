@@ -176,10 +176,9 @@ def update_publish_state(request, state):
 #     post.likes.add(request.user)
 #     #  post.refresh_from_db()
 #     # return HttpResponseRedirect(reverse('blog-post-show', args=[str(pk)]))
-#     return HttpResponse(status=204)
 
 
-# like_unlike_post
+
 @login_required
 def likeview(request):
     user=request.user
@@ -194,6 +193,12 @@ def likeview(request):
         else:
             post.likes.add(user)
         
-    # return HttpResponseRedirect('/')
+    return HttpResponse(status=204)
 
-    return HttpResponseRedirect('/post/'+post_id)
+    # return HttpResponseRedirect('/post/'+post_id)
+
+
+def likes_list(request):
+    user = request.user
+    likes_post = Post.objects.filter(likes=user).all()
+    return render(request, 'profile/like_list.html', {'posts': likes_post})

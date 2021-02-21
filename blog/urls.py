@@ -26,5 +26,6 @@ urlpatterns = [
     path('category/<category_name>/',
          views.category_view, name='blog-category_view'),
     path('post/publish_manage', views.published, name='blog-post-published'),
-    path('like/', views.likeview, name='like_post')
+    path('like/', views.likeview, name='like_post'),
+    path('user/likes/', views.likes_list, name='blog_like_list'),
     ]
