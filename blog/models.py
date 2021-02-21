@@ -22,7 +22,9 @@ class categorys(models.Model):
     def __str__(self):
         return self.category_name
 
-# cases: notPublished, published, refused
+
+cases = [('notPublished', 'notPublished'),
+         ('published', 'published'), ('refused', 'refused')]
 
 
 class Post(models.Model):
@@ -33,8 +35,8 @@ class Post(models.Model):
     date_post = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category_id = models.ForeignKey(categorys, on_delete=models.CASCADE)
-    isPublish = models.CharField(max_length=255, default='notPublished')
-    likes = models.ManyToManyField(User, related_name='like', blank=True,null=True)
+    isPublish = models.CharField(max_length=255,choices=cases, default='notPublished')
+    likes = models.ManyToManyField(User, related_name='like', blank=True)
     
     def like_count(self):
         return self.likes.count()
