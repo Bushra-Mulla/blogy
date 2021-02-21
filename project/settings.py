@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'django_social_share',
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,9 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +70,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.add_variable_to_context',
+                # 'blog.context_processors.reports',
+                'blog.context_processors.countReports',
+                'blog.context_processors.countArchivedReport',
+                'blog.context_processors.countNotArchivedReport',
+                # 'blog.context_processors.all',
+                # 'blog.context_processors.getAllNotArchivedReport',
+                # 'blog.context_processors.getAllArchivedReport',
+
             ],
         },
     },

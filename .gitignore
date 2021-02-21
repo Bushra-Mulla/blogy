@@ -3,5 +3,6 @@
 .env
 *.pyc
 */__pycache__/*
-*/__migrations__/*
+*__pycache__
+*/migrations/*
 

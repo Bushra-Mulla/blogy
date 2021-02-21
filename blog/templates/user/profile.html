@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+
+{%block content%}
+            <img src={{post.author.user_profile.profile_picture.url}} alt="Avatar"
+
+      <h1>username: {{user.username}} </h1> 
+      <h1>email: {{user.email}} </h1> 
+      <h1>Full name: {{user.first_name}} {{user.last_name}}</h1> 
+      <h1> </h1> 
+     <p>      <h1>about.me: {{user.about_me}}     </p>
+
+      
+      
+{%endblock%}

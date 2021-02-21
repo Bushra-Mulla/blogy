@@ -1,8 +1,125 @@
+#about-me {
+  display:flex;
+}
+#about-me .picture {
+  flex:3;
+}
+#about-me .picture img{
+  width: 100%;
+  height:100%;
+}
+#about-me .information {
+  line-height: 1.6;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-around;
+  flex:4;
+  background-color: #f2f2f2;
+  padding:35px;
+}
+#about-me .information .information-up h3 {
+  padding-bottom: 30px;
+  text-transform:uppercase;
+  font-size:30px;
+  color:#555;
+}
+#about-me .information .information-up p{
+  padding-bottom: 25px;
+}
+#about-me .information .skills {
+  display:flex;
+  flex-wrap: wrap;
+}
+#about-me .information .skills .content {
+  width:50%;
+  display:flex;
+}
+#about-me .information .skills .content .icon {
+  width:20%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#about-me .information .skills .content .icon img {
+  height:60%;
+  width:60%;
+  margin: auto;
+}
+#about-me .information .skills .content .details {
+  width:80%;
+  display:flex;
+  flex-direction: column;
+}
+/* End About Me */ 
+.postButton{
+  list-style: none;
+  display: inline-block;
+  margin: 1%;
+}
 
 
-.card {
-  width: 320px;
-  height: 400px; 
+.PostCard {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+  width: 90%;
+  height: auto; 
+  padding: 5px;
+  margin: 20px;
+  float: left;
+  box-shadow: 2px 2px 2px 2px  #3a7bd5;
+  position: relative;
+  left: 4%;
+  display: inline;
+  text-align: center;
+}
+.PostCard hr{
+  box-shadow: 0px 1px 0px 1px  #3a7bd5;
+
+}
+.card-comments img{width:4rem}
+
+.custom-scrollbar-js,
+.custom-scrollbar-css {
+  height: 200px;
+}
+
+/* Custom Scrollbar using CSS */
+.custom-scrollbar-css {
+  overflow-y: scroll;
+}
+
+/* scrollbar width */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* scrollbar track */
+body::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+/* scrollbar handle */
+body::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #00d2ff;
+  background-image: linear-gradient(to top, #00d2ff 0%, #3a7bd5 100%);
+}
+
+.buttonBorder{
+  padding: 0;
+border: none;
+background: none;
+}
+.cardCon{
+  position: relative;
+  left: 5%;
+  text-align: center;
+}
+.PostCard {
+  /* width: 20%;
+  height: 40%;  */
   padding: 5px;
   margin: 20px;
   float: left;
@@ -13,22 +130,19 @@
   display: inline;
   /* background: linear-gradient(45deg, rgb(135, 240, 214), rgb(29, 126, 182));; */
 }
-.boot{
+/* .boot{
   margin-bottom: 30%;
   left: 1.4%;
   position: relative;
   top: 8px;
-  bottom: 1%;
-}
-
-.fot{
-  top: 20%;
-}
+  bottom: 5%;
+  
+} */
 
 .container {
   position: relative;
   text-align: center;
-  color: white;
+  /* color: white; */
 }
 
 .centered {
@@ -37,7 +151,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.content{
+  margin: 10%;
+}
 .card-custom {
   width: 20%;
   min-width: 200px;
@@ -85,5 +201,4 @@
   left: 1.25rem;
   width: 100px;
   height: 100px;
-
 }

@@ -1,0 +1,66 @@
+{%extends 'base.html'%}
+{% load static %}
+
+
+{%block content%}
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="{% static '../static/js/userPostsList.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a href="#all">
+            <a class="nav-link active" id="all" href="/user/posts/">
+                All Posts</a></a>
+    </li>
+    <li class="nav-item">
+        <a href="#published">
+            <a class="nav-link" id="published" href="/user/posts/published/">
+                Published</a></a>
+    </li>
+    <li class="nav-item">
+        <a href="#notPublished">
+            <a class="nav-link" id="notPublished" href="/user/posts/notPublished/">
+                Not Published</a></a>
+    </li>
+    <li class="nav-item">
+        <a href="#refused">
+            <a class="nav-link" id="refused" href="/user/posts/refused/">
+                Refused</a></a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div id="all" class=" tab-pane active"><br>
+        {%block all_post%}
+        {% include "./blog/post_cards.html" with posts=posts %}
+        {%endblock%}
+    </div>
+    <div id="published" class="container tab-pane"><br>
+        {%block published_post%}
+        {% include "./blog/post_cards.html" with posts=posts %}
+        {%endblock%}
+    </div>
+    <div id="notPublished" class="container tab-pane fade"><br>
+        {%block notPublished_post%}
+        {% include "./blog/post_cards.html" with posts=posts %}
+        {%endblock%}
+    </div>
+    <div id="refused" class="container tab-pane fade"><br>
+        {%block refused_post%}
+        {% include "./blog/post_cards.html" with posts=posts %}
+        {%endblock%}
+    </div>
+</div>
+
+{%endblock%}

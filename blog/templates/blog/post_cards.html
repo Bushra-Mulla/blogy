@@ -1,18 +1,30 @@
-{%extends '../index.html'%}
+{%autoescape off%}
+{% if posts %}
 
-{%for post in posts%}
-<div class="boot">
-    <div class="card card-custom bg-white border-white card">
+<dev class="cardCon">
+    {%for post in posts%}
+    <!-- <h1>{{post.title}}</h1> -->
+    <div class="card PostCard card-custom bg-white border-white card">
         <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
-
         </div>
         <div class="card-custom-avatar">
-            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
+            <img class="img-fluid" src={{post.author.user_profile.profile_picture.url}} alt="Avatar" />
         </div>
         <div class="card-body" style="overflow-y: auto">
             <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
             <p class="card-text">{{post.author}} {{post.date_post}}</p>
+
+            <p>{{post.date_post}}</p>
+            {%block like%}
+            {% include "../post/like.html" with post=post %}
+            {%endblock%}
         </div>
     </div>
-</div>
-{%endfor%}
+
+    {%endfor%}
+</dev>
+
+{% else %}
+<h3>Nothing To Show</h3>
+{% endif %}
+{%endautoescape %}
