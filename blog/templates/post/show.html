@@ -24,22 +24,22 @@
         </div>
         <div class="col">
           <h2>
-           <a href="user/{{post.id}}""> <strong>By: {{post.author.first_name}} {{post.author.last_name}}</strong> </a>
+            <a href="user/{{post.id}}""> <strong>By: {{post.author.first_name}} {{post.author.last_name}}</strong> </a>
           </h2>
           <p>{{post.author.user_profile.position}} </p>
         </div>
-        <div class="col">
-          {% if user.is_authenticated %} 
-          <ul class=postButton>
-            <li>
-              <a class="gradient-button gradient-button-2" href="{% url 'blog-post-Update' post.id %}">Edit</a>
-            </li>
-            <li>
-              <a class="gradient-button gradient-button-1" href="{% url 'blog-post-delete' post.id %}">DELETE</a>
+        <div class=" col">
+              {% if user.is_authenticated %}
+              <ul class=postButton>
+                <li>
+                  <a class="gradient-button gradient-button-2" href="{% url 'blog-post-Update' post.id %}">Edit</a>
+                </li>
+                <li>
+                  <a class="gradient-button gradient-button-1" href="{% url 'blog-post-delete' post.id %}">DELETE</a>
 
-            </li>
-          </ul>
-          {% endif %}
+                </li>
+              </ul>
+              {% endif %}
         </div>
       </div>
 
@@ -89,6 +89,7 @@
   </div>
 </div>
 
+<<<<<<< HEAD {%block like%} {% include "./like.html" with post=post show=True %} {%endblock%}=======>>>>>>>
+  a7366fec4833d28b543eab7796d05b4804b6dfcd
 
-{% endblock %}
-
+  {% endblock %}

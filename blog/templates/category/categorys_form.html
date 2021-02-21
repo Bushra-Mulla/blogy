@@ -4,10 +4,20 @@
 {% block content %}
 <form method="post" enctype='multipart/form-data'>
     {% csrf_token %}
-    <table>
-        {{ form.media }}
-        {{ form|crispy }}
-    </table>
-    <input type="submit" value="Submit!">
+    <br>
+    <div class="card" style="margin: 0 auto; width: 55%;">
+        <div class="card-header">
+            <h3>Create New Category</h3>
+        </div>
+        <div class="card-body">
+            {{ form.media }}
+            {{ form|crispy }}
+        </div>
+        <div class="card-footer">
+            <a href="{{request.META.HTTP_REFERER|escape}}" class="gradient-button gradient-button-1"
+                style="float: left;">Cancel</a>
+            <input type="submit" value="Submit" class="gradient-button gradient-button-3" style="float: right;">
+        </div>
+    </div>
 </form>
 {% endblock %}
