@@ -6,8 +6,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
 from django.urls import reverse_lazy ,reverse
 from django.contrib.auth.decorators import login_required
+
 
 def home(request):
     last_twenty= Post.objects.filter(
@@ -86,6 +88,16 @@ class PostUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
 
+
+def category_view(request, category_name):
+    categorys_post = categorys.objects.get(category_name=category_name)
+    post = Post.objects.filter(category_id=categorys_post)
+    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post , 'category_info':categorys_post})
+ 
+
+def published(request):
+    notPublished = Post.objects.filter(isPublish='notPublished')
+    return render(request, 'post/publish_manage.html', {'notPublished': notPublished})
 # Query to
 
 

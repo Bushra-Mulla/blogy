@@ -26,7 +26,6 @@ class categorys(models.Model):
 cases = [('notPublished', 'notPublished'),
          ('published', 'published'), ('refused', 'refused')]
 
-
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = RichTextField(blank=True, null=True)
