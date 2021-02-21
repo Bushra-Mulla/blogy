@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 from django.contrib.auth import authenticate, login, logout
@@ -184,4 +184,4 @@ def likeview(request):
         
     # return HttpResponseRedirect('/')
 
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/post/'+post_id)
