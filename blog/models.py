@@ -28,13 +28,13 @@ cases = [('notPublished', 'notPublished'),
          ('published', 'published'), ('refused', 'refused')]
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = RichTextField(blank=True, null=True)
+    title = models.CharField(max_length=200, verbose_name="Post Title")
+    content = RichTextField(blank=True, null=True, verbose_name="Post Content:")
     post_img = models.ImageField(
-        upload_to='post_img/', blank=True, default='post_img/test.png')
+        upload_to='post_img/', blank=True, default='post_img/test.png', verbose_name="Post Header")
     date_post = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    category_id = models.ForeignKey(categorys, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE )
+    category_id = models.ForeignKey(categorys, on_delete=models.CASCADE, verbose_name="Post Category")
     isPublish = models.CharField(max_length=255,choices=cases, default='notPublished')
     likes = models.ManyToManyField(User, related_name='like', blank=True)
     

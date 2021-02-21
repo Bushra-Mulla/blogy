@@ -46,15 +46,14 @@ def post_show(request, post_id):
 @method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
     model = Post
-    fields = ['title', 'content', 'post_img', 'category_id', 'author']
+    fields = ['title', 'content', 'post_img', 'category_id']
     success_url = 'user/posts/'
 
-    def form_valid(self, form):
+    def form_valid(self, form , *kwargs):
         self.object = form.save(commit=False)
-        self.object.user = self.request.user
+        self.object.author_id = self.request.user.id
         self.object.save()
         return HttpResponseRedirect('/user/posts/')
-
 @method_decorator(login_required, name='dispatch')
 class PostUpdate(UpdateView):
     model = Post
