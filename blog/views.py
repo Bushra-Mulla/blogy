@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 from django.contrib.auth import authenticate, login, logout
@@ -7,13 +7,16 @@ from django.contrib import messages
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.urls import reverse_lazy ,reverse
+from django.contrib.auth.decorators import login_required
+
 
 
 def home(request):
-    last_twenty = Post.objects.filter(
-        isPublish=True).select_related('author__user_profile').order_by('-id')[:20]
+    last_twenty= Post.objects.filter(
+        isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
     return render(request, 'index.html', {'posts': last_twenty})
-
+   
 
 # def logIn(request):
 #     if request.method == 'POST':
@@ -149,7 +152,6 @@ class categoryCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/')
 
-
 def reports(request):
     # reports = report.objects.all().order_by('-id')
     return render(request, 'report/report_list.html', {"reports": allReports()})
@@ -207,3 +209,54 @@ def archivedReport(request):
     reports = report.objects.filter(is_archived=True)
     print(reports)
     return render(request, 'report/report_list.html', {'reports': reports})
+
+def category_view(request, category_name):
+    categorys_post = categorys.objects.get(category_name=category_name)
+    post = Post.objects.filter(
+        category_id=categorys_post, isPublish='published').order_by('-id')
+    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
+
+
+def published(request):
+    notPublished = Post.objects.filter(isPublish='notPublished')
+    publishe ='' 
+    # notPublished.published_update()
+    return render(request, 'post/publish_manage.html', {'notPublished': notPublished, 'publishe': publishe})
+
+def update_publish_state(request, state):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.isPublish.update(isPublish=state)
+    return HttpResponse(status=204)
+
+
+# def likeviewf(request,pk):
+#     post = get_object_or_404(Post, id=request.POST.get('post_id'))
+#     post.likes.add(request.user)
+#     #  post.refresh_from_db()
+#     # return HttpResponseRedirect(reverse('blog-post-show', args=[str(pk)]))
+
+
+
+@login_required
+def likeview(request):
+    user=request.user
+    print(user)
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        post=Post.objects.get(id=post_id)
+        profile = User.objects.get(username=user)
+
+        if profile in post.likes.all():
+            post.likes.remove(user)
+        else:
+            post.likes.add(user)
+        
+    return HttpResponse(status=204)
+
+    # return HttpResponseRedirect('/post/'+post_id)
+
+
+def likes_list(request):
+    user = request.user
+    likes_post = Post.objects.filter(likes=user).all()
+    return render(request, 'profile/like_list.html', {'posts': likes_post})
