@@ -22,7 +22,6 @@ class categorys(models.Model):
     def __str__(self):
         return self.category_name
 
-# cases: notPublished, published, refused
 
 
 class Post(models.Model):

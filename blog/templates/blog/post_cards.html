@@ -1,13 +1,10 @@
 {%autoescape off%}
-
 {% if posts %}
 {%for post in posts%}
 <!-- <h1>{{post.title}}</h1> -->
-
-<body calss="boot">
+<dev calss="boot">
     <div class="card card-custom bg-white border-white card">
         <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
-
         </div>
         <div class="card-custom-avatar">
             <img class="img-fluid" src={{post.author.user_profile.profile_picture.url}} alt="Avatar" />
@@ -17,10 +14,11 @@
             <p class="card-text">{{post.author}} {{post.date_post}}</p>
         </div>
     </div>
-</body>
+</dev>
+
 {%endfor%}
 {% else %}
 <h3>Nothing To Show</h3>
 {% endif %}
-
 {%endautoescape %}
+
