@@ -2,8 +2,8 @@
 {% if posts %}
 
 <dev class="cardCon">
-{%for post in posts%}
-<!-- <h1>{{post.title}}</h1> -->
+    {%for post in posts%}
+    <!-- <h1>{{post.title}}</h1> -->
     <div class="card card-custom bg-white border-white card">
         <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
         </div>
@@ -14,19 +14,17 @@
             <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
             <h4 class="card-text">{{post.author.first_name}} {{post.author.last_name}}</h4>
 
-               <p>{{post.date_post}}</p>
-               
+            <p>{{post.date_post}}</p>
             {%block like%}
             {% include "../post/like.html" with post=post %}
-        {%endblock%}
+            {%endblock%}
         </div>
     </div>
 
-{%endfor%}
+    {%endfor%}
 </dev>
 
 {% else %}
 <h3>Nothing To Show</h3>
 {% endif %}
 {%endautoescape %}
-
