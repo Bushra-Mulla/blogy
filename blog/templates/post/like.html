@@ -1,11 +1,10 @@
 {%block like%}
 
-
 <form action="{% url 'like_post'  %}" method="POST" class='like_form' id='{{post.id}}'>
   {% csrf_token %}
 
   <input type="hidden"name="post_id"class='btn btn-warning btn-sm' value="{{post.id}}">
-    <button type='submit'class='like_button'>
+    <button type='submit'class='like_button{{post.id}}'>
       {% if profile not in post.likes.all %}
         Like
       {% else %}
@@ -14,7 +13,7 @@
     </button>
 </form>
 {% if show %}
- <p class='like_count'>{{post.like_count}}</p>
+ <p class='like_count{{post.id}}'>{{post.like_count}}</p>
 {%endif%}
  <script>
   $('.like_form').submit(function(e){
@@ -38,14 +37,14 @@
       success: function(response) {
         console.log('success',response)
         if(trim === 'Unlike') {
-          $(`.like_button`).text('Like')
+          $(`.like_button${post_id}`).text('Like')
           res = trimCount - 1
         } else {
-          $(`.like_button`).text('Unlike')
+          $(`.like_button${post_id}`).text('Unlike')
           res = trimCount + 1
         }
 
-        $(`.like_count`).text(res)
+        $(`.like_count${post_id}`).text(res)
       },
       error: function(response) {
         console.log('error', response)
