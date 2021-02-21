@@ -14,4 +14,63 @@
 </div>
 <a href="{% url 'blog-post-Update' post.id %}">Update Details</a> | 
 
-    {% endblock %}
+<form action="{% url 'like_post'  %}" method="POST" class='like_form' id='{{post.id}}'>
+  {% csrf_token %}
+
+  <input type="hidden"name="post_id"class='btn btn-warning btn-sm' value="{{post.id}}">
+    <button type='submit'class='like_button{{post.id}}'>
+      {% if profile not in post.likes.all %}
+        Like
+      {% else %}
+        Unlike
+      {% endif %}
+    </button>
+</form>
+ <p class='like_count'>{{post.like_count}}</p>
+
+ 
+
+{% endblock %}
+
+{% block script %}
+<script>
+  $('.like_form').submit(function(e){
+    e.preventDefault()
+    console.log('blabla')
+    const post_id = $(this).attr('id')                
+    const like_button = $(`.like_button${post_id}`).text()
+    const trim = $.trim(like_button)
+    const url = $(this).attr('action')
+    let res;
+    const like_count = $(`.like_count`).text()
+    const trimCount = parseInt(like_count)
+                  
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: {
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+        'post_id':post_id,
+      },
+      success: function(response) {
+        console.log(response)
+        if(trim === 'Unlike') {
+          $(`.like_button${post_id}`).text('Like')
+          res = trimCount - 1
+          console.log(like_button)
+        } else {
+          $(`.like_button${post_id}`).text('Unlike')
+          res = trimCount + 1
+        }
+
+        $(`.like_count`).text(res)
+      },
+      error: function(response) {
+        console.log('error', response)
+      }
+    })
+              
+})
+
+</script>
+{% endblock %}
