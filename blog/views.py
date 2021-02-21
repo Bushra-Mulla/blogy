@@ -11,6 +11,7 @@ from django.urls import reverse_lazy ,reverse
 from django.contrib.auth.decorators import login_required
 
 
+
 def home(request):
     last_twenty= Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
@@ -92,8 +93,8 @@ class PostUpdate(UpdateView):
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
     post = Post.objects.filter(category_id=categorys_post)
-    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post , 'category_info':categorys_post})
- 
+    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
+
 
 def published(request):
     notPublished = Post.objects.filter(isPublish='notPublished')
@@ -140,7 +141,7 @@ def logout_view(request):
 
 
 class categoryCreate(CreateView):
-    print('create new category')
+    # print('create new category')
     model = categorys
     fields = '__all__'
     success_url = '/'
@@ -151,6 +152,63 @@ class categoryCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/')
 
+def reports(request):
+    # reports = report.objects.all().order_by('-id')
+    return render(request, 'report/report_list.html', {"reports": allReports()})
+
+
+def allReports():
+    reports = report.objects.all().select_related(
+        'user_id__user_profile').all().order_by('-id')
+    return reports
+
+
+class reportCreate(CreateView):
+    model = report
+    # fields = '__all__'
+    fields = ['title', 'message']
+    success_url = '/'
+
+    def form_valid(self, form, *kwargs):
+        self.object = form.save(commit=False)
+        self.object.user_id = self.request.user
+        # get post instance by id
+        post = Post.objects.get(id=self.kwargs['post_id'])
+        # print(post)
+        self.object.Post_id = post
+        self.object.save()
+        return HttpResponseRedirect('/')
+
+
+def reportDetails(request, report_id):
+    report_details = report.objects.get(
+        id=report_id)
+    print(report_details.title)
+    return render(request, 'report/report_list.html', {'reports': allReports(), 'report_details': report_details})
+
+
+def archiveReport(request, report_id):
+    reportDetails = report.objects.get(
+        id=report_id)
+    reportDetails.is_archived = True
+    reportDetails.save()
+    print(reportDetails.is_archived)
+    return HttpResponseRedirect('/reports/', {'reports': allReports()})
+
+# Query: Retrive number of not archived reports , make it a badge for admin anounncemnt
+
+
+def notArchivedReport(request):
+    reports = report.objects.filter(is_archived=False).select_related(
+        'user_id__user_profile').all()
+    print(reports)
+    return render(request, 'report/report_list.html', {'reports': reports})
+
+
+def archivedReport(request):
+    reports = report.objects.filter(is_archived=True)
+    print(reports)
+    return render(request, 'report/report_list.html', {'reports': reports})
 
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
