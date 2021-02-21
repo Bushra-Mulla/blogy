@@ -4,10 +4,24 @@
 {% block content %}
 <form method="post" enctype='multipart/form-data'>
     {% csrf_token %}
-    <table>
+    <br>
+    <div class="card" style="margin: 0 auto; width: 55%;">
+        <div class="card-header">
+            <h3>Create New Category</h3>
+        </div>
+        <div class="card-body">
+            {{ form.media }}
+            {{ form|crispy }}
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Cancel" class="btn btn-default" style="float: left;"
+                onclick="location.href='{% url 'home' %}'">
+            <input type="submit" value="Submit" class="btn btn-primary" style="float: right;">
+        </div>
+    </div>
+    <!-- <table>
         {{ form.media }}
         {{ form|crispy }}
-    </table>
-    <input type="submit" value="Submit!">
+    </table> -->
 </form>
 {% endblock %}
