@@ -123,6 +123,8 @@ background: none;
   height: 40%; 
 }
 .PostCard {
+    /* width: 20%;
+  height: 40%;  */
   padding: 5px;
   margin: 20px;
   float: left;
