@@ -4,7 +4,7 @@
 {%for post in posts%}
 <!-- <h1>{{post.title}}</h1> -->
 
-<body calss="boot">
+<div calss="boot">
     <div class="card card-custom bg-white border-white card">
         <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
 
@@ -14,10 +14,12 @@
         </div>
         <div class="card-body" style="overflow-y: auto">
             <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
-            <p class="card-text">{{post.author}} {{post.date_post}}</p>
+            {%block like%}
+                {% include "../post/like.html" with post=post %}
+            {%endblock%}
         </div>
     </div>
-</body>
+</div>
 {%endfor%}
 {% else %}
 <h3>Nothing To Show</h3>
