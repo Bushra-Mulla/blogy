@@ -8,5 +8,7 @@
         {{ form|crispy }}
     </table>
     <input type="submit" value="Send!">
+    <a href="{{request.META.HTTP_REFERER|escape}}" class="gradient-button gradient-button-1">Back</a>
+
 </form>
 {% endblock %}

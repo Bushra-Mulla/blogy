@@ -4,7 +4,7 @@
   {% csrf_token %}
 ​
   <input type="hidden"name="post_id"class='btn btn-warning btn-sm' value="{{post.id}}">
-    <button type='submit'class='like_button{{post.id}} btn btn-info'>
+    <button type='submit'class='like_button{{post.id}} gradient-button gradient-button-2 thumbs-up''>
       {% if profile not in post.likes.all %}
         Like
       {% else %}
