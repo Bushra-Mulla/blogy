@@ -20,6 +20,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'footer.css' %}" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
 
 </head>
@@ -56,11 +57,7 @@
               </ul>
             </li>
           </ul>
-          {% if user.is_staff %}
-          <a class="btn btn-primary" href="{% url 'reports' %}">
-            Announcement <span class="badge badge-light">{{countNotArchivedReport}}</span>
-          </a>
-          {% endif %}
+
         </div>
 
         <form class="d-flex">
@@ -73,13 +70,33 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/post/create/">Create</a>
           </li>
+          {% if user.is_staff %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-user-circle-o" aria-hidden="true"></i> Profile </a>
+              <i class="fas fa-users-cog" aria-hidden="true"></i> Admin </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+              <a class="dropdown-item waves-effect waves-light" href="{% url 'reports' %}">Reports <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
+              <a class="dropdown-item waves-effect waves-light" href="/published">New Post</a>
+              <a class="dropdown-item waves-effect waves-light" href="/admin">Control Panel</a>
+            </div>
+          </li>
+          
+          <!-- <a class="btn btn-primary" href="{% url 'reports' %}">
+            Announcement <span class="badge badge-light">{{countNotArchivedReport}}</span>
+          </a> -->
+          <!-- <a class="btn btn-primary" href="/admin">
+            Published <span class="badge badge-light"></span>
+          </a> -->
+          {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="far fa-user-circle" aria-hidden="true"></i> Profile </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
               <a class="dropdown-item waves-effect waves-light" href="/profile/">My Account</a>
               <a class="dropdown-item waves-effect waves-light" href="/user/posts/">My Posts</a>
+              <a class="dropdown-item waves-effect waves-light" href="/user/likes/">My Likes</a>
               <a class="dropdown-item waves-effect waves-light" href="/logout/">Log Out</a>
             </div>
           </li>
