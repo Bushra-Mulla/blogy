@@ -29,7 +29,7 @@
 .container {
   position: relative;
   text-align: center;
-  color: white;
+  /* color: white; */
 }
 
 .centered {
@@ -38,7 +38,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.content{
+  margin: 10%;
+}
 .card-custom {
   width: 20%;
   min-width: 200px;

@@ -22,4 +22,6 @@ urlpatterns = [
         template_name='category/categorys_form.html'), name="categoryCreate"),
     path('category/<category_name>/',
          views.category_view, name='blog-category_view'),
-    path('post/published', views.published, name='blog-post-published')]
+    path('post/publish_manage', views.published, name='blog-post-published'),
+    path('like/', views.likeview, name='like_post')
+    ]

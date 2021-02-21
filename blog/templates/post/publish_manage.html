@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id='accordion' class='accordion'>
+
+{%for post in notPublished%}
+  <h3>{{post.title}}
+    <!-- <form method="POST">
+    {% csrf_token %}  {{post.publish}}
+
+      <button type="submit" name="post_id" value="post.id">publish</button>
+    </form> -->
+  </h3>
+  <div>
+{{ post.content | safe}}
+ </div>
+
+  {%endfor%}
+
+</div>
+
+
+<script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+<script src='https://code.jquery.com/ui/1.12.1/jquery-ui.min.js'></script>
+<link href='https://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css' rel='stylesheet'>
+
+<script>
+$(document).ready(function() {
+
+$( '#accordion' ).accordion({
+active: false,
+collapsible: true
+});
+
+})
+</script>
+{% endblock %}

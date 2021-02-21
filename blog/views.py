@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
@@ -6,14 +6,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from django.urls import reverse_lazy ,reverse
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     last_twenty= Post.objects.filter(
-        isPublish=True).select_related('author__user_profile').order_by('-id')[:20]
-
+        isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
     return render(request, 'index.html', {'posts': last_twenty})
-
+   
 
 # def logIn(request):
 #     if request.method == 'POST':
@@ -142,9 +142,46 @@ class categoryCreate(CreateView):
 
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
-    post = Post.objects.filter(category_id=categorys_post)
+    post = Post.objects.filter(
+        category_id=categorys_post, isPublish='published').order_by('-id')
     return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
 
 
 def published(request):
-    pass
+    notPublished = Post.objects.filter(isPublish='notPublished')
+    publishe ='' 
+    # notPublished.published_update()
+    return render(request, 'post/publish_manage.html', {'notPublished': notPublished, 'publishe': publishe})
+
+def update_publish_state(request, state):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.isPublish.update(isPublish=state)
+    return HttpResponse(status=204)
+
+
+# def likeviewf(request,pk):
+#     post = get_object_or_404(Post, id=request.POST.get('post_id'))
+#     post.likes.add(request.user)
+#     #  post.refresh_from_db()
+#     # return HttpResponseRedirect(reverse('blog-post-show', args=[str(pk)]))
+#     return HttpResponse(status=204)
+
+
+# like_unlike_post
+@login_required
+def likeview(request):
+    user=request.user
+    print(user)
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        post=Post.objects.get(id=post_id)
+        profile = User.objects.get(username=user)
+
+        if profile in post.likes.all():
+            post.likes.remove(user)
+        else:
+            post.likes.add(user)
+        
+    # return HttpResponseRedirect('/')
+
+    return HttpResponseRedirect('/')

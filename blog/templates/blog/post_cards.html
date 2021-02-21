@@ -10,7 +10,7 @@
 
         </div>
         <div class="card-custom-avatar">
-            <img class="img-fluid" src={{post.post_img}} alt="Avatar" />
+            <img class="img-fluid" src={{post.author.user_profile.profile_picture.url}} alt="Avatar" />
         </div>
         <div class="card-body" style="overflow-y: auto">
             <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
