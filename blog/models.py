@@ -23,9 +23,8 @@ class categorys(models.Model):
     def __str__(self):
         return self.category_name
 
-
 cases = [('notPublished', 'notPublished'),
-         ('published', 'published'), ('refused', 'refused')]
+         ('published', 'published'), ('refused', 'refused'),('draft', 'draft')]
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -49,7 +48,6 @@ class Post(models.Model):
     def refused_update(self):
         self.isPublish = 'refused'
         self.save()
-        
 
 class comment(models.Model):
     content = models.TextField()

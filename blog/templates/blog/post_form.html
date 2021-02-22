@@ -2,11 +2,16 @@
 
 {% block content %}
 <form action="" method="post" enctype='multipart/form-data'>
-    {% csrf_token %}
-    <table>
+  {% csrf_token %}
+  <table>
     {{ form.media }}
     {{ form.as_table }}
   </table>
   <input type="submit" value="Submit!">
+  <form method='get' action='#'>
+    <input type="submit" value="YourValue" name="NameOfYourButton" />
+  </form>
+  <!-- <input name="cancel" type='submit' value='Cancel'> -->
+  <a href="{% url 'post_draft'%}" type='submit' value='Cancel'>Cancel</a>
 </form>
 {% endblock %}

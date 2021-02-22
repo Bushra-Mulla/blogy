@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.list import ListView
 from django.views import View
-from django.urls import reverse_lazy ,reverse
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 
 
@@ -20,6 +20,7 @@ def home(request):
     last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
     return render(request, 'index.html', {'posts': last_twenty})
+
 
 def signup(request):
     if request.method == 'POST':
@@ -43,17 +44,67 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
+
 @method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
     model = Post
-    fields = ['title', 'content', 'post_img', 'category_id', 'author']
+    fields = ['title', 'content', 'post_img', 'category_id']
     success_url = 'user/posts/'
 
-    def form_valid(self, form):
+    def form_valid(self, form, *kwargs):
         self.object = form.save(commit=False)
-        self.object.user = self.request.user
+        # get one field
+        print('fhgbjlkm;,', self.object.title)
+        print('----------form----------;,', form)
+        print('selffffffffffff;,', self.request.POST)
+        self.object.author_id = self.request.user.id
         self.object.save()
+        # if self.request.POST['submit'] == 'cancel':
+        #     # if self.request.GET.get('NameOfYourButton') == 'YourValue':
+        #     print('self.request.POST', self.request.POST)
+        # if self.request.method == 'GET':
+        # return HttpResponse('llllllll?;')
+        # print("&&&&&&&&&&&&&&&&&&&&&&&&&", self.request.method)
         return HttpResponseRedirect('/user/posts/')
+        # return "True"
+
+    def draft(self):
+        # result = super(CreateView, self).is_valid()
+        # print('aaaaaaaaaaaaaa', form_valid())
+        print("request method ***********", result)
+        if self.request.method == 'GET':
+            return HttpResponse('hhhhhhhhhhhh;')
+        return HttpResponse('ghkjl;')
+
+    # def draft(self):
+        # print('fhgbjlkm;,', self.object.title)
+    #     print('----------form----------;,', form)
+    #     print('selffffffffffff;,', self.request.POST)
+    #     self.object.author_id = self.request.user.id
+    #     self.object.save()
+    #     if self.request.POST['submit'] == 'cancel':
+    #         # if self.request.GET.get('NameOfYourButton') == 'YourValue':
+    #         print('self.request.POST', self.request.POST)
+    #     return HttpResponseRedirect('/user/posts/')
+    #     # self.object = form.save(commit=False)
+    #     # if self.object.title is not '':
+    #     #     print('*********************')
+    #     return HttpResponse('draft')
+    # def post(self, form):
+    #     if form.form_invalid():
+    #         if self.request.POST['cancel']:
+    #             # url = self.get_success_url()
+    #             return HttpResponse("url")
+    #         else:
+    #             return HttpResponseRedirect('/user/posts/')
+    #     else:
+    #         print("yeas")
+    #         if self.request.POST['cancel']:
+    #             # url = self.get_success_url()
+    #             return HttpResponse("url")
+    #         else:
+    #             return HttpResponseRedirect('/user/posts/')
+
 
 @method_decorator(login_required, name='dispatch')
 class PostUpdate(UpdateView):
@@ -65,18 +116,34 @@ class PostUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
 
+
 @method_decorator(login_required, name='dispatch')
 class PostDelete(DeleteView):
-  model = Post
-  success_url = '/'
+    model = Post
+    success_url = '/'
 
-@login_required           
+
+def post_draft(request):
+    # if request.method == POST: title', 'content', 'post_img', 'category_id
+    title = request.POST.get('title')
+    # href="{% url 'post_draft'%}"
+    # if title == '':
+    # if request.form.is_valid():
+    #     print("title")
+    # else:
+    #     print('error')
+    # return HttpResponse('<h1>Draft</h1>', title)
+    # print('null')
+
+    # if request
+    return HttpResponse(title)
+
+
+@login_required
 def profile(request, username):
     user = User.objects.get(username=username)
     post = Post.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'post': post})
-
-  
 
 
 def category_view(request, category_name):
@@ -146,6 +213,8 @@ def profile(request):
     # current_user = request.user.id
     # posts = user_profile.objects.filter(id=current_user)
     return render(request, 'user/profile.html')
+
+
 def reports(request):
     # reports = report.objects.all().order_by('-id')
     return render(request, 'report/report_list.html', {"reports": allReports()})
