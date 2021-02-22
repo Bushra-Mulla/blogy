@@ -58,7 +58,9 @@
   margin: 1%;
 }
 
-
+.homeCard{
+  float: left;
+}
 .Card {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -69,12 +71,21 @@
   padding: 5px;
   margin: 20px;
   float: left;
-  box-shadow: 2px 2px 2px 2px  #3a7bd5;
-  position: relative;
+  box-shadow: 2px 2px 2px 2px  #3A7BD5;
+  position: absolute;
   left: 4%;
   display: inline;
   text-align: center;
 }
+.PostCard {
+  padding: 5px;
+  margin: 20px;
+  box-shadow: 3px 3px 3px 3px rgb(153 150 150);
+  position: relative;
+  bottom: 30px;
+  text-align: center;
+}
+
 .PostCard hr{
   box-shadow: 0px 1px 0px 1px  #3a7bd5;
 
@@ -118,31 +129,7 @@ background: none;
   left: 5%;
   text-align: center;
 }
-.cardss{
-  width: 20%;
-  height: 40%; 
-}
-.PostCard {
-    /* width: 20%;
-  height: 40%;  */
-  padding: 5px;
-  margin: 20px;
-  float: left;
-  box-shadow: 3px 3px 3px 3px rgb(153, 150, 150);
-  position: relative;
-  bottom: 30px;
-  text-align: center;
-  display: inline;
-  /* background: linear-gradient(45deg, rgb(135, 240, 214), rgb(29, 126, 182));; */
-}
-/* .boot{
-  margin-bottom: 30%;
-  left: 1.4%;
-  position: relative;
-  top: 8px;
-  bottom: 5%;
-  
-} */
+
 
 .container {
   position: relative;

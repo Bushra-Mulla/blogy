@@ -20,7 +20,7 @@
       <div class="row align-items-center">
         <div class="col">
           <div class="col-sm-2 col-12 mb-3">
-            <img src={{post.author.user_profile.profile_picture.url}} alt="Avatar"
+            <img src={{post.author.user_profile.profile_picture.url}} style="height: 220px; width: 200px;" alt="Avatar"
               class="avatar rounded-circle z-depth-1-half">
           </div>
         </div>
@@ -73,9 +73,13 @@
           {{ post.content | safe}}
           <hr>
           <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}">report</a>
+                      <p class="card-text">{{post.author}} {{post.date_post}}</p>
+          {%if post.author != user%}
           {%block like%}
-          {% include "./like.html" with post=post show=True %}
-          {%endblock%}
+          {% include "./like.html" with post=post show=True %}            {%endblock%}
+          {%endif%}
+
+
           <h3>Share this post:</h3>
 
           <div class="template-demo">

@@ -316,6 +316,8 @@ def post_details(request, post_id):
     return render(request, 'post/publish_manage.html', {'post_details': post_details})
 
 
+
+
 def likeview(request):
     user = request.user
     print(user)
