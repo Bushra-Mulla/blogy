@@ -35,7 +35,7 @@ urlpatterns = [
          views.notArchivedReport, name="notArchivedReport"),
     path('reports/archived',
          views.archivedReport, name="archivedReport"),
-    path('post/publish_manage', views.published, name='blog-post-published'),
+    path('published/', views.published, name='blog-published'),
     path('like/', views.likeview, name='like_post'),
     path('user/likes/', views.likes_list, name='blog_like_list'),
     path('search/', views.search, name='search'),

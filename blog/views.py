@@ -1,6 +1,4 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
@@ -12,53 +10,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.list import ListView
 from django.views import View
-
-
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 def home(request):
-    last_twenty= Post.objects.filter(
+    last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
     return render(request, 'index.html', {'posts': last_twenty})
-    
-# def PostDeleteView(View):
-#     def post(self, request, id=None, *args, **kwargs):
-#         context = {}
-#         obj = self.get_object()
-#         if obj is not None:
-#             obj.delete()
-#             context['object'] = None
-#             return redirect('/')
-#             return render(request, self.template_name, context)
-        
-   
-
-# def logIn(request):
-#     if request.method == 'POST':
-#         # if post, then authenticate (user submitted username and password)
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 if user.is_active:
-#                     login(request, user)
-#                     # return HttpResponse('<h1>Success</h1>')
-#                     print(user.id)
-#                     return HttpResponseRedirect('/')
-#                 else:
-#                     HttpResponse('<h1>Try Again</h1>')
-
-#                     # print("The account has been disabled.")
-#             else:
-#                 print("The username and/or password is incorrect.")
-#     else:
-#         form = LoginForm()
-#     return render(request, 'logIn.html', {'form': form})
-
-# def logIn(request):
-#     return render(request, 'logIn.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -115,19 +74,19 @@ def profile(request, username):
     post = Post.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'post': post})
 
-  
 
+# def profile(request):
+#     # current_user = request.user.id
+#     # posts = user_profile.objects.filter(id=current_user)
+#     return render(request, 'user/profile.html')
 
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
-    post = Post.objects.filter(category_id=categorys_post)
+    post = Post.objects.filter(
+        category_id=categorys_post, isPublish='published').order_by('-id')
     return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
 
 
-def published(request):
-    notPublished = Post.objects.filter(isPublish='notPublished')
-    return render(request, 'post/publish_manage.html', {'notPublished': notPublished})
-# Query to
 
 
 def userPostsList(request):
@@ -181,10 +140,6 @@ class categoryCreate(CreateView):
         return HttpResponseRedirect('/')
 
 
-def profile(request):
-    # current_user = request.user.id
-    # posts = user_profile.objects.filter(id=current_user)
-    return render(request, 'user/profile.html')
 
 def reports(request):
     # reports = report.objects.all().order_by('-id')
@@ -211,9 +166,7 @@ class reportCreate(CreateView):
         # print(post)
         self.object.Post_id = post
         self.object.save()
-         
         return HttpResponseRedirect('/post/'+str(post.id))
-
 
 
 def reportDetails(request, report_id):
@@ -246,50 +199,72 @@ def archivedReport(request):
     print(reports)
     return render(request, 'report/report_list.html', {'reports': reports})
 
-def category_view(request, category_name):
-    categorys_post = categorys.objects.get(category_name=category_name)
-    post = Post.objects.filter(
-        category_id=categorys_post, isPublish='published').order_by('-id')
-    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
-
 
 def published(request):
     notPublished = Post.objects.filter(isPublish='notPublished')
-    publishe ='' 
+
     # notPublished.published_update()
-    return render(request, 'post/publish_manage.html', {'notPublished': notPublished, 'publishe': publishe})
-
-def update_publish_state(request, state):
-    post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    post.isPublish.update(isPublish=state)
-    return HttpResponse(status=204)
+    return render(request, 'post/publish_manage.html', {'notPublished': notPublished})
 
 
-# def likeviewf(request,pk):
+def all_post():
+    all_Post = Post.objects.all().select_related(
+        'author__user_profile').all()
+    return Post
+
+# def update_publish_state(request, state):
 #     post = get_object_or_404(Post, id=request.POST.get('post_id'))
-#     post.likes.add(request.user)
-#     #  post.refresh_from_db()
-#     # return HttpResponseRedirect(reverse('blog-post-show', args=[str(pk)]))
+#     post.isPublish.update(isPublish=state)
+#     return HttpResponse(status=204)
 
 
+def post_details(request, post_id):
+    post_details = post.objects.get(
+        id=post_id)
+    return render(request, 'post/publish_manage.html', {'post_details': post_details})
+
+
+# def archiveReport(request, report_id):
+#     reportDetails = report.objects.get(
+#         id=report_id)
+#     reportDetails.is_archived = True
+#     reportDetails.save()
+#     print(reportDetails.is_archived)
+#     return HttpResponseRedirect('/reports/', {'reports': allReports()})
+
+# Query: Retrive number of not archived reports , make it a badge for admin anounncemnt
+
+
+# def notArchivedReport(request):
+#     reports = report.objects.filter(is_archived=False).select_related(
+#         'user_id__user_profile').all()
+#     print(reports)
+#     return render(request, 'report/report_list.html', {'reports': reports})
+
+
+# def archivedReport(request):
+#     reports = report.objects.filter(is_archived=True)
+#     print(reports)
+#     return render(request, 'report/report_list.html', {'reports': reports})
 
 
 def likeview(request):
-    user=request.user
+    user = request.user
     print(user)
     if request.method == 'POST':
         post_id = request.POST.get('post_id')
-        post=Post.objects.get(id=post_id)
+        post = Post.objects.get(id=post_id)
         profile = User.objects.get(username=user)
 
         if profile in post.likes.all():
             post.likes.remove(user)
         else:
             post.likes.add(user)
-        
-    return HttpResponse(status=204)
 
-    # return HttpResponseRedirect('/post/'+post_id)
+    # return HttpResponse(status=204)
+    post.save()        
+ 
+    return HttpResponseRedirect('/post/'+post_id, {'profile': profile})
 
 
 def likes_list(request):
@@ -299,9 +274,19 @@ def likes_list(request):
 
 
 def search(request):
-    if 'q' in request.GET:
-        q = request.GET['q']
-        posts = Post.objects.filter(title__icontains=q)
+    if request.method == 'GET':
+        search = request.GET.get('q')
+        if search:
+            result = Post.objects.filter(Q(title__icontains=search))
+            return render(request, "search.html", {"posts": result})
+
     else:
-        posts=Post.objects.all()
+        return render(request, "base.html", {})
+        # search = Post.objects.filter(title__search=q)
+        # paginator = Paginator(status, 2)
+        # page_number=request.GET.get('page')
+        # posts_obj=paginator.get_page(page_number)
+        # return HttpResponseRedirect('/search', {"search":posts_obj})
+
+    # return render(request, 'search.html',{"search":posts_obj})
 

@@ -14,7 +14,6 @@
             <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
             <p class="card-text">{{post.author}} {{post.date_post}}</p>
 
-            <p>{{post.date_post}}</p>
             {%block like%}
             {% include "../post/like.html" with post=post %}
             {%endblock%}
