@@ -5,17 +5,14 @@
 <form method="post">
     {% csrf_token %}
 
-
     <div class="card mt-5" style="margin: 0 auto; width: 55%;">
         <div class="card-header">
-            <h3>Create New Category</h3>
+            <h3>Create Your Profile</h3>
         </div>
         <div class="card-body"> {{ form|crispy }}
         </div>
         <div class="card-footer">
-            <!-- <p>{{request.path}}</p> -->
-            <a href="{{request.META.HTTP_REFERER|escape}}" class="gradient-button gradient-button-1"
-                style="float: left;">Back</a>
+
             <input type="submit" value="Send" class="gradient-button gradient-button-3" style="float: right;">
         </div>
     </div>

@@ -13,7 +13,6 @@ from django.views import View
 from django.core.paginator import Paginator
 from django.db.models import Q
 
-
 def home(request):
     last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
@@ -28,7 +27,7 @@ def signup(request):
             print('HEY', user.username, 'id ', user.id)
             # HttpResponse('<h1>Success</h1>')
             # return HttpResponseRedirect('')
-            return HttpResponseRedirect('/', user.id)
+            return HttpResponseRedirect('/profile/create')
         else:
             print('try again')
             HttpResponse('<h1>Try Again</h1>')
@@ -44,15 +43,14 @@ def post_show(request, post_id):
 @method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
     model = Post
-    fields = ['title', 'content', 'post_img', 'category_id', 'author']
+    fields = ['title', 'content', 'post_img', 'category_id']
     success_url = 'user/posts/'
 
-    def form_valid(self, form):
+    def form_valid(self, form , *kwargs):
         self.object = form.save(commit=False)
-        self.object.user = self.request.user
+        self.object.author_id = self.request.user.id
         self.object.save()
         return HttpResponseRedirect('/user/posts/')
-
 @method_decorator(login_required, name='dispatch')
 class PostUpdate(UpdateView):
     model = Post
@@ -139,7 +137,39 @@ class categoryCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/')
 
+# @method_decorator(login_required, name='dispatch')
+class ProfileCreate(CreateView):
+    model = user_profile
+    fields = ['about_me', 'position', 'profile_picture']
+    success_url = '/profile'
 
+    def form_valid(self, form , *kwargs):
+        self.object = form.save(commit=False)
+        self.object.user_id = self.request.user.id
+        self.object.save()
+        return HttpResponseRedirect('/')
+        
+        
+def profile(request):
+    # current_user = request.user.id
+    # posts = user_profile.objects.filter(id=current_user)
+    posts=Post.objects.filter(author = request.user)
+    userInfo= user_profile.objects.filter(user = request.user)
+    return render(request, 'user/profile.html', {
+        'post':posts, 
+         'userInfo': userInfo,
+    })
+    
+class ProfileUpdate(UpdateView):
+    model = user_profile
+    fields = ['about_me', 'position', 'profile_picture']
+    success_url = '/profile/'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/profile/')
+        
 
 def reports(request):
     # reports = report.objects.all().order_by('-id')
@@ -203,8 +233,10 @@ def archivedReport(request):
 def published(request):
     notPublished = Post.objects.filter(isPublish='notPublished')
 
+
     # notPublished.published_update()
     return render(request, 'post/publish_manage.html', {'notPublished': notPublished})
+
 
 
 def all_post():
@@ -212,10 +244,6 @@ def all_post():
         'author__user_profile').all()
     return Post
 
-# def update_publish_state(request, state):
-#     post = get_object_or_404(Post, id=request.POST.get('post_id'))
-#     post.isPublish.update(isPublish=state)
-#     return HttpResponse(status=204)
 
 
 def post_details(request, post_id):
@@ -223,29 +251,6 @@ def post_details(request, post_id):
         id=post_id)
     return render(request, 'post/publish_manage.html', {'post_details': post_details})
 
-
-# def archiveReport(request, report_id):
-#     reportDetails = report.objects.get(
-#         id=report_id)
-#     reportDetails.is_archived = True
-#     reportDetails.save()
-#     print(reportDetails.is_archived)
-#     return HttpResponseRedirect('/reports/', {'reports': allReports()})
-
-# Query: Retrive number of not archived reports , make it a badge for admin anounncemnt
-
-
-# def notArchivedReport(request):
-#     reports = report.objects.filter(is_archived=False).select_related(
-#         'user_id__user_profile').all()
-#     print(reports)
-#     return render(request, 'report/report_list.html', {'reports': reports})
-
-
-# def archivedReport(request):
-#     reports = report.objects.filter(is_archived=True)
-#     print(reports)
-#     return render(request, 'report/report_list.html', {'reports': reports})
 
 
 def likeview(request):
@@ -282,11 +287,5 @@ def search(request):
 
     else:
         return render(request, "base.html", {})
-        # search = Post.objects.filter(title__search=q)
-        # paginator = Paginator(status, 2)
-        # page_number=request.GET.get('page')
-        # posts_obj=paginator.get_page(page_number)
-        # return HttpResponseRedirect('/search', {"search":posts_obj})
 
-    # return render(request, 'search.html',{"search":posts_obj})
 
