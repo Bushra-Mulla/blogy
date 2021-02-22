@@ -137,7 +137,7 @@ class categoryCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/')
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class ProfileCreate(CreateView):
     model = user_profile
     fields = ['about_me', 'position', 'profile_picture']
