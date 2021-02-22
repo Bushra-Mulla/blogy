@@ -147,7 +147,7 @@ class ProfileCreate(CreateView):
         self.object = form.save(commit=False)
         self.object.user_id = self.request.user.id
         self.object.save()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/profile')
         
         
 def profile(request):
