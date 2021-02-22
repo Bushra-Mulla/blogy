@@ -43,7 +43,6 @@ urlpatterns = [
     path('published/', views.published, name='blog-published'),
     path('like/', views.likeview, name='like_post'),
     path('user/likes/', views.likes_list, name='blog_like_list'),
-    path('post/draft/', views.PostCreate.draft, name='post_draft'),
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
              template_name='user/password_reset.html'
