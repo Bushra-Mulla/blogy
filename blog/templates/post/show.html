@@ -6,7 +6,7 @@
 
   <section>
     <div class="">
-      <img src="{{post.post_img.url}}" width="100%" height="550px">
+      <img src="{{post.post_img.url}}" width="100%" height="700px">
     </div>
   </section>
 
@@ -86,10 +86,12 @@
             <!-- {% post_to_telegram "{{post.title}}. Check it out!" object_or_url %} -->
 
             <button type="button" class="{{ link_class }} btn btn-social-icon btn-facebook">
-              <a href="{{ facebook_url }}" class="{{ link_class }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            </button> 
+              <a href="{{ facebook_url }}" class="{{ link_class }}" target="_blank"><i
+                  class="fab fa-facebook-f"></i></a>
+            </button>
             <button type="button" class="btn btn-social-icon btn-youtube">
-              <a href="{{ tweet_url }}" class="meta-act-link meta-tweet {{link_class}}" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="{{ tweet_url }}" class="meta-act-link meta-tweet {{link_class}}" target="_blank"><i
+                  class="fab fa-twitter"></i></a>
             </button>
             <!-- <button type="button" class="btn btn-social-icon btn-dribbble">
               <a href="{{ linkedin_url }}"type="IN/Share" class="{{ link_class }}" target="_blank"></a><i class="fab fa-linkedin"></i>
@@ -105,5 +107,6 @@
     </div>
   </div>
 </div>
-  {% endblock %}
 
+
+{% endblock %}

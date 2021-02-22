@@ -11,7 +11,8 @@ urlpatterns = [
     path('post/create/', views.PostCreate.as_view(), name='blog-post-create'),
     path('post/<int:pk>/update/', views.PostUpdate.as_view(),
          name='blog-post-Update'),
-    path('post/<int:pk>/delete/', views.PostDelete.as_view(), name='blog-post-delete'),
+    path('post/<int:pk>/delete/', views.PostDelete.as_view(),
+         name='blog-post-delete'),
     path('post/publish_manage', views.published, name='blog-post-published'),
     path('user/posts/', views.userPostsList, name='userPostsList'),
     path('user/posts/published/', views.userPublishedPostsList,
@@ -25,7 +26,7 @@ urlpatterns = [
     path('category/<category_name>/',
          views.category_view, name='blog-category_view'),
     path('profile/', views.profile, name="profile"),
-    path('profile/create', views.ProfileCreate.as_view( 
+    path('profile/create', views.ProfileCreate.as_view(
         template_name='user/profile_form.html'), name='user-profile-create'),
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(template_name='user/profile_form.html'),
          name='user-profile-update'),
@@ -42,6 +43,27 @@ urlpatterns = [
     path('published/', views.published, name='blog-published'),
     path('like/', views.likeview, name='like_post'),
     path('user/likes/', views.likes_list, name='blog_like_list'),
+    path('post/draft/', views.PostCreate.draft, name='post_draft'),
+    path('password-reset/',
+         auth_views.PasswordResetView.as_view(
+             template_name='user/password_reset.html'
+         ),
+         name='password_reset'),
+    path('password-reset/done/',
+         auth_views.PasswordResetDoneView.as_view(
+             template_name='user/password_reset_done.html'
+         ),
+         name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(
+             template_name='user/password_reset_confirm.html'
+         ),
+         name='password_reset_confirm'),
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(
+             template_name='user/password_reset_complete.html'
+         ),
+         name='password_reset_complete'),
     path('search/', views.search, name='search'),
 
-    ]
+]
