@@ -14,9 +14,11 @@
             <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
             <p class="card-text">{{post.author}} {{post.date_post}}</p>
 
+            {% if post.isPublish == 'published' %}
             {%block like%}
             {% include "../post/like.html" with post=post %}
             {%endblock%}
+            {% endif %}
         </div>
     </div>
 
