@@ -12,9 +12,9 @@ from django.views.generic.list import ListView
 from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
-
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 def home(request):
@@ -107,22 +107,36 @@ class PostCreate(CreateView):
     #             return HttpResponseRedirect('/user/posts/')
 
 
-@method_decorator(login_required, name='dispatch')
-class PostUpdate(UpdateView):
+
+
+class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id']
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
+        form.instance.author = self.request.user
         return HttpResponseRedirect('/post/' + str(self.object.pk))
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
         
-@method_decorator(login_required, name='dispatch')
-class PostDelete(DeleteView):
+        
+class PostDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/'
 
-
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
+        
+        
 def post_draft(request):
     # if request.method == POST: title', 'content', 'post_img', 'category_id
     title = request.POST.get('title')
