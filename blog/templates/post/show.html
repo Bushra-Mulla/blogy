@@ -79,20 +79,34 @@
           <h3>Share this post:</h3>
 
           <div class="template-demo">
-            <button type="button" class="btn btn-social-icon btn-facebook">
-              <i class="fab fa-facebook-f"> </i></button> <button type="button" class="btn btn-social-icon btn-youtube">
-              <i class="fab fa-twitter"></i></button> <button type="button" class="btn btn-social-icon btn-dribbble">
-              <i class="fab fa-linkedin"></i></button> <button type="button" class="btn btn-social-icon btn-instagram">
-              <i class="fab fa-instagram"></i></button>
+            {% load social_share %}
+            <!-- {% post_to_twitter "{{post.title}}. Check it out!" object_or_url  %} -->
+            <!-- {% post_to_facebook "{{post.title}}. Check it out!" object_or_url %} -->
+            <!-- {% post_to_linkedin object_or_url %} -->
+            <!-- {% post_to_telegram "{{post.title}}. Check it out!" object_or_url %} -->
+
+            <button type="button" class="{{ link_class }} btn btn-social-icon btn-facebook">
+              <a href="{{ facebook_url }}" class="{{ link_class }}" target="_blank"><i
+                  class="fab fa-facebook-f"></i></a>
+            </button>
+            <button type="button" class="btn btn-social-icon btn-youtube">
+              <a href="{{ tweet_url }}" class="meta-act-link meta-tweet {{link_class}}" target="_blank"><i
+                  class="fab fa-twitter"></i></a>
+            </button>
+            <!-- <button type="button" class="btn btn-social-icon btn-dribbble">
+              <a href="{{ linkedin_url }}"type="IN/Share" class="{{ link_class }}" target="_blank"></a><i class="fab fa-linkedin"></i>
+            </button>  -->
+            <button type="button" class="btn btn-social-icon btn-instagram">
+              <a href="{{ telegram_url }}" class="{{ link_class }}" target="_blank"><i class="fab fa-telegram"></i></a>
+            </button>
+
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<<<<<<< HEAD
+
 
 {% endblock %}
-=======
-{% endblock %}
->>>>>>> a4b71c21fc80bbd5249403e29510a3e0463620f4

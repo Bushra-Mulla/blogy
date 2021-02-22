@@ -16,30 +16,41 @@
                     <h4>Reports List</h4>
                 </div>
                 
-                <div class="container ta">
-                    <div class="row align-items-start ta" >
-                        <div class="col ta">
-                            <li class="btn btn-primary"><a onclick="location.href='{% url 'reports' %}'">All <span
-                                class="badge badge-light">{{countReports}}</span></a>
-                    </li>
+                <div class="container">
+                    <div class="row align-items-start" >
+                        <div class="col">
+                            <a onclick="location.href='{% url 'reports' %}'">All <span
+                                    class="badge badge-light">{{countReports}}</span></a>
                             </li>
                         </div>
                         <div class="col">
-                            <li class="btn btn-primary"><a onclick="location.href='{% url 'archivedReport' %}'">Archived
+                            <a onclick="location.href='{% url 'archivedReport' %}'">Archived
                                 <span class="badge badge-light">{{countArchivedReport}}</span></a>
-                        </li>
                         </div>
                         <div class="col">
-                            <li class="btn btn-primary"><a onclick="location.href='{% url 'notArchivedReport' %}'">Not
+                            <a onclick="location.href='{% url 'notArchivedReport' %}'">Not
                                 Archived
                                 <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
-                        </li>
+            
                         </div>
                     </div>
                 </div>
                 
                 
                     <div class="card-body">
+                        <ul class="nav nav-pills">
+                            <li class="btn btn-primary"><a onclick="location.href='{% url 'reports' %}'">All <span
+                                        class="badge badge-light">{{countReports}}</span></a>
+                            </li>
+                            <li class="btn btn-primary"><a onclick="location.href='{% url 'archivedReport' %}'">Archived
+                                    <span class="badge badge-light">{{countArchivedReport}}</span></a>
+                            </li>
+                            <li class="btn btn-primary"><a onclick="location.href='{% url 'notArchivedReport' %}'">Not
+                                    Archived
+                                    <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
+                            </li>
+                        </ul>
+
                         <br>
                         <!-- add tabs -->
                         {% if reports %}

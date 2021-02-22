@@ -58,11 +58,11 @@
             </li>
           </ul>
 
-        </div>
 
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="What Is In Your Mind?" aria-label="Search">
-          <!-- <button class="gradient-button gradient-button-2 buttonBorder" type="submit" width='80px'>Search</button> -->
+        </div>
+        <form class="d-flex" name="searchform" method="GET" action="{% url 'search' %}">
+          <!-- {% csrf_token %} -->
+          <input class="form-control me-2" type="search"  name="q" placeholder="What Is In Your Mind?"  aria-label="Search"/>
 
         </form>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -74,7 +74,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-users-cog" aria-hidden="true"></i> Admin <strong color='red'> {{countNotArchivedReport}} </strong></a>
+              <i class="fas fa-users-cog" aria-hidden="true"></i> Admin </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
               <a class="dropdown-item waves-effect waves-light" href="{% url 'reports' %}">Reports <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
               <a class="dropdown-item waves-effect waves-light" href="/published">New Post</a>
@@ -92,6 +92,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
               <i class="far fa-user-circle" aria-hidden="true"></i> Profile </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
               <a class="dropdown-item waves-effect waves-light" href="/profile/">My Account</a>
@@ -150,9 +151,12 @@
 
     </footer>
 
+  <script src="//code.tidio.co/ozgecflyxqw3basldhj02t7rib4jpuex.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
     crossorigin="anonymous"></script>
+      {% block script %}
+  {% endblock %}
 </body>
 
 </html>

@@ -1,6 +1,4 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
@@ -14,6 +12,9 @@ from django.views.generic.list import ListView
 from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
+
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 def home(request):
@@ -148,26 +149,21 @@ def profile(request, username):
 
 def category_view(request, category_name):
     categorys_post = categorys.objects.get(category_name=category_name)
-    post = Post.objects.filter(category_id=categorys_post)
+    post = Post.objects.filter(
+        category_id=categorys_post, isPublish='published').order_by('-id')
     return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
-
-
-def published(request):
-    notPublished = Post.objects.filter(isPublish='notPublished')
-    return render(request, 'post/publish_manage.html', {'notPublished': notPublished})
-# Query to
 
 
 def userPostsList(request):
     current_user = request.user
-    posts = Post.objects.all().order_by('-id')
+    posts = Post.objects.filter(author=current_user.id).order_by('-id')
     print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
 
 
 def userPublishedPostsList(request):
     current_user = request.user
-    posts = Post.objects.filter(isPublish="published")
+    posts = Post.objects.filter(isPublish="published", author=current_user.id)
     # print(current_user.id)
     # print(current_user.username)
     print(posts)
@@ -176,7 +172,8 @@ def userPublishedPostsList(request):
 
 def userNotPublishedPostsList(request):
     current_user = request.user
-    posts = Post.objects.filter(isPublish="notPublished")
+    posts = Post.objects.filter(
+        isPublish="notPublished", author=current_user.id)
     # print(current_user.username)
     print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
@@ -184,7 +181,7 @@ def userNotPublishedPostsList(request):
 
 def userRefusedPostsList(request):
     current_user = request.user
-    posts = Post.objects.filter(isPublish="refused")
+    posts = Post.objects.filter(isPublish="refused", author=current_user.id)
     # print(current_user.id)
     # print(current_user.username)
     print(posts)
@@ -209,28 +206,31 @@ class categoryCreate(CreateView):
         return HttpResponseRedirect('/')
 
 # @method_decorator(login_required, name='dispatch')
+
+
 class ProfileCreate(CreateView):
     model = user_profile
     fields = ['about_me', 'position', 'profile_picture']
     success_url = '/profile'
 
-    def form_valid(self, form , *kwargs):
+    def form_valid(self, form, *kwargs):
         self.object = form.save(commit=False)
         self.object.user_id = self.request.user.id
         self.object.save()
         return HttpResponseRedirect('/')
-        
-        
+
+
 def profile(request):
     # current_user = request.user.id
     # posts = user_profile.objects.filter(id=current_user)
-    posts=Post.objects.filter(author = request.user)
-    userInfo= user_profile.objects.filter(user = request.user)
+    posts = Post.objects.filter(author=request.user)
+    userInfo = user_profile.objects.filter(user=request.user)
     return render(request, 'user/profile.html', {
-        'post':posts, 
-         'userInfo': userInfo,
+        'post': posts,
+        'userInfo': userInfo,
     })
-    
+
+
 class ProfileUpdate(UpdateView):
     model = user_profile
     fields = ['about_me', 'position', 'profile_picture']
@@ -240,7 +240,8 @@ class ProfileUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/profile/')
-        
+
+
 def reports(request):
     # reports = report.objects.all().order_by('-id')
     return render(request, 'report/report_list.html', {"reports": allReports()})
@@ -300,27 +301,25 @@ def archivedReport(request):
     return render(request, 'report/report_list.html', {'reports': reports})
 
 
-def category_view(request, category_name):
-    categorys_post = categorys.objects.get(category_name=category_name)
-    post = Post.objects.filter(
-        category_id=categorys_post, isPublish='published').order_by('-id')
-    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
-
-
 def published(request):
     notPublished = Post.objects.filter(isPublish='notPublished')
-    publishe = ''
+
     # notPublished.published_update()
-    return render(request, 'post/publish_manage.html', {'notPublished': notPublished, 'publishe': publishe})
+    return render(request, 'post/publish_manage.html', {'notPublished': notPublished})
 
 
-def update_publish_state(request, state):
-    post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    post.isPublish.update(isPublish=state)
-    return HttpResponse(status=204)
+def all_post():
+    all_Post = Post.objects.all().select_related(
+        'author__user_profile').all()
+    return Post
 
 
-@login_required
+def post_details(request, post_id):
+    post_details = post.objects.get(
+        id=post_id)
+    return render(request, 'post/publish_manage.html', {'post_details': post_details})
+
+
 def likeview(request):
     user = request.user
     print(user)
@@ -334,12 +333,24 @@ def likeview(request):
         else:
             post.likes.add(user)
 
-    return HttpResponse(status=204)
+    # return HttpResponse(status=204)
+    post.save()
 
-    # return HttpResponseRedirect('/post/'+post_id)
+    return HttpResponseRedirect('/post/'+post_id, {'profile': profile})
 
 
 def likes_list(request):
     user = request.user
     likes_post = Post.objects.filter(likes=user).all()
     return render(request, 'profile/like_list.html', {'posts': likes_post})
+
+
+def search(request):
+    if request.method == 'GET':
+        search = request.GET.get('q')
+        if search:
+            result = Post.objects.filter(Q(title__icontains=search))
+            return render(request, "search.html", {"posts": result})
+
+    else:
+        return render(request, "base.html", {})

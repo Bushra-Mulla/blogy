@@ -48,6 +48,7 @@ class Post(models.Model):
     def refused_update(self):
         self.isPublish = 'refused'
         self.save()
+           
 
 class comment(models.Model):
     content = models.TextField()

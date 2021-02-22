@@ -26,7 +26,7 @@ urlpatterns = [
     path('category/<category_name>/',
          views.category_view, name='blog-category_view'),
     path('profile/', views.profile, name="profile"),
-    path('profile/create', views.ProfileCreate.as_view( 
+    path('profile/create', views.ProfileCreate.as_view(
         template_name='user/profile_form.html'), name='user-profile-create'),
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(template_name='user/profile_form.html'),
          name='user-profile-update'),
@@ -40,7 +40,7 @@ urlpatterns = [
          views.notArchivedReport, name="notArchivedReport"),
     path('reports/archived',
          views.archivedReport, name="archivedReport"),
-    path('post/publish_manage', views.published, name='blog-post-published'),
+    path('published/', views.published, name='blog-published'),
     path('like/', views.likeview, name='like_post'),
     path('user/likes/', views.likes_list, name='blog_like_list'),
     path('post/draft/', views.PostCreate.draft, name='post_draft'),
@@ -64,4 +64,6 @@ urlpatterns = [
              template_name='user/password_reset_complete.html'
          ),
          name='password_reset_complete'),
+    path('search/', views.search, name='search'),
+
 ]
