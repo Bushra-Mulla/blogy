@@ -57,13 +57,13 @@ class PostCreate(CreateView):
 @method_decorator(login_required, name='dispatch')
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'content', 'post_img', 'category_id', 'author']
+    fields = ['title', 'content', 'post_img', 'category_id']
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
-
+        
 @method_decorator(login_required, name='dispatch')
 class PostDelete(DeleteView):
   model = Post
@@ -166,7 +166,6 @@ def profile(request):
 class ProfileUpdate(UpdateView):
     model = user_profile
     fields = ['about_me', 'position', 'profile_picture']
-    success_url = '/profile/'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
