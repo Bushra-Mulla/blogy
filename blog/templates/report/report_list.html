@@ -14,97 +14,109 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Reports List</h4>
-                    <p>{{request.path}}</p>
                 </div>
-                <div class="card-body">
-                    <ul class="nav nav-pills">
-                        <li class="btn btn-primary"><a onclick="location.href='{% url 'reports' %}'">All <span
-                                    class="badge badge-light">{{countReports}}</span></a>
-                        </li>
-                        <li class="btn btn-primary"><a onclick="location.href='{% url 'archivedReport' %}'">Archived
+                
+                <div class="container ta">
+                    <div class="row align-items-start ta" >
+                        <div class="col ta">
+                            <li class="btn btn-primary"><a onclick="location.href='{% url 'reports' %}'">All <span
+                                class="badge badge-light">{{countReports}}</span></a>
+                    </li>
+                            </li>
+                        </div>
+                        <div class="col">
+                            <li class="btn btn-primary"><a onclick="location.href='{% url 'archivedReport' %}'">Archived
                                 <span class="badge badge-light">{{countArchivedReport}}</span></a>
                         </li>
-                        <li class="btn btn-primary"><a onclick="location.href='{% url 'notArchivedReport' %}'">Not
+                        </div>
+                        <div class="col">
+                            <li class="btn btn-primary"><a onclick="location.href='{% url 'notArchivedReport' %}'">Not
                                 Archived
                                 <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
                         </li>
-                    </ul>
-                    <br>
-                    <!-- add tabs -->
-                    {% if reports %}
-
-                    {%for report in reports%}
-                    {% if not report.is_archived %}
-                    <div class="gaadiex-list">
-                        <div class="gaadiex-list-item" style="border-left: solid #FF2C9C ; background-color: #D3EBFF;">
-                            <img class="gaadiex-list-item-img" src={{report.user_id.user_profile.profile_picture.url}}
-                                alt="List user">
-                            <!-- <i class="fa fa-user"></i> -->
-                            <div class="gaadiex-list-item-text">
-                                <h3><a href="{% url 'reportDetails' report.id %}">{{report.title}}</a></h3>
-                                <p>{{report.report_date}}</p>
-                            </div>
                         </div>
                     </div>
-                    <hr />
-                    {% else %}
-                    <div class="gaadiex-list">
-                        <div class="gaadiex-list-item">
-                            <img class="gaadiex-list-item-img" src={{report.user_id.user_profile.profile_picture.url}}
-                                alt="List user">
-                            <!-- <i class="fa fa-user"></i> -->
-                            <div class="gaadiex-list-item-text">
-                                <h3><a href="{% url 'reportDetails' report.id %}">{{report.title}}</a></h3>
-                                <p>{{report.report_date}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                    {% endif %}
-                    {%endfor%}
-                    {% else %}
-                    <h3>Nothing To Show</h3>
-                    {% endif %}
                 </div>
+                
+                
+                    <div class="card-body">
+                        <br>
+                        <!-- add tabs -->
+                        {% if reports %}
 
+                        {%for report in reports%}
+                        {% if not report.is_archived %}
+                        <div class="gaadiex-list">
+                            <div class="gaadiex-list-item"
+                                style="border-left: solid #FF2C9C ; background-color: #D3EBFF;">
+                                <img class="gaadiex-list-item-img"
+                                    src={{report.user_id.user_profile.profile_picture.url}} alt="List user">
+                                <!-- <i class="fa fa-user"></i> -->
+                                <div class="gaadiex-list-item-text">
+                                    <h3><a href="{% url 'reportDetails' report.id %}">{{report.title}}</a></h3>
+                                    <p>{{report.report_date}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        {% else %}
+                        <div class="gaadiex-list">
+                            <div class="gaadiex-list-item">
+                                <img class="gaadiex-list-item-img"
+                                    src={{report.user_id.user_profile.profile_picture.url}} alt="List user">
+                                <!-- <i class="fa fa-user"></i> -->
+                                <div class="gaadiex-list-item-text">
+                                    <h3><a href="{% url 'reportDetails' report.id %}">{{report.title}}</a></h3>
+                                    <p>{{report.report_date}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        {% endif %}
+                        {%endfor%}
+                        {% else %}
+                        <h3>Nothing To Show</h3>
+                        {% endif %}
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    {% if report_details %}
-                    <h4>{{report_details.title}}</h4>
-                </div>
-                <div class="card-body">
-                    <h1>
-                        <div class="gaadiex-list-item">
-                            <img class="gaadiex-list-item-img"
-                                src={{report_details.user_id.user_profile.profile_picture.url}} alt="List user">
-                            <!-- <i class="fa fa-user"></i> -->
-                            <div class="gaadiex-list-item-text">
-                                <h3 style="padding-top: 10px;">From: {{report_details.user_id}}</h3>
-                                <h6 style="padding-bottom: 5px;">{{report_details.report_date}}</h6>
-                                <hr />
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        {% if report_details %}
+                        <h4>{{report_details.title}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1>
+                            <div class="gaadiex-list-item">
+                                <img class="gaadiex-list-item-img"
+                                    src={{report_details.user_id.user_profile.profile_picture.url}} alt="List user">
+                                <!-- <i class="fa fa-user"></i> -->
+                                <div class="gaadiex-list-item-text">
+                                    <h3 style="padding-top: 10px;">From: {{report_details.user_id}}</h3>
+                                    <h6 style="padding-bottom: 5px;">{{report_details.report_date}}</h6>
+                                    <hr />
 
-                                <p>{{report_details.message}}</p>
-                                <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
-                                    class="btn btn-success">Jump
-                                    to post</a>
-                                <!-- <p>{{report_details.user_id.user_profile.profile_picture.url}}</p> -->
+                                    <p>{{report_details.message}}</p>
+                                    <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
+                                        class="btn btn-success">Jump
+                                        to post</a>
+                                    <!-- <p>{{report_details.user_id.user_profile.profile_picture.url}}</p> -->
 
-                                {% if not report_details.is_archived %}
-                                <a href="{% url 'archiveReport' report_details.id%}" class="btn btn-default">Make
-                                    resolve and archive</a>
-                                {% endif %}
+                                    {% if not report_details.is_archived %}
+                                    <a href="{% url 'archiveReport' report_details.id%}" class="btn btn-default">Make
+                                        resolve and archive</a>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                    </h1>
-                    {% else %}
-                    <h3>Nothing To Show</h3>
-                    {% endif %}
+                        </h1>
+                        {% else %}
+                        <h3>Nothing To Show</h3>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

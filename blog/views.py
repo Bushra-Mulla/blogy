@@ -31,7 +31,7 @@ def signup(request):
             print('HEY', user.username, 'id ', user.id)
             # HttpResponse('<h1>Success</h1>')
             # return HttpResponseRedirect('')
-            return HttpResponseRedirect('/', user.id)
+            return HttpResponseRedirect('/profile/create')
         else:
             print('try again')
             HttpResponse('<h1>Try Again</h1>')
@@ -208,13 +208,39 @@ class categoryCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/')
 
+# @method_decorator(login_required, name='dispatch')
+class ProfileCreate(CreateView):
+    model = user_profile
+    fields = ['about_me', 'position', 'profile_picture']
+    success_url = '/profile'
 
+    def form_valid(self, form , *kwargs):
+        self.object = form.save(commit=False)
+        self.object.user_id = self.request.user.id
+        self.object.save()
+        return HttpResponseRedirect('/')
+        
+        
 def profile(request):
     # current_user = request.user.id
     # posts = user_profile.objects.filter(id=current_user)
-    return render(request, 'user/profile.html')
+    posts=Post.objects.filter(author = request.user)
+    userInfo= user_profile.objects.filter(user = request.user)
+    return render(request, 'user/profile.html', {
+        'post':posts, 
+         'userInfo': userInfo,
+    })
+    
+class ProfileUpdate(UpdateView):
+    model = user_profile
+    fields = ['about_me', 'position', 'profile_picture']
+    success_url = '/profile/'
 
-
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/profile/')
+        
 def reports(request):
     # reports = report.objects.all().order_by('-id')
     return render(request, 'report/report_list.html', {"reports": allReports()})

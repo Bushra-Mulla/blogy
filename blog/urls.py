@@ -26,6 +26,10 @@ urlpatterns = [
     path('category/<category_name>/',
          views.category_view, name='blog-category_view'),
     path('profile/', views.profile, name="profile"),
+    path('profile/create', views.ProfileCreate.as_view( 
+        template_name='user/profile_form.html'), name='user-profile-create'),
+    path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(template_name='user/profile_form.html'),
+         name='user-profile-update'),
     path('report/<int:post_id>/create/', views.reportCreate.as_view(
         template_name='report/reports_form.html'), name="reportCreate"),
     path('reports/', views.reports, name="reports"),
