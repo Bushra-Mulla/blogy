@@ -1,4 +1,5 @@
 {%autoescape off%}
+
 {% if posts %}
 
 <dev class="cardCon">
@@ -11,7 +12,7 @@
             <img class="img-fluid" src={{post.author.user_profile.profile_picture.url}} alt="Avatar" />
         </div>
         <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
+            <h4 class="card-title"><a href="{% url 'blog-post-show' post.id %}">{{post.title}}</a></h4>
             <p class="card-text">{{post.author}} {{post.date_post}}</p>
             {%if post.author != user%}
             {%block like%}

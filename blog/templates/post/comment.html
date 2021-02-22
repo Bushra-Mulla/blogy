@@ -1,4 +1,110 @@
-{% block content %}
+{% block comment %}
+<!--Section: Leave a reply (Not Logged In User)-->
+<section class="mb-4 wow fadeIn" data-wow-delay="0.2s">
+  <h3 class="font-weight-bold text-center my-5">Leave a reply</h3>
+  <!--Grid row-->
+  <div class="row">
+    <div class="col-12 mt-1">
+      <div class="form-group basic-textarea rounded-corners shadow-textarea">
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea6"
+          rows="4"
+          placeholder="Write something here..."
+        ></textarea>
+      </div>
 
+      <div class="text-right">
+        <button class="btn btn-grey btn-sm">Submit</button>
+      </div>
+    </div>
+  </div>
+  <!--Grid row-->
+</section>
+
+
+<!--Comments-->
+<section>
+  <!--Main wrapper-->
+  <div class="comments-list text-center text-md-left">
+    <div class="text-center my-5">
+      <h3 class="font-weight-bold">
+        Comments
+        <span class="badge indigo">3</span>
+      </h3>
+    </div>
+    <!-- First row-->
+    <div class="row mb-5">
+      <!--Image column-->
+      <div class="col-sm-2 col-12 mb-3">
+        <img
+          src="https://mdbootstrap.com/img/Photos/Avatars/img (8).jpg"
+          class="avatar rounded-circle z-depth-1-half"
+          alt="sample image"
+        />
+      </div>
+      <!--/.Image column-->
+
+      <!--Content column-->
+      <div class="col-sm-10 col-12">
+        <a>
+          <h5 class="user-name font-weight-bold">John Doe</h5>
+        </a>
+        <div class="card-data">
+          <ul class="list-unstyled">
+            <li class="comment-date font-small">
+              <i class="far fa-clock-o"></i> 05/10/2015
+            </li>
+          </ul>
+        </div>
+        <p class="dark-grey-text article">
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident.
+        </p>
+      </div>
+      <!--/.Content column-->
+    </div>
+    <!--/.First row -->
+
+    <!--Second row-->
+    <div class="row mb-5">
+      <!--Image column-->
+      <div class="col-sm-2 col-12">
+        <img
+          src="https://mdbootstrap.com/img/Photos/Avatars/img (30).jpg"
+          class="avatar rounded-circle z-depth-1-half"
+          alt="sample image"
+        />
+      </div>
+      <!--/.Image column-->
+
+      <!--Content column-->
+      <div class="col-sm-10 col-12 mb-3">
+        <a>
+          <h5 class="user-name font-weight-bold">Lily Brown</h5>
+        </a>
+        <div class="card-data">
+          <ul class="list-unstyled">
+            <li class="comment-date font-small">
+              <i class="far fa-clock-o"></i> 05/10/2015
+            </li>
+          </ul>
+        </div>
+        <p class="dark-grey-text article">
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident.
+        </p>
+      </div>
+      <!--/.Content column-->
+    </div>
+    <!--/.Second row-->
+  </div>
+  <!--/.Main wrapper-->
+</section>
+<hr />
 
 {% endblock %}

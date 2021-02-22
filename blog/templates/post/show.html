@@ -1,51 +1,61 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <!-- templates/cats/detail.html -->
 <header>
-
   <section>
     <div class="">
-      <img src="{{post.post_img.url}}" width="100%" height="700px">
+      <img src="{{post.post_img.url}}" width="100%" height="700px" />
     </div>
   </section>
-
 </header>
-<br>
-<br>
+<br />
+<br />
 <div class="container-fluid mb-5">
-  <div class="col-md-12 px-lg-5 ">
+  <div class="col-md-12 px-lg-5">
     <!--Card-->
     <div class="PostCard">
       <div class="row align-items-center">
         <div class="col">
           <div class="col-sm-2 col-12 mb-3">
-            <img src={{post.author.user_profile.profile_picture.url}} style="height: 220px; width: 200px;" alt="Avatar"
-              class="avatar rounded-circle z-depth-1-half">
+            <img
+              src="{{post.author.user_profile.profile_picture.url}}"
+              style="height: 220px; width: 200px"
+              alt="Avatar"
+              class="avatar rounded-circle z-depth-1-half"
+            />
           </div>
         </div>
         <div class="col">
           <h2>
-            <a href="user/{{post.id}}""> <strong>By: {{post.author.first_name}} {{post.author.last_name}}</strong> </a>
+            <a href="">
+              <strong
+                >By: {{post.author.first_name}}
+                {{post.author.last_name}}</strong
+              >
+            </a>
           </h2>
-          <p>{{post.author.user_profile.position}} </p>
+          <p>{{post.author.user_profile.position}}</p>
         </div>
-        <div class=" col">
-              {% if user.is_authenticated %}
-              <ul class=postButton>
-                <li>
-                  <a class="gradient-button gradient-button-2" href="{% url 'blog-post-Update' post.id %}">Edit</a>
-                </li>
-                <li>
-                  <a class="gradient-button gradient-button-1" href="{% url 'blog-post-delete' post.id %}">DELETE</a>
-
-                </li>
-              </ul>
-              {% endif %}
+        <div class="col">
+          {% if user.is_authenticated %}
+          <ul class="postButton">
+            <li>
+              <a
+                class="gradient-button gradient-button-2"
+                href="{% url 'blog-post-Update' post.id %}"
+                >Edit</a
+              >
+            </li>
+            <li>
+              <a
+                class="gradient-button gradient-button-1"
+                href="{% url 'blog-post-delete' post.id %}"
+                >DELETE</a
+              >
+            </li>
+          </ul>
+          {% endif %}
         </div>
       </div>
-
-
     </div>
   </div>
 </div>
@@ -61,27 +71,25 @@
           </h1>
           <div class="row">
             <div class="col-md-12 col-xl-12 d-flex justify-content-center">
-              <p class="font-small dark-grey-text mb-1">
-
-              </p>
+              <p class="font-small dark-grey-text mb-1"></p>
               <p class="font-small grey-text mb-0 ml-3">
                 <i class="dark-grey-text">{{ post.date_post }}</i>
               </p>
             </div>
           </div>
-          <hr>
+          <hr />
           {{ post.content | safe}}
-          <hr>
-          <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}">report</a>
-                      <p class="card-text">{{post.author}} {{post.date_post}}</p>
-          {%if post.author != user%}
-          {%block like%}
-          {% include "./like.html" with post=post show=True %}            {%endblock%}
-          {%endif%}
-
+          <hr />
+          <a
+            class="gradient-button gradient-button-1"
+            href="{% url 'reportCreate' post.id %}"
+            >report</a
+          >
+          <!-- <p class="card-text">{{post.author}} {{post.date_post}}</p> -->
+          {%if post.author != user%} {%block like%} {% include "./like.html"
+          with post=post show=True %} {%endblock%} {%endif%}
 
           <h3>Share this post:</h3>
-
           <div class="template-demo">
             {% load social_share %}
             <!-- {% post_to_twitter "{{post.title}}. Check it out!" object_or_url  %} -->
@@ -89,28 +97,45 @@
             <!-- {% post_to_linkedin object_or_url %} -->
             <!-- {% post_to_telegram "{{post.title}}. Check it out!" object_or_url %} -->
 
-            <button type="button" class="{{ link_class }} btn btn-social-icon btn-facebook">
-              <a href="{{ facebook_url }}" class="{{ link_class }}" target="_blank"><i
-                  class="fab fa-facebook-f"></i></a>
+            <button
+              type="button"
+              class="{{ link_class }} btn btn-social-icon btn-facebook"
+            >
+              <a
+                href="{{ facebook_url }}"
+                class="{{ link_class }}"
+                target="_blank"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
             </button>
             <button type="button" class="btn btn-social-icon btn-youtube">
-              <a href="{{ tweet_url }}" class="meta-act-link meta-tweet {{link_class}}" target="_blank"><i
-                  class="fab fa-twitter"></i></a>
+              <a
+                href="{{ tweet_url }}"
+                class="meta-act-link meta-tweet {{link_class}}"
+                target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
             </button>
             <!-- <button type="button" class="btn btn-social-icon btn-dribbble">
               <a href="{{ linkedin_url }}"type="IN/Share" class="{{ link_class }}" target="_blank"></a><i class="fab fa-linkedin"></i>
             </button>  -->
             <button type="button" class="btn btn-social-icon btn-instagram">
-              <a href="{{ telegram_url }}" class="{{ link_class }}" target="_blank"><i class="fab fa-telegram"></i></a>
+              <a
+                href="{{ telegram_url }}"
+                class="{{ link_class }}"
+                target="_blank"
+                ><i class="fab fa-telegram"></i
+              ></a>
             </button>
-
-
           </div>
+          <hr />
+
+          {%block comment %} {% include "./comment.html" with post=post %}
+          {%endblock%}
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 {% endblock %}

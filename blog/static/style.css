@@ -60,6 +60,9 @@
 
 .homeCard{
   float: left;
+  height: 500;
+  width: 500;
+
 }
 .Card {
   -ms-flex: 1 1 auto;

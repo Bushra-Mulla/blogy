@@ -13,7 +13,6 @@ from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 
-from django.core.paginator import Paginator
 from django.db.models import Q
 
 
@@ -116,7 +115,8 @@ class PostUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
-        
+
+
 @method_decorator(login_required, name='dispatch')
 class PostDelete(DeleteView):
     model = Post
@@ -204,6 +204,7 @@ class categoryCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/')
 
+
 @method_decorator(login_required, name='dispatch')
 class ProfileCreate(CreateView):
     model = user_profile
@@ -215,8 +216,8 @@ class ProfileCreate(CreateView):
         self.object.user_id = self.request.user.id
         self.object.save()
         return HttpResponseRedirect('/profile')
-        
-        
+
+
 def profile(request):
     # current_user = request.user.id
     # posts = user_profile.objects.filter(id=current_user)
@@ -316,8 +317,6 @@ def post_details(request, post_id):
     return render(request, 'post/publish_manage.html', {'post_details': post_details})
 
 
-
-
 def likeview(request):
     user = request.user
     print(user)
@@ -347,7 +346,8 @@ def search(request):
     if request.method == 'GET':
         search = request.GET.get('q')
         if search:
-            result = Post.objects.filter(Q(title__icontains=search))
+            result = Post.objects.filter(
+                Q(title__icontains=search, isPublish='published'))
             return render(request, "search.html", {"posts": result})
 
     else:
