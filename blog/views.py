@@ -37,12 +37,12 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            print('HEY', user.username, 'id ', user.id)
+            # print('HEY', user.username, 'id ', user.id)
             # HttpResponse('<h1>Success</h1>')
             # return HttpResponseRedirect('')
             return HttpResponseRedirect('/profile/create')
         else:
-            print('try again')
+            # print('try again')
             HttpResponse('<h1>Try Again</h1>')
     else:
         form = SignUpForm()
@@ -63,74 +63,35 @@ class PostCreate(CreateView):
     def form_valid(self, form, *kwargs):
         self.object = form.save(commit=False)
         # get one field
-        print('fhgbjlkm;,', self.object.title)
-        print('----------form----------;,', form)
-        print('selffffffffffff;,', self.request.POST)
-        self.object.author_id = self.request.user.id
-        self.object.save()
-        # if self.request.POST['submit'] == 'cancel':
-        #     # if self.request.GET.get('NameOfYourButton') == 'YourValue':
-        #     print('self.request.POST', self.request.POST)
-        # if self.request.method == 'GET':
-        # return HttpResponse('llllllll?;')
-        # print("&&&&&&&&&&&&&&&&&&&&&&&&&", self.request.method)
-        return HttpResponseRedirect('/user/posts/')
-        # return "True"
-
-    def draft(self):
-        # result = super(CreateView, self).is_valid()
-        # print('aaaaaaaaaaaaaa', form_valid())
-        print("request method ***********", result)
-        if self.request.method == 'GET':
-            return HttpResponse('hhhhhhhhhhhh;')
-        return HttpResponse('ghkjl;')
-
-    # def draft(self):
         # print('fhgbjlkm;,', self.object.title)
-    #     print('----------form----------;,', form)
-    #     print('selffffffffffff;,', self.request.POST)
-    #     self.object.author_id = self.request.user.id
-    #     self.object.save()
-    #     if self.request.POST['submit'] == 'cancel':
-    #         # if self.request.GET.get('NameOfYourButton') == 'YourValue':
-    #         print('self.request.POST', self.request.POST)
-    #     return HttpResponseRedirect('/user/posts/')
-    #     # self.object = form.save(commit=False)
-    #     # if self.object.title is not '':
-    #     #     print('*********************')
-    #     return HttpResponse('draft')
-    # def post(self, form):
-    #     if form.form_invalid():
-    #         if self.request.POST['cancel']:
-    #             # url = self.get_success_url()
-    #             return HttpResponse("url")
-    #         else:
-    #             return HttpResponseRedirect('/user/posts/')
-    #     else:
-    #         print("yeas")
-    #         if self.request.POST['cancel']:
-    #             # url = self.get_success_url()
-    #             return HttpResponse("url")
-    #         else:
-    #             return HttpResponseRedirect('/user/posts/')
+        # print('----------form----------;,', self.data)
+        # print('selffffffffffff;,', self.request.POST)
+        self.object.author_id = self.request.user.id
+        if 'draft' in self.request.POST:
+            print('yaaaaaaaaaaaaaaaaaaaaaaaaaaah')
+            self.object.isPublish = 'draft'
+
+        self.object.save()
+        return HttpResponseRedirect('/user/posts/')
 
 
 class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id']
     def form_valid(self, form):
-        form.instance.author = self.request.user
         self.object = form.save(commit=False)
+        if self.object.isPublish == 'draft':
+            if 'send' in self.request.POST:
+                self.object.isPublish = 'notPublished'
+
+        if self.object.isPublish == 'refused':
+            if 'send' in self.request.POST:
+                self.object.isPublish = 'notPublished'
+
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        else:
-            return False
 
-
+    
 class PostDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/'
@@ -141,24 +102,8 @@ class PostDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
             return True
         else:
             return False
-
-
-def post_draft(request):
-    # if request.method == POST: title', 'content', 'post_img', 'category_id
-    title = request.POST.get('title')
-    # href="{% url 'post_draft'%}"
-    # if title == '':
-    # if request.form.is_valid():
-    #     print("title")
-    # else:
-    #     print('error')
-    # return HttpResponse('<h1>Draft</h1>', title)
-    # print('null')
-
-    # if request
-    return HttpResponse(title)
-
-
+        
+ 
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
@@ -176,7 +121,7 @@ def category_view(request, category_name):
 def userPostsList(request):
     current_user = request.user
     posts = Post.objects.filter(author=current_user.id).order_by('-id')
-    print(posts)
+    # print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
 
 
@@ -185,7 +130,7 @@ def userPublishedPostsList(request):
     posts = Post.objects.filter(isPublish="published", author=current_user.id)
     # print(current_user.id)
     # print(current_user.username)
-    print(posts)
+    # print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
 
 
@@ -194,7 +139,7 @@ def userNotPublishedPostsList(request):
     posts = Post.objects.filter(
         isPublish="notPublished", author=current_user.id)
     # print(current_user.username)
-    print(posts)
+    # print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
 
 
@@ -203,7 +148,16 @@ def userRefusedPostsList(request):
     posts = Post.objects.filter(isPublish="refused", author=current_user.id)
     # print(current_user.id)
     # print(current_user.username)
-    print(posts)
+    # print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def userDraftPostsList(request):
+    current_user = request.user
+    posts = Post.objects.filter(isPublish="draft", author=current_user.id)
+    # print(current_user.id)
+    # print(current_user.username)
+    # print(posts)
     return render(request, 'userPostsList.html', {'posts': posts})
 
 
@@ -290,7 +244,7 @@ class reportCreate(CreateView):
 def reportDetails(request, report_id):
     report_details = report.objects.get(
         id=report_id)
-    print(report_details.title)
+    # print(report_details.title)
     return render(request, 'report/report_list.html', {'reports': allReports(), 'report_details': report_details})
 
 
@@ -299,7 +253,7 @@ def archiveReport(request, report_id):
         id=report_id)
     reportDetails.is_archived = True
     reportDetails.save()
-    print(reportDetails.is_archived)
+    # print(reportDetails.is_archived)
     return HttpResponseRedirect('/reports/', {'reports': allReports()})
 
 # Query: Retrive number of not archived reports , make it a badge for admin anounncemnt
@@ -308,7 +262,7 @@ def archiveReport(request, report_id):
 def notArchivedReport(request):
     reports = report.objects.filter(is_archived=False).select_related(
         'user_id__user_profile').all()
-    print(reports)
+    # print(reports)
     return render(request, 'report/report_list.html', {'reports': reports})
 
 
@@ -339,7 +293,7 @@ def post_details(request, post_id):
 
 def likeview(request):
     user = request.user
-    print(user)
+    # print(user)
     if request.method == 'POST':
         post_id = request.POST.get('post_id')
         post = Post.objects.get(id=post_id)
