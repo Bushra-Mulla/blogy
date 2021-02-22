@@ -60,10 +60,11 @@ These are some of the EndPoints we used in this project
 |   5| CREATE  | post  | /post/create | To create new post|
 |   6| View | get  | /post/post_id | To veiw exist post|
 |   7| EDIT | PATCH  | /post/<int:pk>/update/  | To edit a specific post|
-|   8|   View | get  |  /user/posts/|  To view all user's posts list|
-|   9|   View |get   |  /user/posts/published// | To view all published user's posts list | 
-|   10|    View |get   | /user/posts/notPublished/  | To view all unpublished user's posts list |
-|   11|    View |get   | /user/posts/refused/  | To view all refused user's posts list|
+|   8|   INDEX | get  |  /user/posts/|  To view all user's posts list|
+|   9|   INDEX |get   |  /user/posts/published// | To view all user's published posts list | 
+|   10|    INDEX |get   | /user/posts/notPublished/  | To view all user's unpublished posts list |
+|   11|    INDEX |get   | /user/posts/refused/  | To view all user's refused posts list|
+|   12|    INDEX |POST   |  /user/posts/draft/ | To view all user's draft posts list|
 |   12|    CREATE |POST   |  /category/create/ | To create new category|
 |   13|    Update |patch   |   | |
 |   14|    Update |patch   |   | |
