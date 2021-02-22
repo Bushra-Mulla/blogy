@@ -1,4 +1,3 @@
-
 {%block like%}
 ​
 <form action="{% url 'like_post' %}" method="POST" class='like_form' id='{{post.id}}'>
@@ -16,9 +15,9 @@
 {% if show %}
 <p class='like_count{{post.id}}'>{{post.like_count}}</p>
 {%endif%}
-
+<o class="mylike{{post.id}}">{{mylike}}</o>
 {% endblock %}
-
+​
 {% block script %}
 <script>
    $('.like_form').submit(function(e){
@@ -30,7 +29,8 @@
     let res;
     const like_count = $(`.like_count${post_id}`).text()
     const trimCount = parseInt(like_count)
-
+    let mylikes = $(`.mylike${post_id}`).text()
+    console.log(mylikes)
     $.ajax({
       type: 'POST',
       url: url,
@@ -42,12 +42,17 @@
         if (trim === 'Unlike') {
           $(`.like_button${post_id}`).text('Like')
           res = trimCount - 1
-          //   $(`.like_button${post_id}`).hide();
+          if(mylikes == 'True'){
+            console.log(`#card${post_id}`)
+            $(`#card${post_id}`).hide()
+          }
+            $(`.like_button${post_id}`).hide();
         } else {
           $(`.like_button${post_id}`).text('Unlike')
           res = trimCount + 1
+​
         }
-
+​
         $(`.like_count${post_id}`).text(res)
       },
       error: function (response) {

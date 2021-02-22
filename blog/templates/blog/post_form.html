@@ -10,7 +10,7 @@
             {% if 'create' in request.path|cut:'/'%}
             <h3 style="float: left;">Create New Post</h3>
             {% else %}
-            <h3 style="float: left;">Update Post</h3>
+            <h3 style="float: left;">Your Post</h3>
             {% endif %}
             <a href="{{request.META.HTTP_REFERER|escape}}"><i class="fa fa-times"
                     style="font-size: 20pt; float: right; color: #E26E8C; padding-top: 5px;"></i></a>
