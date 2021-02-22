@@ -40,16 +40,7 @@ class Post(models.Model):
     
     def like_count(self):
         return self.likes.count()
-    
-    def published_update(self, *args, **kwargs):
-        self.isPublish = 'published'
-        super().save(*args, **kwargs)
-        return
-
-    def refused_update(self):
-        self.isPublish = 'refused'
-        self.save()
-        
+           
 
 class comment(models.Model):
     content = models.TextField()

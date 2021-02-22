@@ -12,9 +12,8 @@
         </div>
         <div class="card-body" style="overflow-y: auto">
             <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
-            <h4 class="card-text">{{post.author.first_name}} {{post.author.last_name}}</h4>
+            <p class="card-text">{{post.author}} {{post.date_post}}</p>
 
-            <p>{{post.date_post}}</p>
             {%block like%}
             {% include "../post/like.html" with post=post %}
             {%endblock%}

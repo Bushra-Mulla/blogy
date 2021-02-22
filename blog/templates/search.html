@@ -1,0 +1,8 @@
+{%extends 'base.html' %}
+
+{%block content%}
+<h1>Search</h1><br/>
+{%block refused_post%}
+{% include "./blog/post_cards.html" with posts=posts %}
+{% endblock %}
+{%endblock%}
