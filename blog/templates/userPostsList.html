@@ -18,7 +18,7 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a href="#all">
-            <a class="nav-link active" id="all" href="/user/posts/">
+            <a class="nav-link" id="all" href="/user/posts/">
                 All Posts</a></a>
     </li>
     <li class="nav-item">
@@ -35,11 +35,6 @@
         <a href="#refused">
             <a class="nav-link" id="refused" href="/user/posts/refused/">
                 Refused</a></a>
-    </li>
-    <li class="nav-item">
-        <a href="#drafts">
-            <a class="nav-link" id="drafts" href="/user/posts/draft/">
-                Drafts</a></a>
     </li>
 </ul>
 
@@ -62,11 +57,6 @@
     </div>
     <div id="refused" class="container tab-pane fade"><br>
         {%block refused_post%}
-        {% include "./blog/post_cards.html" with posts=posts %}
-        {%endblock%}
-    </div>
-    <div id="drafts" class="container tab-pane fade"><br>
-        {%block drafts_post%}
         {% include "./blog/post_cards.html" with posts=posts %}
         {%endblock%}
     </div>

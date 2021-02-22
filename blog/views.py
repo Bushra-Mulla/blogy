@@ -78,9 +78,9 @@ class PostUpdate(UpdateView):
             if 'send' in self.request.POST:
                 self.object.isPublish = 'notPublished'
 
-        # if self.object.isPublish == 'notPublished' or self.object.isPublish == 'published':
-        #     if 'draft' in self.request.POST:
-        #         self.object.isPublish = 'draft'
+        if self.object.isPublish == 'refused':
+            if 'send' in self.request.POST:
+                self.object.isPublish = 'notPublished'
 
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
