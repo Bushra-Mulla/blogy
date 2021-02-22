@@ -1,11 +1,12 @@
+
 {%block like%}
 ​
-<form action="{% url 'like_post'  %}" method="POST" class='like_form' id='{{post.id}}'>
+<form action="{% url 'like_post' %}" method="POST" class='like_form' id='{{post.id}}'>
   {% csrf_token %}
 ​
   <input type="hidden"name="post_id"class='btn btn-warning btn-sm' value="{{post.id}}">
-    <button type='submit'class='like_button{{post.id}} gradient-button gradient-button-2 thumbs-up''>
-      {% if profile not in post.likes.all %}
+    <button type='submit'class='like_button{{post.id}} gradient-button gradient-button-2 thumbs-up'>
+      {% if user not in post.likes.all %}
         Like
       {% else %}
         Unlike
@@ -15,11 +16,12 @@
 {% if show %}
 <p class='like_count{{post.id}}'>{{post.like_count}}</p>
 {%endif%}
+
 {% endblock %}
-​
+
 {% block script %}
 <script>
-  $('.like_form').submit(function (e) {
+   $('.like_form').submit(function(e){
     e.preventDefault()
     const post_id = $(this).attr('id')
     const like_button = $(`.like_button${post_id}`).text()
@@ -28,7 +30,7 @@
     let res;
     const like_count = $(`.like_count${post_id}`).text()
     const trimCount = parseInt(like_count)
-​
+
     $.ajax({
       type: 'POST',
       url: url,
@@ -45,7 +47,6 @@
           $(`.like_button${post_id}`).text('Unlike')
           res = trimCount + 1
         }
-        console.log('success', response)
 
         $(`.like_count${post_id}`).text(res)
       },
