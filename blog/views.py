@@ -84,22 +84,6 @@ class PostDelete(DeleteView):
     success_url = '/'
 
 
-def post_draft(request):
-    # if request.method == POST: title', 'content', 'post_img', 'category_id
-    title = request.POST.get('title')
-    # href="{% url 'post_draft'%}"
-    # if title == '':
-    # if request.form.is_valid():
-    #     print("title")
-    # else:
-    #     print('error')
-    # return HttpResponse('<h1>Draft</h1>', title)
-    # print('null')
-
-    # if request
-    return HttpResponse(title)
-
-
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
@@ -142,6 +126,15 @@ def userNotPublishedPostsList(request):
 def userRefusedPostsList(request):
     current_user = request.user
     posts = Post.objects.filter(isPublish="refused", author=current_user.id)
+    # print(current_user.id)
+    # print(current_user.username)
+    # print(posts)
+    return render(request, 'userPostsList.html', {'posts': posts})
+
+
+def userDraftPostsList(request):
+    current_user = request.user
+    posts = Post.objects.filter(isPublish="draft", author=current_user.id)
     # print(current_user.id)
     # print(current_user.username)
     # print(posts)
