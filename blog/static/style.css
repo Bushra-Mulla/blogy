@@ -77,14 +77,6 @@
   display: inline;
   text-align: center;
 }
-.PostCard {
-  padding: 5px;
-  margin: 20px;
-  box-shadow: 3px 3px 3px 3px rgb(153 150 150);
-  position: relative;
-  bottom: 30px;
-  text-align: center;
-}
 
 .PostCard hr{
   box-shadow: 0px 1px 0px 1px  #3a7bd5;

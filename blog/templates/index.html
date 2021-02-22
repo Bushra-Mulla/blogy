@@ -30,6 +30,20 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+
+<div class="container" style="background-color: aquamarine; width:100%">
+    <div class="row align-items-start">
+      <div class="col">
+        {{ posts.count}} Posts     
+    </div>
+      <div class="col">
+        {{user.count}} Users
+      </div>
+      <div class="col">
+        {{comments.count}} Engage
+      </div>
+    </div>
+</div>
 <br>
 <br>
 {%block refused_post%}

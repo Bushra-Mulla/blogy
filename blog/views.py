@@ -18,9 +18,17 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 def home(request):
+    post = Post.objects.all()
+    user = User.objects.all()
+    comments = comment.objects.all()
     last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
-    return render(request, 'index.html', {'posts': last_twenty})
+    return render(request, 'index.html', {
+        'posts': last_twenty,
+        'post': post,
+        'user': user,
+        'comments': comments
+    })
 
 
 def signup(request):
@@ -107,24 +115,22 @@ class PostCreate(CreateView):
     #             return HttpResponseRedirect('/user/posts/')
 
 
-
-
 class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id']
-
     def form_valid(self, form):
         form.instance.author = self.request.user
+        self.object = form.save(commit=False)
+        self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
-
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.author:
             return True
         else:
             return False
-        
-        
+
+
 class PostDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/'
@@ -135,8 +141,8 @@ class PostDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
             return True
         else:
             return False
-        
-        
+
+
 def post_draft(request):
     # if request.method == POST: title', 'content', 'post_img', 'category_id
     title = request.POST.get('title')
@@ -218,6 +224,7 @@ class categoryCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/')
 
+
 @method_decorator(login_required, name='dispatch')
 class ProfileCreate(CreateView):
     model = user_profile
@@ -229,8 +236,8 @@ class ProfileCreate(CreateView):
         self.object.user_id = self.request.user.id
         self.object.save()
         return HttpResponseRedirect('/profile')
-        
-        
+
+
 def profile(request):
     # current_user = request.user.id
     # posts = user_profile.objects.filter(id=current_user)
