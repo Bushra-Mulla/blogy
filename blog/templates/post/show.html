@@ -74,14 +74,11 @@
         </div>
           <hr>
           <div class="postShowCard">
-            <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}"><i class="fas fa-exclamation-circle"></i> report</a>
+            <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}"><i class="fas fa-exclamation-circle" style="width: auto;"></i> report</a>
             {%block like%}
             {% include "./like.html" with post=post show=True %}
             {%endblock%}
           </div>
-         
-          
-          <h3>Share this post:</h3>
 
           <h3>Share this post:</h3>
           <div class="template-demo">
