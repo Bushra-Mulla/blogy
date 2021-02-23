@@ -17,16 +17,16 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 def home(request):
-    post = Post.objects.all()
-    user = User.objects.all()
-    comments = comment.objects.all()
+    allPost = Post.objects.all()
+    allUsers = User.objects.all()
+    allComments = comment.objects.all()
     last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
     return render(request, 'index.html', {
         'posts': last_twenty,
-        'post': post,
-        'user': user,
-        'comments': comments
+        'allPost': allPost,
+        'allUsers': allUsers,
+        'allComments': allComments
     })
 
 
