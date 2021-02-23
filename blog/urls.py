@@ -12,6 +12,7 @@ urlpatterns = [
         template_name='user/profile_form.html'), name='user-profile-create'),
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(template_name='user/profile_form.html'),
          name='user-profile-update'),
+    path('profile/<int:user_id>', views.authoreProfile, name="profile"),
 
 
     path('user/likes/', views.likes_list, name='blog_like_list'),

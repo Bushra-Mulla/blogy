@@ -10,7 +10,7 @@ class user_profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(
         upload_to='profile_img/', blank=True, default='profile_img/profile.png', verbose_name="Picture:")
-    about_me = models.CharField(max_length=255, blank=True, null=True)
+    about_me = RichTextField(blank=True, null=True, verbose_name="About me:")
     position = models.CharField(max_length=100, blank=True, null=True)
 
 
