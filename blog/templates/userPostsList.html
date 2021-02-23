@@ -36,6 +36,11 @@
             <a class="nav-link" id="refused" href="/user/posts/refused/">
                 Refused</a></a>
     </li>
+    <li class="nav-item">
+        <a href="#draft">
+            <a class="nav-link" id="draft" href="/user/posts/draft/">
+                Drafts</a></a>
+    </li>
 </ul>
 
 <!-- Tab panes -->
@@ -57,6 +62,11 @@
     </div>
     <div id="refused" class="container tab-pane fade"><br>
         {%block refused_post%}
+        {% include "./blog/post_cards.html" with posts=posts %}
+        {%endblock%}
+    </div>
+    <div id="draft" class="container tab-pane fade"><br>
+        {%block draft_post%}
         {% include "./blog/post_cards.html" with posts=posts %}
         {%endblock%}
     </div>
