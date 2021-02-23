@@ -3,7 +3,7 @@
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
 
-    <div class="card mt-5" style="margin: 0 auto; width: 58%;">
+    <div class="card mt-5" style="margin: 0 auto; width: 70%;">
         <div class="card-header">
             {% if 'create' in request.path|cut:'/'%}
             <h3 style="float: left;">Create New Post</h3>
