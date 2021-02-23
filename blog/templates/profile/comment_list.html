@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+
+{%block content%} 
+<div class="comments-list text-center text-md-left comment{{post.id}}">
+    <div class="text-center my-5">
+      <h3 class="font-weight-bold">
+        Comments
+        <span class="badge indigo comment-count{{post.id}}">{{comments.count}}</span>
+      </h3>
+    </div>
+    {%for comment in comments %}
+    <div class="row mb-5">
+      <div class="col-sm-2 col-12 mb-3">
+        <img
+          src="{{comment.user_id.user_profile.profile_picture.url}}"
+          class="avatar rounded-circle z-depth-1-half"
+          alt="sample image"
+          style="height: 100px; width: 100px; margin-left: 55px"
+        />
+      </div>
+      <div class="col-sm-10 col-12">
+        <a>
+          <h5 class="user-name font-weight-bold"><a href="{%url 'blog-post-show' comment.Post_id">
+            {{comment.Post_id.title}}</a>
+          </h5>
+        </a>
+        <div class="card-data">
+          <ul class="list-unstyled">
+            <li class="comment-date font-small">
+              <i class="far fa-clock-o"></i> {{comment.Publish_date}}
+            </li>
+          </ul>
+        </div>
+        <p class="dark-grey-text article">{{comment.content}}</p>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+
+{%endblock%}
