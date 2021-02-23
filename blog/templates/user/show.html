@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- templates/cats/detail.html -->
+
+<section>
+  <div class="container-fluid white">
+    <hr class="mb-2 mt-0">
+    <div class="container">
+
+      <!--Section: Blog v.3-->
+      <section class="section extra-margins mt-2 py-2 text-center text-lg-left">
+
+        <!--Grid row-->
+        <div class="row my-xl-5 py-xl-4">
+
+          <!--Grid column-->
+          <div class="col-sm-12 col-md-5 col-xl-5 mb-2">
+
+            <!--Image-->
+            <div class="view overlay">
+              <img src={{user.user_profile.profile_picture.url}} class="avatar rounded-circle z-depth-1-half"
+                width="400px" height="380px"" alt="">
+                          <div class=" mask rgba-white-slight">
+            </div>
+          </div>
+          <!--/.Image-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-sm-12 col-md-6 col-xl-6">
+
+          <h3 class="dark-grey-text pb-2 font-weight-bold">
+            <strong>About me</strong>
+          </h3>
+          <p class="gold-text mb-2 text-uppercase font-weight-bold">SOME FACTS ABOUT ME</p>
+          <div>
+            <h5>FIND ME ON: </h5>
+            <button type="button" class="btn btn-social-icon btn-facebook">
+              <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            </button>
+            <button type="button" class="btn btn-social-icon">
+              <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            </button>
+            <button type="button" class="btn btn-social-icon">
+              <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            </button>
+          </div>
+          <hr>
+          <p class="dark-grey-text mt-4 text-justify">{{user.user_profile.about_me | safe}}</p>
+          <h5 class="text-right font-weight-bold dark-grey-text mt-5">
+            <em>{{user.first_name}} {{user.last_name}}</em>
+          </h5>
+          <p class="text-right font-weight-bold dark-grey-text mt-1">
+            <em>{{user.user_profile.position}}</em>
+          </p>
+        </div>
+        <!--Grid column-->
+    </div>
+    <!--/Grid row-->
+</section>
+<!--/Section: Blog v.3-->
+</div>
+</div>
+</section>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#">
+      <a class="nav-link" id="Posts" href="/user/posts/">
+        Posts</a></a>
+  </li>
+  <li class="nav-item">
+    <a href="#">
+      <a class="nav-link" id="Likes" href="/user/posts/notPublished/">
+        Likes</a></a>
+  </li>
+  <li class="nav-item">
+    <a href="#">
+      <a class="nav-link" id="Commines" href="/user/posts/refused/">
+        Commines</a></a>
+  </li>
+</ul>
+<!-- <div class="tab-content mt-5">
+  <div id="Posts" class=" tab-pane active "><br>
+      {%block all_post%}
+      {% include "./blog/post_cards.html" with posts=posts %}
+      {%endblock%}
+  </div>
+  <div id="published" class="container tab-pane"><br>
+      {%block published_post%}
+      {% include "./blog/post_cards.html" with posts=posts %}
+      {%endblock%}
+  </div>
+  <div id="notPublished" class="container tab-pane fade"><br>
+      {%block notPublished_post%}
+      {% include "./blog/post_cards.html" with posts=posts %}
+      {%endblock%}
+  </div>
+  <div id="refused" class="container tab-pane fade"><br>
+      {%block refused_post%}
+      {% include "./blog/post_cards.html" with posts=posts %}
+      {%endblock%}
+  </div>
+</div> -->
+
+{% endblock %}

@@ -53,6 +53,10 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
+def authoreProfile(request, user_id):
+    user = User.objects.get(id=user_id)
+    posts = Post.objects.filter(author=user)
+    return render(request, 'user/show.html', {'user': user})
 
 @method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):

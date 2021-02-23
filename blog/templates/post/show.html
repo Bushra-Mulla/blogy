@@ -26,7 +26,7 @@
         </div>
         <div class="col">
           <h2>
-            <a href="user/{{post.id}}""> <strong>By: {{post.author.first_name}} {{post.author.last_name}}</strong> </a>
+            <a href="profile/{{post.id}}""> <strong>By: {{post.author.first_name}} {{post.author.last_name}}</strong> </a>
           </h2>
           <p>{{post.author.user_profile.position}} </p>
         </div>
@@ -53,10 +53,10 @@
 <div class="container-fluid mb-5">
   <div class="col-md-12 px-lg-5">
     <!--Card-->
-    <div class="PostCard pb-5 mx-md-3">
+    <div class="PostCard pb-5 mx-md-3 ">
       <div>
         <div>
-          <h1>
+          <h1 class='mt-4'>
             <strong>{{ post.title }}</strong>
           </h1>
           <div class="row">
@@ -70,14 +70,18 @@
             </div>
           </div>
           <hr>
-          <div style="text-align: left;"> 
+          <div style="text-align: left;" class='mt-5 ml-5 mr-5 mb-5'> 
           {{ post.content | safe}}
         </div>
           <hr>
-          <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}">report</a>
-          {%block like%}
-          {% include "./like.html" with post=post show=True %}
-          {%endblock%}
+          <div class="postShowCard">
+            <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}"><i class="fas fa-exclamation-circle"></i> report</a>
+            {%block like%}
+            {% include "./like.html" with post=post show=True %}
+            {%endblock%}
+          </div>
+         
+          
           <h3>Share this post:</h3>
 
           <div class="template-demo">

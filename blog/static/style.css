@@ -1,55 +1,7 @@
-
-#about-me {
-  display:flex;
-}
-#about-me .picture {
-  flex:3;
-}
-#about-me .picture img{
-  width: 100%;
-  height:100%;
-}
-#about-me .information {
-  line-height: 1.6;
+.postShowCard{
   display: flex;
-  flex-direction:column;
-  justify-content: space-around;
-  flex:4;
-  background-color: #f2f2f2;
-  padding:35px;
-}
-#about-me .information .information-up h3 {
-  padding-bottom: 30px;
-  text-transform:uppercase;
-  font-size:30px;
-  color:#555;
-}
-#about-me .information .information-up p{
-  padding-bottom: 25px;
-}
-#about-me .information .skills {
-  display:flex;
-  flex-wrap: wrap;
-}
-#about-me .information .skills .content {
-  width:50%;
-  display:flex;
-}
-#about-me .information .skills .content .icon {
-  width:20%;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-}
-#about-me .information .skills .content .icon img {
-  height:60%;
-  width:60%;
-  margin: auto;
-}
-#about-me .information .skills .content .details {
-  width:80%;
-  display:flex;
-  flex-direction: column;
+  align-items: center;
+  
 }
 /* End About Me */ 
 .postButton{
