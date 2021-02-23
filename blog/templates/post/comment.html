@@ -1,5 +1,4 @@
 {% block comment %}
-
 <!--Comments-->
 <section>
   <div class="comments-list text-center text-md-left comment{{post.id}}">
@@ -38,7 +37,6 @@
       </div>
     </div>
       <hr>
-
     {%endfor%}
   </div>
 </section>
@@ -57,14 +55,14 @@
           class="form-control content{{post.id}}"
           rows="4"
           placeholder="Write something here..."
+          required
         ></textarea>
       </div>
-
       <div class="text-right">
         <button
           type="button"
           id="{{post.id}}"
-          class="gradient-button gradient-button-3"
+          class="gradient-button gradient-button-3 submentComment"
           style='margin-left: 50%;'
         >
           Submit
@@ -80,7 +78,10 @@
   $(".submentComment").on("click", function () {
     var post_id = "{{post.id}}";
     var content = $(`.content${post_id}`).val();
-
+    if(content == ""){
+      alert ("Comments cannot be empty")
+      return
+    }
     $.ajax({
       type: "POST",
       url: "/comment/",
@@ -119,13 +120,10 @@
           "</p>\
       </div>\
     </div>";
-
         $(".comment" + post_id).append(_html);
         var prevCount = $(".comment-count" + post_id).text();
         $(".comment-count" + post_id).text(parseInt(prevCount) + 1);
-
         console.log(_html);
-
         $(".submentComment").removeClass("disabled").text("Submit");
       },
       error: function (response) {

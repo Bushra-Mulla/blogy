@@ -2,9 +2,7 @@
   display: flex;
   align-items: center;
   
-}
-/* End About Me */ 
-.postButton{
+}.postButton{
   list-style: none;
   display: inline-block;
   margin: 1%;
@@ -31,6 +29,14 @@
   position: absolute;
   left: 4%;
   display: inline;
+  text-align: center;
+}
+.PostCard {
+  padding: 5px;
+  margin: 20px;
+  box-shadow: 3px 3px 3px 3px rgb(153 150 150);
+  position: relative;
+  bottom: 30px;
   text-align: center;
 }
 
