@@ -274,7 +274,6 @@ def archivedReport(request):
 
 
 def publish(request):
-
     return render(request, 'post/publish_manage.html', {"posts": allposts()})
 
 
