@@ -14,7 +14,8 @@
         </div>
         <div class="card-body" style="overflow-y: auto">
             <h4 class="card-title"><a href="{% url 'blog-post-show' post.id %}">{{post.title}}</a></h4>
-            <p class="card-text">{{post.author}} {{post.date_post}}</p>
+            <h6 class="card-title"><a href="{% url 'profile' post.author.id %}"  style="color: black;">By: {{post.author.first_name}} {{post.author.last_name}}</a></h6>
+            <p class="card-text">{{post.date_post}}</p>
             {%if post.author != user%}
             {%block like%}
             {% include "../post/like.html" with post=post %}

@@ -27,7 +27,7 @@
         </div>
         <div class="col">
           <h2>
-            <a href="{% url 'profile' post.id%}"> <strong>By: {{post.author.first_name}} {{post.author.last_name}}</strong> </a>
+            <a href="{% url 'profile' post.author.id %}"> <strong>By: {{post.author.first_name}} {{post.author.last_name}}</strong> </a>
           </h2>
           <p>{{post.author.user_profile.position}}</p>
         </div>
