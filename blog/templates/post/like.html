@@ -15,9 +15,10 @@
 {% if show %}
 <p class='like_count{{post.id}}'>{{post.like_count}}</p>
 {%endif%}
-<o class="mylike{{post.id}}">{{mylike}}</o>
 {% endblock %}
-​
+<p class="mylike{{post.id}}">{{mylike}}</p>
+
+
 {% block script %}
 <script>
    $('.like_form').submit(function(e){
@@ -46,13 +47,13 @@
             console.log(`#card${post_id}`)
             $(`#card${post_id}`).hide()
           }
-            $(`.like_button${post_id}`).hide();
+            // $(`.like_button${post_id}`).hide();
         } else {
           $(`.like_button${post_id}`).text('Unlike')
           res = trimCount + 1
-​
+
+
         }
-​
         $(`.like_count${post_id}`).text(res)
       },
       error: function (response) {
