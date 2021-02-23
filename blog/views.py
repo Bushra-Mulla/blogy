@@ -309,7 +309,7 @@ def refused(request):
 
 def notpublish(request):
     notpublish = Post.objects.filter(isPublish='notpublish')
-    return render(request, 'post/publish_manage.html', {'posts': notpublish})
+    return render(requesat, 'post/publish_manage.html', {'posts': notpublish})
 
 
 def likeview(request):

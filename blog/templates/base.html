@@ -20,7 +20,8 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'footer.css' %}" />
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 
 </head>
@@ -62,7 +63,8 @@
         </div>
         <form class="d-flex" name="searchform" method="GET" action="{% url 'search' %}">
           <!-- {% csrf_token %} -->
-          <input class="form-control me-2" type="search"  name="q" placeholder="What Is In Your Mind?"  aria-label="Search"/>
+          <input class="form-control me-2" type="search" name="q" placeholder="What Is In Your Mind?"
+            aria-label="Search" />
 
         </form>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -74,14 +76,16 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-users-cog" aria-hidden="true"></i> Admin <span class="font-weight-bold"> {{countNotArchivedReport}} </span></a>
+              <i class="fas fa-users-cog" aria-hidden="true"></i> Admin <span class="font-weight-bold">
+                {{countNotArchivedReport}} </span></a>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-              <a class="dropdown-item waves-effect waves-light" href="{% url 'reports' %}">Reports <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
+              <a class="dropdown-item waves-effect waves-light" href="{% url 'reports' %}">Reports <span
+                  class="badge badge-light">{{countNotArchivedReport}}</span></a>
               <a class="dropdown-item waves-effect waves-light" href="{% url 'blog-published' %}">New Post</a>
               <a class="dropdown-item waves-effect waves-light" href="{/admin}">Control Panel</a>
             </div>
           </li>
-          
+
           <!-- <a class="btn btn-primary" href="{% url 'reports' %}">
             Announcement <span class="badge badge-light">{{countNotArchivedReport}}</span>
           </a> -->
@@ -124,38 +128,38 @@
   {% block content %}
   {% endblock %}
 
-    <footer class="text-muted py-5" id="footer" class="site-footer">
-        <!-- <div class="logo">
+  <footer class="text-muted py-5" id="footer" class="site-footer">
+    <!-- <div class="logo">
             <h3>
               <img src="{% static '/images/logo2.png' %}" width="40%" height="40%" />
 
                 <span class="spl-name">Blogy</span>
         </div> -->
-        
-        <ul>
-            <li>
-                <a href="#"><img src="{% static '/images/inst.png' %}"/></a>
-            </li>
-            <li>
-                <a href="#"><img src="{% static '/images/tw.png' %}"/></a>
-            </li>
-            <li>
-                <a href="#"><img src="{% static '/images/face.png' %}"/></a>
-            </li>
-            <li>
-                <a href="#"><img src="{% static '/images/tm.png' %}"/></a>
-            </li>
-        </ul>
-        <p>Copyright &copy; 2021 Blogy Team. All Right Reserved &reg; </p>
-        <a href="#" className='uppage'>Back to top</a>
 
-    </footer>
+    <ul>
+      <li>
+        <a href="#"><img src="{% static '/images/inst.png' %}" /></a>
+      </li>
+      <li>
+        <a href="#"><img src="{% static '/images/tw.png' %}" /></a>
+      </li>
+      <li>
+        <a href="#"><img src="{% static '/images/face.png' %}" /></a>
+      </li>
+      <li>
+        <a href="#"><img src="{% static '/images/tm.png' %}" /></a>
+      </li>
+    </ul>
+    <p>Copyright &copy; 2021 Blogy Team. All Right Reserved &reg; </p>
+    <a href="#" className='uppage'>Back to top</a>
+
+  </footer>
 
   <script src="//code.tidio.co/ozgecflyxqw3basldhj02t7rib4jpuex.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
     crossorigin="anonymous"></script>
-      {% block script %}
+  {% block script %}
   {% endblock %}
 </body>
 
