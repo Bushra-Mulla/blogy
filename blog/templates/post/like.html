@@ -1,4 +1,3 @@
-
 {%block like%}
 ​
 <form action="{% url 'like_post' %}" method="POST" class='like_form' id='{{post.id}}'>
@@ -18,6 +17,7 @@
 {%endif%}
 {% endblock %}
 <p class="mylike{{post.id}}">{{mylike}}</p>
+
 
 {% block script %}
 <script>
@@ -52,8 +52,8 @@
           $(`.like_button${post_id}`).text('Unlike')
           res = trimCount + 1
 
-        }
 
+        }
         $(`.like_count${post_id}`).text(res)
       },
       error: function (response) {

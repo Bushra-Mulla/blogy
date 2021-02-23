@@ -75,6 +75,7 @@
   margin: 20px;
   float: left;
   box-shadow: 2px 2px 2px 2px  #3A7BD5;
+
   position: absolute;
   left: 4%;
   display: inline;
@@ -132,6 +133,7 @@ background: none;
   left: 5%;
   text-align: center;
 }
+
 
 
 .container {
