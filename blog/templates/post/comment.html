@@ -6,20 +6,14 @@
     <div class="text-center my-5">
       <h3 class="font-weight-bold">
         Comments
-        <span class="badge indigo comment-count{{post.id}}"
-          >{{post.comment_set.count}}</span
-        >
+        <span class="badge indigo comment-count{{post.id}}">{{post.comment_set.count}}</span>
       </h3>
     </div>
     {%for comment in post.comment_set.all %}
     <div class="row mb-5">
       <div class="col-sm-2 col-12 mb-3">
-        <img
-          src="{{comment.user_id.user_profile.profile_picture.url}}"
-          class="avatar rounded-circle z-depth-1-half"
-          alt="sample image"
-          style="height: 100px; width: 100px; margin-left: 25px"
-        />
+        <img src="{{comment.user_id.user_profile.profile_picture.url}}" class="avatar rounded-circle z-depth-1-half"
+          alt="sample image" style="height: 100px; width: 100px; margin-left: 25px" />
       </div>
       <div class="col-sm-10 col-12">
         <a>
@@ -37,8 +31,7 @@
         <p class="dark-grey-text article">{{comment.content}}</p>
       </div>
     </div>
-      <hr>
-
+    <hr>
     {%endfor%}
   </div>
 </section>
@@ -50,23 +43,13 @@
     <!-- <form class="col-12 mt-1 comment_form" method="POST" action=".">
       {%csrf_token %y} -->
     <div class="col-12 mt-1">
-      <div
-        class="form-group basic-textarea rounded-corners shadow-textarea {{post.id}}"
-      >
-        <textarea
-          class="form-control content{{post.id}}"
-          rows="4"
-          placeholder="Write something here..."
-        ></textarea>
+      <div class="form-group basic-textarea rounded-corners shadow-textarea {{post.id}}">
+        <textarea class="form-control content{{post.id}}" rows="4" placeholder="Write something here..."
+          required></textarea>
       </div>
-
       <div class="text-right">
-        <button
-          type="button"
-          id="{{post.id}}"
-          class="gradient-button gradient-button-3"
-          style='margin-left: 50%;'
-        >
+        <button type="button" id="{{post.id}}" class="gradient-button gradient-button-3 submentComment"
+          style='margin-left: 50%;'>
           Submit
         </button>
       </div>
@@ -75,12 +58,16 @@
   </div>
   <!--Grid row-->
 </section>
-{% endblock %} {% block script%}
+{% endblock %}
+{% block script%}
 <script>
   $(".submentComment").on("click", function () {
     var post_id = "{{post.id}}";
     var content = $(`.content${post_id}`).val();
-
+    if (content == "") {
+      alert("Comments cannot be empty")
+      return
+    }
     $.ajax({
       type: "POST",
       url: "/comment/",
@@ -119,13 +106,10 @@
           "</p>\
       </div>\
     </div>";
-
         $(".comment" + post_id).append(_html);
         var prevCount = $(".comment-count" + post_id).text();
         $(".comment-count" + post_id).text(parseInt(prevCount) + 1);
-
         console.log(_html);
-
         $(".submentComment").removeClass("disabled").text("Submit");
       },
       error: function (response) {

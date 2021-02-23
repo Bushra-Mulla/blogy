@@ -66,8 +66,6 @@ class PostCreate(CreateView):
         return HttpResponseRedirect('/user/posts/')
 
 
-
-
 class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id']
@@ -85,6 +83,13 @@ class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
 
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
+
 
 @method_decorator(login_required, name='dispatch')
 class PostDelete(DeleteView):
@@ -98,8 +103,8 @@ class PostDelete(DeleteView):
             return True
         else:
             return False
-        
- 
+
+
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
@@ -279,10 +284,9 @@ def allposts():
     return published
 
 
-def postDetails(request, Post_id):
-    posts = Post.objects.get(
-        id=Post_id)
-    return render(request, 'post/publish_manage.html', {'posts': allposts(), 'post': posts})
+def postDetails(request, post_id):
+    posts = Post.objects.get(id=post_id)
+    return render(request, 'post/publish_manage.html', {'posts': allposts(), 'postDetails': posts})
 
 
 def update_published(request, Post_id):
@@ -308,8 +312,8 @@ def refused(request):
 
 
 def notpublish(request):
-    notpublish = Post.objects.filter(isPublish='notpublish')
-    return render(requesat, 'post/publish_manage.html', {'posts': notpublish})
+    notpublish = Post.objects.filter(isPublish='notPublished')
+    return render(request, 'post/publish_manage.html', {'posts': notpublish})
 
 
 def likeview(request):
