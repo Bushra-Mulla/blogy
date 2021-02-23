@@ -22,10 +22,11 @@ urlpatterns = [
          name='userNotPublishedPostsList'),
     path('user/posts/refused/', views.userRefusedPostsList,
          name='userRefusedPostsList'),
+    path('user/comments',  views.comment_list, name='comment_list'),
     path('user/posts/draft/', views.userDraftPostsList,
          name='userDraftPostsList'),
   
-  
+
     path('category/create/', views.categoryCreate.as_view(
         template_name='category/categorys_form.html'), name="categoryCreate"),
     path('category/<category_name>/',
@@ -41,7 +42,6 @@ urlpatterns = [
 
 
     path('like/', views.likeview, name='like_post'),
-    path('comments/',  views.comment_list, name='comments'),
     path('comment/',  views.comments, name='comment'),
 
 

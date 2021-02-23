@@ -366,7 +366,7 @@ def comments(request):
         return JsonResponse({'bool': True})
 
 
-def comment_list(request, post_id):
+def comment_list(request):
     user = request.user
-    comment_post = comment.objects.filter(Post_id=post_id).all()
-    return render(request, 'post/comment.html', {'comments': comment_post})
+    comments = comment.objects.filter(user_id=user.id).all()
+    return render(request, 'profile/comment_list.html', {'comments': comments})
