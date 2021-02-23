@@ -376,3 +376,26 @@ def search(request):
 
     else:
         return render(request, "base.html", {})
+
+
+def comments(request):
+    user = request.user
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        content = request.POST.get('content')
+        post = Post.objects.get(id=post_id)
+        user_id = User.objects.get(username=user)
+
+        comment.objects.create(
+            content=content,
+            user_id=user_id,
+            Post_id=post
+        )
+
+        return JsonResponse({'bool': True})
+
+
+def comment_list(request, post_id):
+    user = request.user
+    comment_post = comment.objects.filter(Post_id=post_id).all()
+    return render(request, 'post/comment.html', {'comments': comment_post})

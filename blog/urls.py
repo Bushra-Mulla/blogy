@@ -39,7 +39,8 @@ urlpatterns = [
     path('post/draft/', views.PostCreate.draft, name='post_draft'),
 
     path('like/', views.likeview, name='like_post'),
-    #     path('comment/', views.commen, name='comment'),
+    path('comments/',  views.comment_list, name='comments'),
+    path('comment/',  views.comments, name='comment'),
 
 
     path('report/<int:post_id>/create/', views.reportCreate.as_view(

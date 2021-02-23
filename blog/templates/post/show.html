@@ -86,8 +86,11 @@
             >report</a
           >
           <!-- <p class="card-text">{{post.author}} {{post.date_post}}</p> -->
-          {%if post.author != user%} {%block like%} {% include "./like.html"
-          with post=post show=True %} {%endblock%} {%endif%}
+            {%if post.author != user%}
+            {%block like%}
+            {% include "./like.html" with post=post %}
+            {%endblock%}
+            {%endif%}
 
           <h3>Share this post:</h3>
           <div class="template-demo">

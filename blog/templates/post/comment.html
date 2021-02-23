@@ -4,107 +4,126 @@
   <h3 class="font-weight-bold text-center my-5">Leave a reply</h3>
   <!--Grid row-->
   <div class="row">
+    <!-- <form class="col-12 mt-1 comment_form" method="POST" action=".">
+      {%csrf_token %y} -->
     <div class="col-12 mt-1">
-      <div class="form-group basic-textarea rounded-corners shadow-textarea">
+      <div
+        class="form-group basic-textarea rounded-corners shadow-textarea {{post.id}}"
+      >
         <textarea
-          class="form-control"
-          id="exampleFormControlTextarea6"
+          class="form-control content{{post.id}}"
           rows="4"
           placeholder="Write something here..."
         ></textarea>
       </div>
 
       <div class="text-right">
-        <button class="btn btn-grey btn-sm">Submit</button>
+        <button
+          type="button"
+          id="{{post.id}}"
+          class="submentComment btn btn-grey btn-sm"
+        >
+          Submit
+        </button>
       </div>
     </div>
+    <!-- </form> -->
   </div>
   <!--Grid row-->
 </section>
 
-
 <!--Comments-->
 <section>
-  <!--Main wrapper-->
-  <div class="comments-list text-center text-md-left">
+  <div class="comments-list text-center text-md-left comment{{post.id}}">
     <div class="text-center my-5">
       <h3 class="font-weight-bold">
         Comments
-        <span class="badge indigo">3</span>
+        <span class="badge indigo comment-count{{post.id}}">{{post.comment_set.count}}</span>
       </h3>
     </div>
-    <!-- First row-->
+    {%for comment in post.comment_set.all %}
     <div class="row mb-5">
-      <!--Image column-->
       <div class="col-sm-2 col-12 mb-3">
         <img
-          src="https://mdbootstrap.com/img/Photos/Avatars/img (8).jpg"
+          src="{{comment.user_id.user_profile.profile_picture.url}}"
           class="avatar rounded-circle z-depth-1-half"
           alt="sample image"
+          style="height: 100px; width: 100px; margin-left: 25px"
         />
       </div>
-      <!--/.Image column-->
-
-      <!--Content column-->
       <div class="col-sm-10 col-12">
         <a>
-          <h5 class="user-name font-weight-bold">John Doe</h5>
+          <h5 class="user-name font-weight-bold">
+            {{comment.user_id.username}}
+          </h5>
         </a>
         <div class="card-data">
           <ul class="list-unstyled">
             <li class="comment-date font-small">
-              <i class="far fa-clock-o"></i> 05/10/2015
+              <i class="far fa-clock-o"></i> {{comment.Publish_date}}
             </li>
           </ul>
         </div>
-        <p class="dark-grey-text article">
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident.
-        </p>
+        <p class="dark-grey-text article">{{comment.content}}</p>
       </div>
-      <!--/.Content column-->
     </div>
-    <!--/.First row -->
-
-    <!--Second row-->
-    <div class="row mb-5">
-      <!--Image column-->
-      <div class="col-sm-2 col-12">
-        <img
-          src="https://mdbootstrap.com/img/Photos/Avatars/img (30).jpg"
-          class="avatar rounded-circle z-depth-1-half"
-          alt="sample image"
-        />
-      </div>
-      <!--/.Image column-->
-
-      <!--Content column-->
-      <div class="col-sm-10 col-12 mb-3">
-        <a>
-          <h5 class="user-name font-weight-bold">Lily Brown</h5>
-        </a>
-        <div class="card-data">
-          <ul class="list-unstyled">
-            <li class="comment-date font-small">
-              <i class="far fa-clock-o"></i> 05/10/2015
-            </li>
-          </ul>
-        </div>
-        <p class="dark-grey-text article">
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident.
-        </p>
-      </div>
-      <!--/.Content column-->
-    </div>
-    <!--/.Second row-->
+    {%endfor%}
   </div>
-  <!--/.Main wrapper-->
 </section>
-<hr />
 
+{% endblock %} {% block script%}
+<script>
+  $(".submentComment").on("click", function () {
+    var post_id = "{{post.id}}";
+    var content = $(`.content${post_id}`).val();
+
+    $.ajax({
+      type: "POST",
+      url: "/comment/",
+      data: {
+        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+        content: content,
+        post_id: post_id,
+      },
+      // dataType: "json",
+      beforeSend: function () {
+        $(".submentComment").addClass("disabled").text("saving...");
+      },
+      success: function (res) {
+        $(`.content${post_id}`).val("");
+        // Append Element
+        var _html ='<div class="row mb-5">\
+      <div class="col-sm-2 col-12 mb-3">\
+        <img src="{{request.user.user_profile.profile_picture.url}}" class="avatar rounded-circle z-depth-1-half"alt="sample image"style="height: 100px; width: 100px; margin-left: 25px">\
+      </div>\
+      <div class="col-sm-10 col-12">\
+        <a>\
+          <h5 class="user-name font-weight-bold">\
+            {{request.user}}</h5>\
+        </a>\
+        <div class="card-data">\
+          <ul class="list-unstyled">\
+            <li class="comment-date font-small">\
+              <i class="far fa-clock-o"></i> '+Date.now()+'</li>\
+          </ul>\
+        </div>\
+        <p class="dark-grey-text article">'+content +'</p>\
+      </div>\
+    </div>';
+
+        $(".comment" + post_id).append(_html);
+        var prevCount = $(".comment-count" + post_id).text();
+        $(".comment-count" + post_id).text(parseInt(prevCount) + 1);
+
+        console.log(_html);
+
+        $(".submentComment").removeClass("disabled").text("Submit");
+      },
+      error: function (response) {
+        console.log("error", response);
+        console.log(data);
+      },
+    });
+  });
+</script>
 {% endblock %}
