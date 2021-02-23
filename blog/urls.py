@@ -26,11 +26,11 @@ urlpatterns = [
     path('user/comments',  views.comment_list, name='comment_list'),
     path('user/posts/draft/', views.userDraftPostsList,
          name='userDraftPostsList'),
-  
+
 
     path('category/create/', views.categoryCreate.as_view(
         template_name='category/categorys_form.html'), name="categoryCreate"),
-    path('category/<category_name>/',
+    path('category/<int:pk>/',
          views.category_view, name='blog-category_view'),
 
 
@@ -83,6 +83,6 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(
              template_name='user/password_reset_complete.html'), name='password_reset_complete'),
 
-  
+
     path('search/', views.search, name='search'),
 ]
