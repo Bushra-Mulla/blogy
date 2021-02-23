@@ -77,7 +77,9 @@ TEMPLATES = [
                 'blog.context_processors.countNotArchivedReport',
                 'blog.context_processors.countNotPublishedPosts',
                 'blog.context_processors.totalAnnouncement',
-                # 'blog.context_processors.getAllArchivedReport',
+                'blog.context_processors.countpost',
+                'blog.context_processors.countnotpublish',
+                'blog.context_processors.countrefused',
 
             ],
         },

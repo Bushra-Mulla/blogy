@@ -2,15 +2,15 @@
 ​
 <form action="{% url 'like_post' %}" method="POST" class='like_form' id='{{post.id}}'>
   {% csrf_token %}
-​
-  <input type="hidden"name="post_id"class='btn btn-warning btn-sm' value="{{post.id}}">
-    <button type='submit'class='like_button{{post.id}} gradient-button gradient-button-2 thumbs-up'>
-      {% if user not in post.likes.all %}
-        Like
-      {% else %}
-        Unlike
-      {% endif %}
-    </button>
+  ​
+  <input type="hidden" name="post_id" class='btn btn-warning btn-sm' value="{{post.id}}">
+  <button type='submit' class='like_button{{post.id}} gradient-button gradient-button-2 thumbs-up' style="width: auto;">
+    {% if user not in post.likes.all %}
+    <i class="fa fa-thumbs-up"></i> Like
+    {% else %}
+    <i class="fa fa-thumbs-down"></i> Unlike
+    {% endif %}
+  </button>
 </form>
 {% if show %}
 <p class='like_count{{post.id}}'>{{post.like_count}}</p>
@@ -21,7 +21,7 @@
 
 {% block script %}
 <script>
-   $('.like_form').submit(function(e){
+  $('.like_form').submit(function (e) {
     e.preventDefault()
     const post_id = $(this).attr('id')
     const like_button = $(`.like_button${post_id}`).text()
@@ -41,13 +41,13 @@
       },
       success: function (response) {
         if (trim === 'Unlike') {
-          $(`.like_button${post_id}`).text('Like')
+          $(`.like_button${post_id}`).text(' Like')
           res = trimCount - 1
-          if(mylikes == 'True'){
+          if (mylikes == 'True') {
             console.log(`#card${post_id}`)
             $(`#card${post_id}`).hide()
           }
-            // $(`.like_button${post_id}`).hide();
+          // $(`.like_button${post_id}`).hide();
         } else {
           $(`.like_button${post_id}`).text('Unlike')
           res = trimCount + 1

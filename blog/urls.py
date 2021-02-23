@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from . import context_processors
+from django.contrib import admin
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('logIn/', auth_views.LoginView.as_view(template_name='logIn.html'), name='logIn'),
@@ -85,4 +87,5 @@ urlpatterns = [
 
 
     path('search/', views.search, name='search'),
+    path('admin/', admin.site.urls, name='admin'),
 ]

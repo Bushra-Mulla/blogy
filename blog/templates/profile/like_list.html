@@ -1,11 +1,13 @@
 {%extends 'base.html'%}
 
-{%block content%} 
+{%block content%}
 <!-- should change it to profile -->
 
+<br>
 
+<br>
 {%block refused_post%}
-    {% include "../blog/post_cards.html" with posts=posts mylike=True%}
+{% include "../blog/post_cards.html" with posts=posts mylike=True%}
 {%endblock%}
 
 

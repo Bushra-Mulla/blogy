@@ -73,3 +73,18 @@ def add_variable_to_context(request):
     return {
         'categorys_list': categorys.objects.all()
     }
+
+
+def countpost(request):
+    posts = Post.objects.filter(isPublish='published').count()
+    return {'countpost': posts}
+
+
+def countnotpublish(request):
+    posts = Post.objects.filter(isPublish='notPublished').count()
+    return {'countnotpublish': posts}
+
+
+def countrefused(request):
+    posts = Post.objects.filter(isPublish='refused').count()
+    return {'countrefused': posts}
