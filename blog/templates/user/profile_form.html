@@ -7,7 +7,13 @@
 
     <div class="card mt-5" style="margin: 0 auto; width: 58%;">
         <div class="card-header">
-            <h3>Create Your Profile</h3>
+            {% if 'create' in request.path|cut:'/'%}
+            <h3 style="float: left;">Create Your Profile</h3>
+            {% else %}
+            <h3 style="float: left;">Update Your Profile</h3>
+            <a href="{{request.META.HTTP_REFERER|escape}}"><i class="fa fa-times"
+                    style="font-size: 20pt; float: right; color: #E26E8C; padding-top: 5px;"></i></a>
+            {% endif %}
         </div>
         <div class="card-body"> 
             {{ form|crispy }}
@@ -16,7 +22,7 @@
         </div>
         <div class="card-footer">
 
-            <input type="submit" value="Send" class="gradient-button gradient-button-3" style="float: right;">
+            <input type="submit" value="Save" class="gradient-button gradient-button-3" style="float: right;">
         </div>
     </div>
 </form>
