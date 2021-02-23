@@ -18,7 +18,7 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a href="#all">
-            <a class="nav-link active" id="all" href="/user/posts/">
+            <a class="nav-link" id="all" href="/user/posts/">
                 All Posts</a></a>
     </li>
     <li class="nav-item">
@@ -39,8 +39,8 @@
 </ul>
 
 <!-- Tab panes -->
-<div class="tab-content">
-    <div id="all" class=" tab-pane active"><br>
+<div class="tab-content mt-5">
+    <div id="all" class=" tab-pane active "><br>
         {%block all_post%}
         {% include "./blog/post_cards.html" with posts=posts %}
         {%endblock%}

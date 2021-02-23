@@ -3,24 +3,28 @@
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
 
-  <div class="card mt-5" style="margin: 0 auto; width: 58%">
-    <div class="card-header">
-      <h3>Create New Post</h3>
-    </div>
-    <div class="card-body">{{ form | crispy }} {{ form.media}}</div>
-    <div class="card-footer">
-      <a
-        href="{{request.META.HTTP_REFERER|escape}}"
-        class="gradient-button gradient-button-1"
-        style="float: left"
-        >Back</a
-      >
-      <input
-        type="submit"
-        value="Send"
-        class="gradient-button gradient-button-3"
-        style="float: right"
-      />
+    <div class="card mt-5" style="margin: 0 auto; width: 58%;">
+        <div class="card-header">
+            {% if 'create' in request.path|cut:'/'%}
+            <h3 style="float: left;">Create New Post</h3>
+            {% else %}
+            <h3 style="float: left;">Your Post</h3>
+            {% endif %}
+            <a href="{{request.META.HTTP_REFERER|escape}}"><i class="fa fa-times"
+                    style="font-size: 20pt; float: right; color: #E26E8C; padding-top: 5px;"></i></a>
+        </div>
+        <div class="card-body">
+            {{ form | crispy }}
+            {{ form.media}}
+        </div>
+        <div class="card-footer">
+            {% if 'create' in request.path|cut:'/' or post.isPublish == 'draft'%}
+            <input name='draft' type="submit" value="Save as draft" class="gradient-button gradient-button-2"
+                style="float: left; width: auto;">
+            {%endif%}
+            <input type="submit" name='send' value="Send" class="gradient-button gradient-button-3"
+                style="float: right;">
+        </div>
     </div>
   </div>
 </form>

@@ -5,7 +5,8 @@
 <dev class="cardCon">
     {%for post in posts%}
     <!-- <h1>{{post.title}}</h1> -->
-    <div class="card PostCard homeCard card-custom bg-white border-white card" id='card{{post.id}}'>
+
+    <div class="card PostCard homeCard card-custom bg-white border-white card" id='card{{post.id}}'  >
         <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
         </div>
         <div class="card-custom-avatar">
@@ -19,6 +20,7 @@
             {% include "../post/like.html" with post=post %}
             {%endblock%}
             {%endif%}
+
         </div>
     </div>
 

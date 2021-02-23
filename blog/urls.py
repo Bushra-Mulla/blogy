@@ -22,8 +22,10 @@ urlpatterns = [
          name='userNotPublishedPostsList'),
     path('user/posts/refused/', views.userRefusedPostsList,
          name='userRefusedPostsList'),
-
-
+    path('user/posts/draft/', views.userDraftPostsList,
+         name='userDraftPostsList'),
+  
+  
     path('category/create/', views.categoryCreate.as_view(
         template_name='category/categorys_form.html'), name="categoryCreate"),
     path('category/<category_name>/',
@@ -36,7 +38,7 @@ urlpatterns = [
          name='blog-post-Update'),
     path('post/<int:pk>/delete/', views.PostDelete.as_view(),
          name='blog-post-delete'),
-    path('post/draft/', views.PostCreate.draft, name='post_draft'),
+
 
     path('like/', views.likeview, name='like_post'),
     path('comments/',  views.comment_list, name='comments'),
@@ -66,6 +68,7 @@ urlpatterns = [
     path('published/notpublish',
          views.notpublish, name="notpublish"),
 
+
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
              template_name='user/password_reset.html'), name='password_reset'),
@@ -78,6 +81,7 @@ urlpatterns = [
     path('password-reset-complete/',
          auth_views.PasswordResetCompleteView.as_view(
              template_name='user/password_reset_complete.html'), name='password_reset_complete'),
-    path('search/', views.search, name='search'),
 
+  
+    path('search/', views.search, name='search'),
 ]

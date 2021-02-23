@@ -3,7 +3,8 @@
 <header>
   <section>
     <div class="">
-      <img src="{{post.post_img.url}}" width="100%" height="700px" />
+
+      <img src="{{post.post_img.url}}" width="100%" height="500px">
     </div>
   </section>
 </header>
@@ -12,7 +13,7 @@
 <div class="container-fluid mb-5">
   <div class="col-md-12 px-lg-5">
     <!--Card-->
-    <div class="PostCard">
+    <div class="card PostCard">
       <div class="row align-items-center">
         <div class="col">
           <div class="col-sm-2 col-12 mb-3">
@@ -35,25 +36,19 @@
           </h2>
           <p>{{post.author.user_profile.position}}</p>
         </div>
-        <div class="col">
-          {% if user.is_authenticated %}
-          <ul class="postButton">
-            <li>
-              <a
-                class="gradient-button gradient-button-2"
-                href="{% url 'blog-post-Update' post.id %}"
-                >Edit</a
-              >
-            </li>
-            <li>
-              <a
-                class="gradient-button gradient-button-1"
-                href="{% url 'blog-post-delete' post.id %}"
-                >DELETE</a
-              >
-            </li>
-          </ul>
-          {% endif %}
+
+        <div class=" col">
+              {% if post.author == user %}
+              <ul class=postButton>
+                <li>
+                  <a class="gradient-button gradient-button-2" href="{% url 'blog-post-Update' post.id %}">Edit</a>
+                </li>
+                <li>
+                  <a class="gradient-button gradient-button-1" href="{% url 'blog-post-delete' post.id %}">DELETE</a>
+
+                </li>
+              </ul>
+              {% endif %}
         </div>
       </div>
     </div>
@@ -77,20 +72,17 @@
               </p>
             </div>
           </div>
-          <hr />
+
+          <hr>
+          <div style="text-align: left;"> 
           {{ post.content | safe}}
-          <hr />
-          <a
-            class="gradient-button gradient-button-1"
-            href="{% url 'reportCreate' post.id %}"
-            >report</a
-          >
-          <!-- <p class="card-text">{{post.author}} {{post.date_post}}</p> -->
-            {%if post.author != user%}
-            {%block like%}
-            {% include "./like.html" with post=post %}
-            {%endblock%}
-            {%endif%}
+        </div>
+          <hr>
+          <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}">report</a>
+          {%block like%}
+          {% include "./like.html" with post=post show=True %}
+          {%endblock%}
+          <h3>Share this post:</h3>
 
           <h3>Share this post:</h3>
           <div class="template-demo">
