@@ -72,10 +72,13 @@ class PostCreate(CreateView):
         # print('----------form----------;,', self.data)
         # print('selffffffffffff;,', self.request.POST)
         self.object.author_id = self.request.user.id
+
         if 'draft' in self.request.POST:
             print('yaaaaaaaaaaaaaaaaaaaaaaaaaaah')
             self.object.isPublish = 'draft'
-
+        elif self.request.user.is_staff:
+            print('yeas he is admin')
+            self.object.isPublish = 'published'
         self.object.save()
         return HttpResponseRedirect('/user/posts/')
 
