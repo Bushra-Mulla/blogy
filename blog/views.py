@@ -17,9 +17,17 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 def home(request):
+    allPost = Post.objects.all()
+    allUsers = User.objects.all()
+    allComments = comment.objects.all()
     last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
-    return render(request, 'index.html', {'posts': last_twenty})
+    return render(request, 'index.html', {
+        'posts': last_twenty,
+        'allPost': allPost,
+        'allUsers': allUsers,
+        'allComments': allComments
+    })
 
 
 def signup(request):
@@ -44,6 +52,10 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
+def authoreProfile(request, user_id):
+    user = User.objects.get(id=user_id)
+    posts = Post.objects.filter(author=user)
+    return render(request, 'user/show.html', {'user': user})
 
 @method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
@@ -69,7 +81,6 @@ class PostCreate(CreateView):
 class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id']
-
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if self.object.isPublish == 'draft':

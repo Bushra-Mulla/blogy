@@ -5,11 +5,14 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <div class="card mt-5" style="margin: 0 auto; width: 55%;">
+    <div class="card mt-5" style="margin: 0 auto; width: 58%;">
         <div class="card-header">
             <h3>Create Your Profile</h3>
         </div>
-        <div class="card-body"> {{ form|crispy }}
+        <div class="card-body"> 
+            {{ form|crispy }}
+            {{ form.media}}
+
         </div>
         <div class="card-footer">
 
