@@ -14,6 +14,7 @@ urlpatterns = [
          name='user-profile-update'),
     path('profile/<int:user_id>', views.authoreProfile, name="profile"),
 
+
     path('user/likes/', views.likes_list, name='blog_like_list'),
     path('user/posts/', views.userPostsList, name='userPostsList'),
     path('user/posts/published/', views.userPublishedPostsList,
@@ -22,9 +23,11 @@ urlpatterns = [
          name='userNotPublishedPostsList'),
     path('user/posts/refused/', views.userRefusedPostsList,
          name='userRefusedPostsList'),
+    path('user/comments',  views.comment_list, name='comment_list'),
     path('user/posts/draft/', views.userDraftPostsList,
          name='userDraftPostsList'),
   
+
     path('category/create/', views.categoryCreate.as_view(
         template_name='category/categorys_form.html'), name="categoryCreate"),
     path('category/<category_name>/',
@@ -38,8 +41,10 @@ urlpatterns = [
     path('post/<int:pk>/delete/', views.PostDelete.as_view(),
          name='blog-post-delete'),
 
+
     path('like/', views.likeview, name='like_post'),
-    #     path('comment/', views.commen, name='comment'),
+    path('comment/',  views.comments, name='comment'),
+
 
     path('report/<int:post_id>/create/', views.reportCreate.as_view(
         template_name='report/reports_form.html'), name="reportCreate"),
@@ -52,8 +57,17 @@ urlpatterns = [
     path('reports/archived',
          views.archivedReport, name="archivedReport"),
 
-
-    path('published/', views.published, name='blog-published'),
+    # Archived == notpublish  all=published NotArchived = refused
+    path('published/', views.publish, name='blog-published'),
+    path('published/<int:post_id>/', views.postDetails, name="postDetails"),
+    path('published/<int:post_id>/notpublish',
+         views.update_published, name="update_published"),
+    path('published/<int:post_id>/refused',
+         views.update_refuse, name="update_refuse"),
+    path('published/refused',
+         views.refused, name="refused"),
+    path('published/notpublish',
+         views.notpublish, name="notpublish"),
 
 
     path('password-reset/',
@@ -68,6 +82,7 @@ urlpatterns = [
     path('password-reset-complete/',
          auth_views.PasswordResetCompleteView.as_view(
              template_name='user/password_reset_complete.html'), name='password_reset_complete'),
+
   
     path('search/', views.search, name='search'),
 ]

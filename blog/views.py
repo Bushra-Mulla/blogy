@@ -12,7 +12,6 @@ from django.views.generic.list import ListView
 from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
@@ -95,8 +94,10 @@ class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
 
-    
-class PostDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+
+@method_decorator(login_required, name='dispatch')
+class PostDelete(DeleteView):
+
     model = Post
     success_url = '/'
 
@@ -276,28 +277,53 @@ def archivedReport(request):
     return render(request, 'report/report_list.html', {'reports': reports})
 
 
-def published(request):
-    notPublished = Post.objects.filter(isPublish='notPublished')
+def publish(request):
 
-    # notPublished.published_update()
-    return render(request, 'post/publish_manage.html', {'notPublished': notPublished})
+    return render(request, 'post/publish_manage.html', {"posts": allposts()})
 
 
-def all_post():
-    all_Post = Post.objects.all().select_related(
+def allposts():
+    published = Post.objects.filter(isPublish='published').select_related(
+        'author__user_profile').all().order_by('-id')
+    return published
+
+
+def postDetails(request, Post_id):
+    posts = Post.objects.get(
+        id=Post_id)
+    return render(request, 'post/publish_manage.html', {'posts': allposts(), 'post': posts})
+
+
+def update_published(request, Post_id):
+    postDetails = Post.objects.get(
+        id=Post_id)
+    postDetails.isPublish = 'published'
+    postDetails.save()
+    return HttpResponseRedirect('/blog-published/', {'posts': allposts()})
+
+
+def update_refuse(request, Post_id):
+    postDetails = Post.objects.get(
+        id=Post_id)
+    postDetails.isPublish = 'refuse'
+    postDetails.save()
+    return HttpResponseRedirect('/blog-published/', {'posts': allposts()})
+
+
+def refused(request):
+    posts = Post.objects.filter(isPublish='refused').select_related(
         'author__user_profile').all()
-    return Post
+    return render(request, 'post/publish_manage.html', {'posts': posts})
 
 
-def post_details(request, post_id):
-    post_details = post.objects.get(
-        id=post_id)
-    return render(request, 'post/publish_manage.html', {'post_details': post_details})
+def notpublish(request):
+    notpublish = Post.objects.filter(isPublish='notpublish')
+    return render(request, 'post/publish_manage.html', {'posts': notpublish})
 
 
 def likeview(request):
     user = request.user
-    # print(user)
+
     if request.method == 'POST':
         post_id = request.POST.get('post_id')
         post = Post.objects.get(id=post_id)
@@ -324,8 +350,32 @@ def search(request):
     if request.method == 'GET':
         search = request.GET.get('q')
         if search:
-            result = Post.objects.filter(Q(title__icontains=search))
+            result = Post.objects.filter(
+                Q(title__icontains=search, isPublish='published'))
             return render(request, "search.html", {"posts": result})
 
     else:
         return render(request, "base.html", {})
+
+
+def comments(request):
+    user = request.user
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        content = request.POST.get('content')
+        post = Post.objects.get(id=post_id)
+        user_id = User.objects.get(username=user)
+
+        comment.objects.create(
+            content=content,
+            user_id=user_id,
+            Post_id=post
+        )
+
+        return JsonResponse({'bool': True})
+
+
+def comment_list(request):
+    user = request.user
+    comments = comment.objects.filter(user_id=user.id).all()
+    return render(request, 'profile/comment_list.html', {'comments': comments})

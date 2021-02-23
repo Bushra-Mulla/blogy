@@ -1,9 +1,11 @@
 {%autoescape off%}
+
 {% if posts %}
 
 <dev class="cardCon">
     {%for post in posts%}
     <!-- <h1>{{post.title}}</h1> -->
+
     <div class="card PostCard homeCard card-custom bg-white border-white card" id='card{{post.id}}'  >
         <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
         </div>
@@ -11,14 +13,14 @@
             <img class="img-fluid" src={{post.author.user_profile.profile_picture.url}} alt="Avatar" />
         </div>
         <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title"><a href="post/{{post.id}}">{{post.title}}</a></h4>
+            <h4 class="card-title"><a href="{% url 'blog-post-show' post.id %}">{{post.title}}</a></h4>
             <p class="card-text">{{post.author}} {{post.date_post}}</p>
-
-            {% if post.isPublish == 'published' %}
+            {%if post.author != user%}
             {%block like%}
             {% include "../post/like.html" with post=post %}
             {%endblock%}
-            {% endif %}
+            {%endif%}
+
         </div>
     </div>
 
