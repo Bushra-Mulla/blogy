@@ -1,107 +1,139 @@
-{% extends 'base.html' %}
-{% load static%}
-{% block content %}
+{% extends 'base.html' %} {% load static%} {% block content %}
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
-<link rel="stylesheet" type="text/css" href="{% static 'reports_lists.css' %}" />
-<br>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'reports_lists.css' %}"
+/>
+<br />
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Post List</h4>
-                </div>
-
-                <div class="container">
-                    <div class="row align-items-start">
-                        <div class="col">
-                            <a onclick="location.href='{% url 'blog-published' %}'">published <span
-                                    class="badge badge-light">{{countpost}}</span></a>
-
-                        </div>
-                        <div class="col">
-                            <a onclick="location.href='{% url 'notpublish' %}'">not publish
-                                <span class="badge badge-light">{{countnotpublish}}</span></a>
-                        </div>
-                        <div class="col">
-                            <a onclick="location.href='{% url 'refused' %}'">refused
-                                <span class="badge badge-light">{{countrefused}}</span></a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="card-body">
-                    <br>
-                    <!-- add tabs -->
-                    {% if posts %}
-
-                    {%for post in posts%}
-                    {% if post.ispublish == 'published' %}
-                    <div class="gaadiex-list">
-                        <div class="gaadiex-list-item" style="border-left: solid #FF2C9C ; background-color: #D3EBFF;">
-                            <img class="gaadiex-list-item-img" src={{post.author.user_profile.profile_picture.url}}
-                                alt="List user">
-                            <!-- <i class="fa fa-user"></i> -->
-                            <div class="gaadiex-list-item-text">
-                                <h3><a href="{% url 'postDetails' post.id %}">{{post.title}}</a></h3>
-                                <p>{{post.date_post}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                    {% else %}
-                    <div class="gaadiex-list">
-                        <div class="gaadiex-list-item">
-                            <img class="gaadiex-list-item-img" src={{post.author.user_profile.profile_picture.url}}
-                                alt="List user">
-                            <!-- <i class="fa fa-user"></i> -->
-                            <div class="gaadiex-list-item-text">
-                                <h3><a href="{% url 'postDetails' post.id %}">{{post.title}}</a></h3>
-                                <p>{{post.date_post}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                    {% endif %}
-                    {%endfor%}
-                    {% else %}
-                    <h3>Nothing To Show</h3>
-                    {% endif %}
-                </div>
-
-            </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h4>Post List</h4>
         </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    {% if postDetails %}
-                    <h4>{{postDetails.title}}</h4>
-                </div>
-                <div class="card-body">
-                    <h1>
-                        <div class="gaadiex-list-item">
-                            <img class="gaadiex-list-item-img"
-                                src={{postDetails.auther.user_profile.profile_picture.url}} alt="List user">
-                            <!-- <i class="fa fa-user"></i> -->
-                            <div class="gaadiex-list-item-text">
-                                <h3 style="padding-top: 10px;">From: {{postDetails.author}}</h3>
-                                <h6 style="padding-bottom: 5px;">{{postDetails.date_post}}</h6>
-                                <hr />
-
-                                <p>{{postDetails.message}}</p>
-                                <a href="{% url 'blog-post-show' postDetails.id%}" class="btn btn-success">Jump
-                                    to post</a>
-
-                            </div>
-                        </div>
-                    </h1>
-                    {% else %}
-                    <h3>Nothing To Show</h3>
-                    {% endif %}
-                </div>
+        <div class="container">
+          <div class="row align-items-start">
+            <div class="col">
+              <a onclick="location.href='{% url 'blog-published' %}'"
+                >published
+                <span class="badge badge-light">{{countpost}}</span></a
+              >
             </div>
+            <div class="col">
+              <a onclick="location.href='{% url 'notpublish' %}'"
+                >not publish
+                <span class="badge badge-light">{{countnotpublish}}</span></a
+              >
+            </div>
+            <div class="col">
+              <a onclick="location.href='{% url 'refused' %}'"
+                >refused
+                <span class="badge badge-light">{{countrefused}}</span></a
+              >
+            </div>
+          </div>
         </div>
+        <div class="card-body">
+          <br />
+          <!-- add tabs -->
+          {% if posts %} {%for post in posts%}
+           {% if post.isPublish == 'notPublished' %}
+           
+          <p>{{post.isPublish }}</p>
+          <div class="gaadiex-list">
+            <div
+              class="gaadiex-list-item"
+              style="border-left: solid #ff2c9c; background-color: #d3ebff"
+            >
+              <img
+                class="gaadiex-list-item-img"
+                src="{{post.author.user_profile.profile_picture.url}}"
+                alt="List user"
+              />
+              <!-- <i class="fa fa-user"></i> -->
+              <div class="gaadiex-list-item-text">
+                <h3>
+                  <a href="{% url 'postDetails' post.id %}">{{post.title}}</a>
+                </h3>
+                <p>{{post.date_post}}</p>
+              </div>
+            </div>
+          </div>
+          <hr />
+          {% else %}
+          <div class="gaadiex-list">
+            <div class="gaadiex-list-item">
+              <img
+                class="gaadiex-list-item-img"
+                src="{{post.author.user_profile.profile_picture.url}}"
+                alt="List user"
+              />
+              <!-- <i class="fa fa-user"></i> -->
+              <div class="gaadiex-list-item-text">
+                <h3>
+                  <a href="{% url 'postDetails' post.id %}">{{post.title}}</a>
+                </h3>
+                <p>{{post.date_post}}</p>
+              </div>
+            </div>
+          </div>
+          <hr />
+          {% endif %} {%endfor%} {% else %}
+          <h3>Nothing To Show</h3>
+          {% endif %}
+        </div>
+      </div>
     </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          {% if postDetails %}
+          <h4>{{postDetails.title}}</h4>
+        </div>
+        <div class="card-body">
+          <h1>
+            <div class="gaadiex-list-item">
+              <img
+                class="gaadiex-list-item-img"
+                src="{{postDetails.author.user_profile.profile_picture.url}}"
+              />
+
+              <div class="gaadiex-list-item-text">
+                <h3 style="padding-top: 10px">From: {{postDetails.author}}</h3>
+                <h6 style="padding-bottom: 5px">{{postDetails.date_post}}</h6>
+                <hr />
+
+                <a
+                  href="{% url 'blog-post-show' postDetails.id%}"
+                  class="btn btn-success"
+                  >Jump to post</a
+                >
+                {% if postDetails.ispublish == notPublished %}
+                <a
+                  href="{% url 'update_published' postDetails.id %}"
+                  class="btn btn-default"
+                  >Make it publish</a
+                >
+                <a
+                  href="{% url 'update_refuse' postDetails.id%}"
+                  class="btn btn-default"
+                  >Make it refused</a
+                >
+                {% endif %}
+              </div>
+            </div>
+          </h1>
+          {% else %}
+          <h3>Nothing To Show</h3>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
