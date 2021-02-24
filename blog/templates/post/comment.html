@@ -95,7 +95,7 @@
 {% endblock %} {% block script%}
 <script>
   var comment_id = "{{comment.id}}";
-  // $(`.form`).hide();
+  $(`.form`).hide();
   $(".submentComment").on("click", function (e) {
     e.preventDefault();
 
