@@ -1,5 +1,5 @@
 {% block edit %}
-<form method="POST" action="." class="col-12 mt-1 editcommentform" id="{{comment.id}}">
+<form method="POST" action="." class="col-12 mt-1 editcommentform{{comment.id}}" id="{{comment.id}}">
   {% csrf_token %}
 
   <div class="form-group basic-textarea rounded-corners shadow-textarea">
@@ -22,7 +22,7 @@
 </form>
 {% endblock %} {% block script%}
 <script>
-  $(".editcommentform").submit(function (e) {
+  $(".editcommentform{{comment.id}}").submit(function (e) {
     e.preventDefault();
     var comment_id = "{{comment.id}}";
     var content = $(`.content${comment_id}`).val();
