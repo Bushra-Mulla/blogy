@@ -23,7 +23,7 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * Ajax
 
 ### User Stories
-# Admin
+#### Admin
 * As admin, I should be able to manage blog website
 * As admin, I should be able to craete post and published directly
 * As admin, I should be able to show list of reports
@@ -34,7 +34,7 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * As admin, I should be able to access control panel
 
 
-# User
+#### User
 * As a User, I should be able to see the post content
 * As a User, I should be able to search by post title
 * As a User, I should be able to see author profile
@@ -45,10 +45,10 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * As a User, I should be able to contact with author by email
 * As a User, I should be able to share post link via Facebook, Twitter or Telegram
 
-# Visited User
+#### Visited User
 * As a visitors User, I should not be neither able edit, delete on post content or add comments
 
-# Logged In User
+#### Logged In User
 * As a logged in user, I should be able to log out
 * As a logged in user, I should be able to see all my posts with filtered by status   
 * As a logged in user, I should be able to create new post
