@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'django_social_share',
-    'whitenoise.runserver.nostatic',
+    'whitenoise.runserver_nostatic',
 
 ]
 
