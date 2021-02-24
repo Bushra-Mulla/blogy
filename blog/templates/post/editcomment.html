@@ -38,8 +38,6 @@
         csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
         content: content,
         comment_id: comment_id,
-        // post_id: "{{comment.post_id}}",
-        // user_id: "{{comment.user_id}}",
       },
       dataType: "json",
       beforeSend: function () {
@@ -47,8 +45,8 @@
       },
       success: function (data) {
         window.location.reload();
-        $(`.content${post_id}`).val("");
-        $(".editComment").removeClass("disabled").text("Submit");
+        // $(`.content${post_id}`).val("");
+        // $(".editComment").removeClass("disabled").text("Submit");
       },
       error: function (response) {
         console.log("error", response);

@@ -50,7 +50,12 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {% if user.is_staff %}
-                <li><a class="dropdown-item" href="/category/create/">Create new category</a></li>
+                <li><a class="dropdown-item" href="/category/create/"><i class="far fa-plus-square"></i> Create New
+                    Category</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+
                 {% endif %}
                 {%for object in categorys_list %}
                 <li><a class="dropdown-item" href="{% url 'blog-category_view' object.id %}">{{object}}</a></li>

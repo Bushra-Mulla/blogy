@@ -16,19 +16,19 @@
                     <h4>Reports List</h4>
                 </div>
 
-                <div class="container">
+                <div class="container reportStyle">
                     <div class="row align-items-start">
-                        <div class="col">
-                            <a onclick="location.href='{% url 'reports' %}'" style="cursor: pointer;">All <span
+                        <div class="col border">
+                            <a onclick="location.href='{% url 'reports' %}'">All <span
                                     class="badge badge-light">{{countReports}}</span></a>
                             </li>
                         </div>
-                        <div class="col">
-                            <a onclick="location.href='{% url 'archivedReport' %}'" style="cursor: pointer;">Archived
+                        <div class="col border">
+                            <a onclick="location.href='{% url 'archivedReport' %}'">Archived
                                 <span class="badge badge-light">{{countArchivedReport}}</span></a>
                         </div>
-                        <div class="col">
-                            <a onclick="location.href='{% url 'notArchivedReport' %}'" style="cursor: pointer;">Not
+                        <div class="col border">
+                            <a onclick="location.href='{% url 'notArchivedReport' %}'">Not
                                 Archived
                                 <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
 

@@ -55,8 +55,34 @@ def post_show(request, post_id):
 
 def authoreProfile(request, user_id):
     user = User.objects.get(id=user_id)
-    posts = Post.objects.filter(author=user)
-    return render(request, 'user/show.html', {'user': user})
+    authorPost = Post.objects.filter(author=user).filter(isPublish='published')
+    authorLikes = Post.objects.filter(likes=user).filter(isPublish='published')
+    authorComments = comment.objects.filter(user_id=user)
+    return render(request, 'user/show.html', {
+        'user': user,
+        'authorPost': authorPost,
+        'authorLikes': authorLikes,
+        'authorComments': authorComments,
+        })
+
+def authorePosts(request, user_id):
+    authorPost = Post.objects.filter(author=user_id, isPublish='published')
+    return render(request, 'user/show.html', {
+        'authorPost': authorPost,
+        })
+
+def authoreLikes(request, user_id):
+    authorLikes = Post.objects.filter(likes=user_id, isPublish='published')
+    return render(request, 'user/show.html', {
+        'authorLikes': authorLikes,
+        })
+        
+        
+def authoreComments(request, user_id):
+    user = User.objects.get(id=user_id)
+    authorComments = comment.objects.filter(user_id=user)
+    return render(request, 'user/show.html', {'usercomments': authorComments})
+
 
 
 @method_decorator(login_required, name='dispatch')

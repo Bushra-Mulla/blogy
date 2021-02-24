@@ -1,3 +1,13 @@
+.reportStyle{
+  background-color: #061542; 
+  color:#D3EBFF; 
+  text-align: left;
+  font-size: large;
+  cursor: pointer;
+  align-items: center;
+  border:  #D3EBFF ;
+}
+
 .postShowCard{
   display: flex;
   align-items: center;
@@ -14,7 +24,7 @@
   width: 500;
 
 }
-.Card {
+.Card{
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   min-height: 1px;
@@ -25,7 +35,6 @@
   margin: 20px;
   float: left;
   box-shadow: 2px 2px 2px 2px  #3A7BD5;
-
   position: absolute;
   left: 4%;
   display: inline;

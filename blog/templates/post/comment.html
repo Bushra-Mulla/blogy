@@ -1,42 +1,42 @@
 {% block comment %}
 <!--Comments-->
-<section>
-  <div class="comments-list text-center text-md-left comment{{post.id}}">
-    <div class="text-center my-5">
-      <h3 class="font-weight-bold">
-        Comments
-        <span class="badge indigo comment-count{{post.id}}"
-          >{{post.comment_set.count}}</span
-        >
-      </h3>
-    </div>
-    {%for comment in post.comment_set.all %}
-    <div class="row mb-5">
-      <div class="col-sm-2 col-12 mb-3">
-        <img
-          src="{{comment.user_id.user_profile.profile_picture.url}}"
-          class="avatar rounded-circle z-depth-1-half"
-          alt="sample image"
-          style="height: 100px; width: 100px; margin-left: 25px"
-        />
+<div class="container-fluid mb-5">
+  <div class="col-md-12 px-lg-5">
+    <!--Card-->
+    <div class="PostCard pb-5 mx-md-3 ">
+      <div class="card-header ">
+        <h1 class='mt-4 '>
+          <strong>Comments<span
+              class="badge indigo comment-count{{post.id}}">({{post.comment_set.count}})</span></strong>
       </div>
-      <div class="col-sm-10 col-12">
-        <a href="{% url 'profile' comment.user_id.id%}">
-          <h5 class="user-name font-weight-bold">
-            {{comment.user_id.first_name}} {{comment.user_id.last_name}}
-          </h5>
-        </a>
-        <div class="card-data">
-          <ul class="list-unstyled">
-            <li class="comment-date font-small">
-              <i class="far fa-clock-o"></i> {{comment.Publish_date}}
-            </li>
-          </ul>
-        </div>
-        <p class="dark-grey-text article pcontent{{comment.id}}">
-          {{comment.content}}
-        </p>
-        <div class="form{{comment.id}} form">
+      <div class="card-body">
+        <section>
+          <div class="comments-list text-center text-md-left comment{{post.id}}">
+            <div class="text-center my-5">
+
+            </div>
+            {%for comment in post.comment_set.all %}
+            <div class="row mb-5">
+              <div class="col-sm-2 col-12 mb-3">
+                <img src="{{comment.user_id.user_profile.profile_picture.url}}"
+                  class="avatar rounded-circle z-depth-1-half" alt="sample image"
+                  style="height: 100px; width: 100px; margin-left: 25px" />
+              </div>
+              <div class="col-sm-10 col-12">
+                <a href="{% url 'profile' comment.user_id.id%}" style="color: black;">
+                  <h5 class="user-name font-weight-bold">
+                    {{comment.user_id.first_name}} {{comment.user_id.last_name}}
+                  </h5>
+                </a>
+                <div class="card-data">
+                  <ul class="list-unstyled">
+                    <li class="comment-date font-small">
+                      <i class="far fa-clock-o"></i> {{comment.Publish_date}}
+                    </li>
+                  </ul>
+                </div>
+                <p class="dark-grey-text article">{{comment.content}}</p>
+                <div class="form{{comment.id}} form">
           {% block edit %}
           {% include "./editcomment.html" with comment=comment%}
           {%endblock%}
@@ -53,116 +53,103 @@
         <!-- Delete -->
       </h6>
       {% endif %}
-    </div>
-    <hr />
-
-    {%endfor%}
-  </div>
-</section>
-<!--Section: Leave a reply (Not Logged In User)-->
-<section class="mb-4 wow fadeIn" data-wow-delay="0.2s">
-  <h3 class="font-weight-bold text-center my-5">Leave a Comment</h3>
-  <!--Grid row-->
-  <div class="row">
-    <!-- <form class="col-12 mt-1 comment_form" method="POST" action=".">
+              </div>
+            </div>
+            <hr>
+            {%endfor%}
+          </div>
+        </section>
+        <!--Section: Leave a reply (Not Logged In User)-->
+        <div class="card-footer">
+        <section class="mb-4 wow fadeIn" data-wow-delay="0.2s">
+          <h3 class="font-weight-bold text-center my-5">Leave a Comment</h3>
+          <!--Grid row-->
+          <div class="row">
+            <!-- <form class="col-12 mt-1 comment_form" method="POST" action=".">
       {%csrf_token %y} -->
-    <div class="col-12 mt-1">
-      <div
-        class="form-group basic-textarea rounded-corners shadow-textarea {{post.id}}"
-      >
-        <textarea
-          class="form-control content{{post.id}}"
-          rows="4"
-          placeholder="Write something here..."
-          required
-        ></textarea>
-      </div>
-      <div class="text-right">
-        <button
-          type="button"
-          id="{{post.id}}"
-          class="gradient-button gradient-button-3 submentComment"
-          style="margin-left: 50%"
-        >
-          Submit
-        </button>
+            <div class="col-12 mt-1">
+              <div class="form-group basic-textarea rounded-corners shadow-textarea {{post.id}}">
+                <textarea class="form-control content{{post.id}}" rows="4" placeholder="Write something here..."
+                  required></textarea>
+              </div>
+              <div class="text-right">
+                <button type="button" id="{{post.id}}" class="gradient-button gradient-button-3 submentComment"
+                  style='margin-left: 50%;'>
+                  Submit
+                </button>
+              </div>
+            </div>
+            <!-- </form> -->
+          </div>
+          <!--Grid row-->
+        </section>
+        {% endblock %}
+        {% block script%}
+        <script>
+          $(".submentComment").on("click", function () {
+            var post_id = "{{post.id}}";
+            var content = $(`.content${post_id}`).val();
+            if (content == "") {
+              alert("Comments cannot be empty")
+              return
+            }
+            $.ajax({
+              type: "POST",
+              url: "/comment/",
+              data: {
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                content: content,
+                post_id: post_id,
+              },
+              // dataType: "json",
+              beforeSend: function () {
+                $(".submentComment").addClass("disabled").text("saving...");
+              },
+              success: function (res) {
+                $(`.content${post_id}`).val("");
+                        // window.location.reload();
+
+                // Append Element
+                var _html =
+                  '<div class="row mb-5">\
+      <div class="col-sm-2 col-12 mb-3">\
+        <img src="{{request.user.user_profile.profile_picture.url}}" class="avatar rounded-circle z-depth-1-half"alt="sample image"style="height: 100px; width: 100px; margin-left: 25px">\
+      </div>\
+      <div class="col-sm-10 col-12">\
+        <a>\
+          <h5 class="user-name font-weight-bold">\
+            {{request.user}}</h5>\
+        </a>\
+        <div class="card-data">\
+          <ul class="list-unstyled">\
+            <li class="comment-date font-small">\
+              <i class="far fa-clock-o"></i> ' +
+                  Date.now() +
+                  '</li>\
+          </ul>\
+        </div>\
+        <p class="dark-grey-text article">' +
+                  content +
+                  "</p>\
+      </div>\
+    </div>";
+                $(".comment" + post_id).append(_html);
+                var prevCount = $(".comment-count" + post_id).text();
+                $(".comment-count" + post_id).text(parseInt(prevCount) + 1);
+                console.log(_html);
+                $(".submentComment").removeClass("disabled").text("Submit");
+              },
+              error: function (response) {
+                console.log("error", response);
+                console.log(data);
+              },
+            });
+          });
+        </script>
       </div>
     </div>
-    <!-- </form> -->
   </div>
-  <!--Grid row-->
-</section>
-{% endblock %} {% block script%}
-<script>
-  var comment_id = "{{comment.id}}";
-  $(`.form`).hide();
-  $(".submentComment").on("click", function (e) {
-    e.preventDefault();
+</div>
+</div>
 
-    var post_id = "{{post.id}}";
-    var content = $(`.content${post_id}`).val();
-    if (content == "") {
-      alert("Comments cannot be empty");
-      return;
-    }
-    $.ajax({
-      type: "POST",
-      url: "/comment/",
-      data: {
-        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
-        content: content,
-        post_id: post_id,
-      },
-      // dataType: "json",
-      beforeSend: function () {
-        $(".submentComment").addClass("disabled").text("saving...");
-      },
-      success: function (res) {
-        window.location.reload();
-
-        $(`.content${post_id}`).val("");
-        // Append Element
-        //     var _html =
-        //       '<div class="row mb-5">\
-        //   <div class="col-sm-2 col-12 mb-3">\
-        //     <img src="{{request.user.user_profile.profile_picture.url}}" class="avatar rounded-circle z-depth-1-half"alt="sample image"style="height: 100px; width: 100px; margin-left: 25px">\
-        //   </div>\
-        //   <div class="col-sm-10 col-12">\
-        //     <a>\
-        //       <h5 class="user-name font-weight-bold">\
-        //         {{request.user}}</h5>\
-        //     </a>\
-        //     <div class="card-data">\
-        //       <ul class="list-unstyled">\
-        //         <li class="comment-date font-small">\
-        //           <i class="far fa-clock-o"></i> ' +
-        //       Date.now() +
-        //       '</li>\
-        //       </ul>\
-        //     </div>\
-        //     <p class="dark-grey-text article">' +
-        //       content +
-        //       "</p>\
-        //   </div>\
-        // </div>";
-        //     $(".comment" + post_id).append(_html);
-        //     var prevCount = $(".comment-count" + post_id).text();
-        //     $(".comment-count" + post_id).text(parseInt(prevCount) + 1);
-        //     console.log(_html);
-        $(".submentComment").removeClass("disabled").text("Submit");
-      },
-      error: function (response) {
-        console.log("error", response);
-        console.log(data);
-      },
-    });
-  });
-
-  // $(`.edit{{comment.id}}`).on("click", function (e) {
-    // e.preventDefault()
-    // console.log("object");
-    // $(`.pcontent{{comment.id}}`).hide();
-    // $(`.form${comment_id}`).show()
-  // });
-</script>
 {% endblock %}

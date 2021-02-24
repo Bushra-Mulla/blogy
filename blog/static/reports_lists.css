@@ -1,4 +1,12 @@
-
+.reportStyle{
+    background-color: #061542; 
+    color:#D3EBFF; 
+    text-align: left;
+    font-size: large;
+    cursor: pointer;
+    align-items: center;
+    border:  #D3EBFF ;
+  }
 
 a{
     text-decoration-style: none;
