@@ -53,9 +53,8 @@ urlpatterns = [
 
     path('like/', views.likeview, name='like_post'),
     path('comment/',  views.comments, name='comment'),
-    #     path('comment/<int:pk>/',  views.editcommentform, name='editcomment'),
     path('comment/update/',  views.editcomment, name='editcomment'),
-
+    path('comment/delete/',  views.deletecomment, name='editcomment'),
 
     path('report/<int:post_id>/create/', views.reportCreate.as_view(
         template_name='report/reports_form.html'), name="reportCreate"),

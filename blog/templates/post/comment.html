@@ -43,15 +43,17 @@
         </div>
       </div>
       {% if comment.user_id == request.user %}
-      <h6 class="small comment-meta">
-        <button
-          class="gradient-button gradient-button-3 edit{{comment.id}}"
-          type="button"
-        >
-          Edit
-        </button>
-        <!-- Delete -->
-      </h6>
+          <ul class=postButton>
+            <li>
+              <div class="gradient-button gradient-button-2 edit{{comment.id}}"
+                style="text-decoration: none; color: white;"><i class="fa fa-edit"></i> Edit</div>
+            </li>
+            <li>
+              <div class="gradient-button gradient-button-1 delet{{comment.id}}" href="{% url 'blog-post-delete' post.id %}"
+                style="text-decoration: none; color: white;"><i class="fa fa-trash"></i> DELETE</div>
+
+            </li>
+          </ul>
       {% endif %}
               </div>
             </div>
@@ -86,6 +88,7 @@
         {% endblock %}
         {% block script%}
         <script>
+          comment_id='{{comment.id}}'
           $(".submentComment").on("click", function () {
             var post_id = "{{post.id}}";
             var content = $(`.content${post_id}`).val();
@@ -145,6 +148,28 @@
               },
             });
           });
+
+
+          $('.delet{{comment.id}}'.on('click', function(){
+            if (confirm('Are you sure you want to delete?')){
+              $.ajax({
+                type: "POST",
+                url: `/comment/delete/`,
+                data: {
+                  csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                  comment_id: comment_id,
+                },
+                dataType: "json",
+                beforeSend: function () {
+                  $(".delet{{comment.id}}").addClass("disabled").text("delete...");
+                },
+                success: function (data) {
+                  window.location.reload();
+                  // $(`.content${post_id}`).val("");
+                  // $(".editComment").removeClass("disabled").text("Submit");
+                },
+            })
+          }}
         </script>
       </div>
     </div>
