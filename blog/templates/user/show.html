@@ -56,11 +56,12 @@
             </button>
           </div> -->
           <p>Joined: {{user.date_joined}}</p>
-            <a class="gradient-button gradient-button-3" href="mailto: {{ user.email}} ?subject=your title&body=TThe message"
-              style="width: auto; color: white; text-decoration: none; padding: 15px;">
-              <i class="fal fa-envelope"></i> Content With me</a>
+          <a class="gradient-button gradient-button-3"
+            href="mailto: {{ user.email}} ?subject=your title&body=TThe message"
+            style="width: auto; color: white; text-decoration: none; padding: 15px;">
+            <i class="fal fa-envelope"></i> Content With me</a>
           <hr>
-          
+
           <p class="dark-grey-text mt-4 text-justify">{{user.user_profile.about_me | safe}}</p>
           <h5 class="text-right font-weight-bold dark-grey-text mt-5">
             <em>{{user.first_name}} {{user.last_name}}</em>
@@ -68,8 +69,8 @@
           <p class="text-right font-weight-bold dark-grey-text mt-1">
             <em>{{user.user_profile.position}}</em>
           </p>
-         
-        
+
+
         </div>
         <!--Grid column-->
     </div>
@@ -86,30 +87,34 @@
   <li class="nav-item">
     <a href="#posts">
       <a class="nav-link" id="authorPosts" href="{% url 'authorePosts' user.id%}">
-        Posts {{authorPost.count}}</a></a>
+        Posts</a></a>
   </li>
   <li class="nav-item">
     <a href="#authorLikes">
       <a class="nav-link" id="authorLikes" href="{% url 'authoreLikes' user.id%}">
-        Likes {{authorLikes.count}}</a></a>
+        Likes</a></a>
   </li>
   <li class="nav-item">
     <a href="#authorComments">
       <a class="nav-link" id="authorCommines" href="{% url 'usercomments' user.id%}">
-        Commines {{authorComments.count}}</a></a>
+        Commines</a></a>
   </li>
 </ul>
 
 <div class="tab-content mt-5">
   <div id="authorPost" class=" tab-pane active "><br>
+    {% if authorPost%}
     {%block authorPost%}
     {% include "blog/post_cards.html" with posts=authorPost %}
     {%endblock%}
+    {% endif %}
   </div>
   <div id="authorLikes" class=" tab-pane active "><br>
+    {% if authorLikes%}
     {%block authorLikes%}
     {% include "blog/post_cards.html" with posts=authorLikes %}
     {%endblock%}
+    {% endif%}
   </div>
   <div id="authorComments" class=" tab-pane active "><br>
     {%block postsComment%}
@@ -118,5 +123,5 @@
   </div>
 </div>
 
-  
+
 {% endblock %}

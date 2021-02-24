@@ -7,7 +7,7 @@
 <br />
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-header">
           <h4>Publish Post Requests List</h4>
@@ -74,7 +74,7 @@
       <div class="card">
         <div class="card-header">
           {% if postDetails %}
-          <h4>{{postDetails.title}}</h4>
+          <h4><a href="{% url 'blog-post-show' postDetails.id%}">{{postDetails.title}}</a></h4>
         </div>
         <div class="card-body">
           <h1>
@@ -86,10 +86,11 @@
                 <h6 style="padding-bottom: 5px">{{postDetails.date_post}}</h6>
                 <hr />
 
-                <a href="{% url 'blog-post-show' postDetails.id%}" class="btn btn-success">Jump to post</a>
                 {% if postDetails.ispublish == notPublished %}
-                <a href="{% url 'update_published' postDetails.id %}" class="btn btn-default">Make it publish</a>
-                <a href="{% url 'update_refuse' postDetails.id%}" class="btn btn-default">Make it refused</a>
+                <a href="{% url 'update_published' postDetails.id %}" class="gradient-button gradient-button-3"
+                  style="width: auto; text-decoration: none; color: white; float: right;">Publish</a>
+                <a href="{% url 'update_refuse' postDetails.id%}" class="gradient-button gradient-button-1"
+                  style="width: auto; text-decoration: none; color: white; float: left;">Refused</a>
                 {% endif %}
               </div>
             </div>
