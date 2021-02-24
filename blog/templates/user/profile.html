@@ -9,8 +9,7 @@
                   <h1 style="float: left;">{{user.first_name}} {{user.last_name}}</h1>
                   <a class="gradient-button gradient-button-2"
                         style="float: right; text-decoration: none; color: white;"
-                        href="{% url 'user-profile-update' user.id.user_profile.id  %}""><i class=" fas fa-edit"></i>
-                        Edit</a>
+                        href="{% url 'user-profile-update' user.id.id %}6695ff"><i class="fas fa-edit"></i> Edit</a>
             </div>
             <div class="card-body">
                   <div class="row pb-5">
@@ -21,12 +20,6 @@
                         <div class="col-md-9">
                               <p class="font-weight-bold">User Name: <span class="font-weight-normal"> {{user.username}}
                                     </span> </p>
-                              <p class="font-weight-bold">Position: <span class="font-weight-normal">
-                                          {{user.user_profile.position}} </span> </p>
-                              <p class="font-weight-bold">About Me:<span class="font-weight-normal">
-                                          {{user.user_profile.about_me | safe}} </span> </p>
-                              <p class="font-weight-bold">Email:<span class="font-weight-normal"> {{user.email}} </span>
-                              </p>
                               <p class="font-weight-bold">Position:
                                     <span class="font-weight-normal">
                                           {{user.user_profile.position}}
