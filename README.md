@@ -62,6 +62,25 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * As a logged in user, H should be able to contact with admin via life chat 
 
 ## App Preview
+- As a visitor, I can see all posts on the website and its information like the author to the post and his information.
+
+<img src="img/v1.gif">
+ 
+- As a visitor, I can create my own account and edit it.
+
+<img src="img/v2.gif">
+
+- As a logged-in user, I will be able to like the post, report to the admin, and add comments on posts. And create a new post, modify and delete it. Also, display all my posts and filter them by status, and display my like list
+
+<img src="img/v.gif">
+
+
+- As an admin, I can do all functions as a logged user in addition manages the blog website via the control panel and display reports, and publish post requests in order to confirm publish a post on the website or refused it.
+
+<img src="img/v3.gif">
+
+
+
 ### The Website Dimo 
 You can visit Blogy website [link here](https://blogyproject.herokuapp.com/)
 
