@@ -39,13 +39,15 @@ urlpatterns = [
     path('post/<int:post_id>/', views.post_show, name='blog-post-show'),
     path('post/create/', views.PostCreate.as_view(), name='blog-post-create'),
     path('post/<int:pk>/update/', views.PostUpdate.as_view(),
-         name='blog-post-Update'),
+         name='blog-post-C'),
     path('post/<int:pk>/delete/', views.PostDelete.as_view(),
          name='blog-post-delete'),
 
 
     path('like/', views.likeview, name='like_post'),
     path('comment/',  views.comments, name='comment'),
+#     path('comment/<int:pk>/',  views.editcommentform, name='editcomment'),
+    path('comment/update/',  views.editcomment, name='editcomment'),
 
 
     path('report/<int:post_id>/create/', views.reportCreate.as_view(

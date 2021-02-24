@@ -389,3 +389,24 @@ def comment_list(request):
     user = request.user
     comments = comment.objects.filter(user_id=user.id).all()
     return render(request, 'profile/comment_list.html', {'comments': comments})
+
+
+# def editcommentform(request, pk):
+#     comments = comment.objects.get(id=pk)
+
+#     return render(request, 'post/editcomment.html', {'comment_id': pk, 'comment': comments})
+
+
+def editcomment(request):
+    user = request.user
+    if request.method == 'POST':
+        comment_id = request.POST.get('comment_id')
+        content = request.POST.get('content')
+        commentt = comment.objects.get(id=comment_id)
+        print(content)
+        print(commentt)
+        commentt.content=content
+        commentt.save()
+        return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
+
+           
