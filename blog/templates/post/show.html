@@ -49,73 +49,71 @@
   </div>
 </div>
 
+
 <div class="container-fluid mb-5">
   <div class="col-md-12 px-lg-5">
     <!--Card-->
     <div class="PostCard pb-5 mx-md-3 ">
-      <div>
-        <div>
-          <h1 class='mt-4'>
-            <strong>{{ post.title }}</strong>
-          </h1>
-          <div class="row">
-            <div class="col-md-12 col-xl-12 d-flex justify-content-center">
-              <p class="font-small dark-grey-text mb-1"></p>
-              <p class="font-small grey-text mb-0 ml-3">
-                <i class="dark-grey-text">{{ post.date_post }}</i>
-              </p>
-            </div>
-          </div>
+      <div class="card-header ">
+        <h1 class='mt-4 '>
+          <strong>{{ post.title }}</strong>
+        </h1>
+        <div class="col-md-12 col-xl-12 d-flex justify-content-center">
+          <p class="font-small dark-grey-text mb-1"></p>
+          <i class="dark-grey-text">{{ post.date_post }}</i>
+          </p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="text-align: left;" class='mt-5 ml-5 mr-5 mb-2'>
+          {{ post.content | safe}}
+        </div>
+      </div>
 
-          <hr>
-          <div style="text-align: left;" class='mt-5 ml-5 mr-5 mb-5'>
-            {{ post.content | safe}}
-          </div>
-          <hr>
-          <div class="postShowCard">
-            <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}"
-              style="text-decoration: none; color: white; width: auto; padding: 13px"><i
-                class="fas fa-exclamation-circle"></i>
-              report</a>
-            {%block like%}
-            {% include "./like.html" with post=post show=True %}
-            {%endblock%}
-          </div>
+      <div class="card-footer">
+        <div class="postShowCard" style="padding-left: 42%">
+          <a class='gradient-button gradient-button-1' href="{% url 'reportCreate' post.id %}"
+            style="text-decoration: none; color: white; width: auto; padding: 13px"><i
+              class="fas fa-exclamation-circle"></i>
+            report</a>
+          {%block like%}
+          {% include "./like.html" with post=post show=True %}
+          {%endblock%}
+        </div>
+        <h3>Share this post:</h3>
+        <div class="template-demo">
+          {% load social_share %}
+          <!-- {% post_to_twitter "{{post.title}}. Check it out!" object_or_url  %} -->
+          <!-- {% post_to_facebook "{{post.title}}. Check it out!" object_or_url %} -->
+          <!-- {% post_to_linkedin object_or_url %} -->
+          <!-- {% post_to_telegram "{{post.title}}. Check it out!" object_or_url %} -->
 
-
-          <h3>Share this post:</h3>
-
-          <h3>Share this post:</h3>
-          <div class="template-demo">
-            {% load social_share %}
-            <!-- {% post_to_twitter "{{post.title}}. Check it out!" object_or_url  %} -->
-            <!-- {% post_to_facebook "{{post.title}}. Check it out!" object_or_url %} -->
-            <!-- {% post_to_linkedin object_or_url %} -->
-            <!-- {% post_to_telegram "{{post.title}}. Check it out!" object_or_url %} -->
-
-            <button type="button" class="{{ link_class }} btn btn-social-icon btn-facebook">
-              <a href="{{ facebook_url }}" class="{{ link_class }}" target="_blank"><i
-                  class="fab fa-facebook-f"></i></a>
-            </button>
-            <button type="button" class="btn btn-social-icon btn-youtube">
-              <a href="{{ tweet_url }}" class="meta-act-link meta-tweet {{link_class}}" target="_blank"><i
-                  class="fab fa-twitter"></i></a>
-            </button>
-            <!-- <button type="button" class="btn btn-social-icon btn-dribbble">
+          <button type="button" class="{{ link_class }} btn btn-social-icon btn-facebook">
+            <a href="{{ facebook_url }}" class="{{ link_class }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          </button>
+          <button type="button" class="btn btn-social-icon btn-youtube">
+            <a href="{{ tweet_url }}" class="meta-act-link meta-tweet {{link_class}}" target="_blank"><i
+                class="fab fa-twitter"></i></a>
+          </button>
+          <!-- <button type="button" class="btn btn-social-icon btn-dribbble">
               <a href="{{ linkedin_url }}"type="IN/Share" class="{{ link_class }}" target="_blank"></a><i class="fab fa-linkedin"></i>
             </button>  -->
-            <button type="button" class="btn btn-social-icon btn-instagram">
-              <a href="{{ telegram_url }}" class="{{ link_class }}" target="_blank"><i class="fab fa-telegram"></i></a>
-            </button>
-          </div>
-          <hr />
-
-          {%block comment %} {% include "./comment.html" with post=post %}
-          {%endblock%}
+          <button type="button" class="btn btn-social-icon btn-instagram">
+            <a href="{{ telegram_url }}" class="{{ link_class }}" target="_blank"><i class="fab fa-telegram"></i></a>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+        {%block comment %} {% include "./comment.html" with post=post %}
+        {%endblock%}
+
+
+
+
 
 {% endblock %}
