@@ -33,7 +33,6 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * As admin, I should be able to show list of reports
 * As admin, I should be able to access control panel
 
-
 #### User
 * As a User, I should be able to see the post content
 * As a User, I should be able to search by post title
@@ -66,33 +65,51 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 
 ## App Preview
 ### The Website Dimo 
+You can visit Blogy website [link here](https://blogyproject.herokuapp.com/)
 
 ## API Endpoints
 These are some of the EndPoints we used in this project
 
 | #  |  Action  |  Method |  URL  |  Description  |
 | :------------ | :------------ | :------------ | :------------ | :------------ |
-|   1| INDEX  | get  | / | To view Home page|
-|   2|  CRAETE | POST  |   /login |  To login to the user account|
-|   3| CREATE | POST  |/signup   | To create new account|
-|   4| INDEX | POST  |/logout   | To log out from the account|
-|   5| INDEX | POST  |/profile | To show user's profile|
-|   6| CREATE | POST  |/profile/create | To allow the user signed up to create own profile|
-|   7| UPDATE | POST  |/profile/<int:pk>/update | To allow the user logged in to modify own profile|
-|   8| INDEX | POST  |/profile/<int:user_id>/ | To show specific user profile for others users|
-|   5| CREATE  | post  | /post/create | To create new post|
-|   6| View | get  | /post/post_id | To veiw exist post|
-|   7| EDIT | PATCH  | /post/<int:pk>/update/  | To edit a specific post|
-|   8|   INDEX | get  |  /user/posts/|  To view all user's posts list|
-|   9|   INDEX |get   |  /user/posts/published// | To view all user's published posts list | 
-|   10|    INDEX |get   | /user/posts/notPublished/  | To view all user's unpublished posts list |
-|   11|    INDEX |get   | /user/posts/refused/  | To view all user's refused posts list|
-|   12|    INDEX |POST   |  /user/posts/draft/ | To view all user's draft posts list|
-|   12|    CREATE |POST   |  /category/create/ | To create new category|
-|   13|    Update |patch   |   | |
-|   14|    Update |patch   |   | |
-|   15|    Update |patch   |   | |
-|   16|    Update |patch   |   | |
+|   1| INDEX  | GET  | / | To view Home page|
+|   2|  CRAETE | POST  |   /login/ |  To login to the user account|
+|   3| CREATE | POST  |/signup/   | To create new account|
+|   4| INDEX | GET  |/profile/ | To show the user's profile|
+|   5| CREATE | POST  |/profile/create/ | To allow the user signed up to create own profile|
+|   6| UPDATE | PATCH  |/profile/<int:pk>/update/ | To allow the user logged in to modify own profile|
+|   7| INDEX | GET  |/profile/<int:user_id>/ | To show specific user profile for others users|
+|   8| CREATE  | POST  | /post/create/ | To create new post|
+|   9| INDEX | GET  | /post/post_id/ | To veiw exist post|
+|   10| UPDATE | PATCH  | /post/<int:pk>/update/  | To edit a specific post|
+|   11|    DELETE |DELETE   | /post/<int:pk>/delete/  | To delete a specific post|
+|   12|   INDEX | get  |  /user/posts/|  To view all user's posts list|
+|   13|   INDEX |get   |  /user/posts/published/ | To view all user's published posts list | 
+|   14|    INDEX |get   | /user/posts/notPublished/  | To view all user's not published posts list |
+|   15|    INDEX |get   | /user/posts/refused/  | To view all user's refused posts list|
+|   16|    INDEX |POST   |  /user/posts/draft/ | To view all user's draft posts list|
+|   17|    CREATE |POST   |  /category/create/ | To create new category|
+|   18|    INDEX |GET   | /category/<int:pk>/  | To view the list of categories |
+|   19|    INDEX |GET   | /post/<int:post_id>/ | To view a specific post details |
+|   20|    CREATE |POST   | /post/create/  | To create new post|
+|   21|    DELETE |DELETE   | /post/<int:pk>/delete/  | To delete a specific post|
+|   22|    CREATE |POST   | /comment/  | To allow the logged-in user to add a comment to an existing post|
+|   23|    UPDATE |PATCH   | /comment/update/  | To allow the logged-in user to edit own comment |
+|   24|    DELETE |DELETE   | /comment/delete/  | To allow the logged-in user to delete own comment|
+|   25|    CREATE |CREATE   | /report/<int:post_id>/create/  | To allow the logged-in user to create a report for an existing post  |
+|   26|    INDEX |GET   | /reports/   | To view all reports list for the admin|
+|   27|    INDEX |GET  |  /reports/<int:report_id>/ |To view a specific report details for the admin |
+|   28|    INDEX |GET  | /reports/<int:report_id>/archived  |To allow the admin to make the report archived|
+|   29|    INDEX |GET   |  /reports/archived | To view all archived reports list for the admin|
+|   30|   INDEX |GET   | /published/   | To view all published posts list for the admin|
+|   31|   INDEX |GET   | /published/<int:post_id>/  | To view a published post details for the admin|
+|   32|   UPDATE |PATCH   | /published/<int:post_id>/notpublish/  | To allow the admin to publish a post|
+|   33|   UPDATE |PATCH  | /published/<int:post_id>/refused/  | To allow the admin to refused publish a post|
+|   34|    Update |patch   | /published/refused/  | To view all refused posts list for the admin|
+|   35|    Update |patch   | /published/notpublish/  | To view all not published posts list for the admin|
+|   36|    INDEX |GET  | /search/  | To all the user to search about a post|
+|   37|    INDEX |GET  | /admin/  | To allow the admin to access to the control panel|
+|   37|    UPDATE |PATCH  | /password-reset/  | To allow the user to reset the password|
 
 ## Code Installation
 #### Python 3.8
@@ -101,7 +118,6 @@ Follow instructions to install the latest version of python for your platform in
 Installing Django by type on command line `pip install Django` 
 #### Requirements 
 Installing all project's requirements by type on command line `pip install -r Requirements.txt` 
-
 #### Running the server
 1- clone the repository using this code:
 `git clone https://git.generalassemb.ly/ashwagzabani/Project-4`
