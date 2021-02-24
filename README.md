@@ -68,7 +68,7 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
  
 - As a visitor, I can create my own account and edit it.
 
-<img src="img/v2.gif">
+<img src="img/V2.gif">
 
 - As a logged-in user, I will be able to like the post, report to the admin, and add comments on posts. And create a new post, modify and delete it. Also, display all my posts and filter them by status, and display my like list
 
