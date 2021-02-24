@@ -40,20 +40,25 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link active" aria-current="page" href="/"><i class="fa fa-home"></i> Home</a>
             </li>
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                Catagories
+                <i class="fa fa-stream"></i> Catagories
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {% if user.is_staff %}
-                <li><a class="dropdown-item" href="/category/create/">Create new category</a></li>
+                <li><a class="dropdown-item" href="/category/create/"><i class="far fa-plus-square"></i> Create New
+                    Category</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+
                 {% endif %}
                 {%for object in categorys_list %}
-                <li><a class="dropdown-item" href="{% url 'blog-category_view' object %}">{{object}}</a></li>
+                <li><a class="dropdown-item" href="{% url 'blog-category_view' object.id %}">{{object}}</a></li>
                 {%endfor%}
 
               </ul>
@@ -67,28 +72,31 @@
           <!-- <div class="form-group"> -->
 
           <span class="fa fa-search form-control-icon"></span>
-
           <input class="form-control me-2" type="search" name="q" placeholder="What Is In Your Mind?"
             aria-label="Search" />
         </form>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {% if user.is_authenticated %}
           <li>
-            <a class="gradient-button gradient-button-4" href="/post/create/" style="width: auto; ">
+            <a class="gradient-button gradient-button-4" href="/post/create/"
+              style="width: auto; color: white; text-decoration: none; padding: 8px;">
               <i class="far fa-plus-square"></i> New Post</a>
           </li>
 
           {% if user.is_staff %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
               <i class="fas fa-users-cog" aria-hidden="true"></i> Admin <span class="font-weight-bold">
-                {{countNotArchivedReport}} </span></a>
+                {{totalAnnouncement}} </span></a>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-              <a class="dropdown-item waves-effect waves-light" href="{% url 'reports' %}">Reports <span
-                  class="badge badge-light">{{countNotArchivedReport}}</span></a>
-              <a class="dropdown-item waves-effect waves-light" href="{% url 'blog-published' %}">New Post</a>
-              <a class="dropdown-item waves-effect waves-light" href="/admin">Control Panel</a>
+              <a class="dropdown-item waves-effect waves-light" href="{% url 'reports' %}"><i class="fa fa-tasks"></i>
+                Reports <span class="badge badge-light">{{countNotArchivedReport}}</span></a>
+              <a class="dropdown-item waves-effect waves-light" href="{% url 'blog-published' %}"><i
+                  class="fa fa-paper-plane"></i> Publish Requests <span
+                  class="badge badge-light">{{countNotPublishedPosts}}</span></a>
+              <a class="dropdown-item waves-effect waves-light" href="/admin/"><i class="fa fa-keyboard"></i> Control
+                Panel</a>
             </div>
           </li>
 
@@ -101,9 +109,9 @@
           {% endif %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
 
-              <i class="far fa-user-circle" aria-hidden="true"></i> {{user.first_name}} </a>
+              <i class="far fa-user-circle" aria-hidden="true" style="cursor: pointer;"></i> {{user.first_name}} </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
               <a class="dropdown-item waves-effect waves-light" href="/profile/"><i class="far fa-user"></i> My
                 Account</a>
@@ -128,8 +136,12 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/signup/">Sign Up</a>
             </li> -->
-          <li><a class="gradient-button gradient-button-4" href="/logIn/">Log In</a> </li>
-          <li> <a class="gradient-button gradient-button-4" href="/signup/">Sign Up</a> </li>
+          <li><a class="gradient-button gradient-button-4" href="/logIn/"
+              style="color: white; text-decoration: none; padding: 8px;"><i class="fa fa-sign-in"></i> Log In</a> </li>
+          <li> <a class="gradient-button gradient-button-4" href="/signup/"
+              style="color: white; text-decoration: none; padding: 8px; width: auto;"><i class="fa fa-user-plus"></i>
+              Sign Up</a>
+          </li>
 
           {% endif %}
 

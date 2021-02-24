@@ -52,6 +52,7 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
+
 def authoreProfile(request, user_id):
     user = User.objects.get(id=user_id)
     authorPost = Post.objects.filter(author=user).filter(isPublish='published')
@@ -65,7 +66,7 @@ def authoreProfile(request, user_id):
         })
 
 def authorePosts(request, user_id):
-    authorPost = Post.objects.filter(author=user_id, sPublish='published')
+    authorPost = Post.objects.filter(author=user_id, isPublish='published')
     return render(request, 'user/show.html', {
         'authorPost': authorPost,
         })
@@ -86,6 +87,10 @@ def authoreComments(request, user_id):
         })
         
         
+    posts = Post.objects.filter(author=user)
+    return render(request, 'user/show.html', {'user': user})
+
+
 @method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
     model = Post
@@ -99,10 +104,13 @@ class PostCreate(CreateView):
         # print('----------form----------;,', self.data)
         # print('selffffffffffff;,', self.request.POST)
         self.object.author_id = self.request.user.id
+
         if 'draft' in self.request.POST:
             print('yaaaaaaaaaaaaaaaaaaaaaaaaaaah')
             self.object.isPublish = 'draft'
-
+        elif self.request.user.is_staff:
+            print('yeas he is admin')
+            self.object.isPublish = 'published'
         self.object.save()
         return HttpResponseRedirect('/user/posts/')
 
@@ -110,6 +118,7 @@ class PostCreate(CreateView):
 class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id']
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if self.object.isPublish == 'draft':
@@ -152,11 +161,11 @@ def profile(request, username):
     return render(request, 'profile.html', {'username': username, 'post': post})
 
 
-def category_view(request, category_name):
-    categorys_post = categorys.objects.get(category_name=category_name)
+def category_view(request, pk):
+    categorys_post = categorys.objects.get(id=pk)
     post = Post.objects.filter(
         category_id=categorys_post, isPublish='published').order_by('-id')
-    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
+    return render(request, 'category/category.html', {'posts': post, 'category_info': categorys_post})
 
 
 def userPostsList(request):
@@ -329,20 +338,18 @@ def postDetails(request, post_id):
     return render(request, 'post/publish_manage.html', {'posts': allposts(), 'postDetails': posts})
 
 
-def update_published(request, Post_id):
-    postDetails = Post.objects.get(
-        id=Post_id)
+def update_published(request, post_id):
+    postDetails = Post.objects.get(id=post_id)
     postDetails.isPublish = 'published'
     postDetails.save()
-    return HttpResponseRedirect('/blog-published/', {'posts': allposts()})
+    return HttpResponseRedirect('/published/', {'posts': allposts()})
 
 
-def update_refuse(request, Post_id):
-    postDetails = Post.objects.get(
-        id=Post_id)
-    postDetails.isPublish = 'refuse'
+def update_refuse(request, post_id):
+    postDetails = Post.objects.get(id=post_id)
+    postDetails.isPublish = 'refused'
     postDetails.save()
-    return HttpResponseRedirect('/blog-published/', {'posts': allposts()})
+    return HttpResponseRedirect('/published/', {'posts': refused(request)})
 
 
 def refused(request):

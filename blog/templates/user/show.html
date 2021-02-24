@@ -43,7 +43,7 @@
             <strong>About me</strong>
           </h3>
           <p class="gold-text mb-2 text-uppercase font-weight-bold">SOME FACTS ABOUT ME</p>
-          <div>
+          <!-- <div>
             <h5>FIND ME ON: </h5>
             <button type="button" class="btn btn-social-icon btn-facebook">
               <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -54,8 +54,13 @@
             <button type="button" class="btn btn-social-icon">
               <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
             </button>
-          </div>
+          </div> -->
+          <p>Joined: {{user.date_joined}}</p>
+            <a class="gradient-button gradient-button-3" href="mailto: {{ user.email}} ?subject=your title&body=TThe message"
+              style="width: auto; color: white; text-decoration: none; padding: 15px;">
+              <i class="fal fa-envelope"></i> Content With me</a>
           <hr>
+          
           <p class="dark-grey-text mt-4 text-justify">{{user.user_profile.about_me | safe}}</p>
           <h5 class="text-right font-weight-bold dark-grey-text mt-5">
             <em>{{user.first_name}} {{user.last_name}}</em>
@@ -63,6 +68,8 @@
           <p class="text-right font-weight-bold dark-grey-text mt-1">
             <em>{{user.user_profile.position}}</em>
           </p>
+         
+        
         </div>
         <!--Grid column-->
     </div>
@@ -77,17 +84,17 @@
 
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a href="posts">
+    <a href="#posts">
       <a class="nav-link" id="authorPosts" href="{{ request.get_full_path }}/posts/">
         Posts {{authorPost.count}}</a></a>
   </li>
   <li class="nav-item">
-    <a href="authorLikes">
+    <a href="#authorLikes">
       <a class="nav-link" id="authorLikes" href="{{ request.get_full_path }}/likes/">
         Likes {{authorLikes.count}}</a></a>
   </li>
   <li class="nav-item">
-    <a href="authorComments">
+    <a href="#authorComments">
       <a class="nav-link" id="authorCommines" href="{{ request.get_full_path }}/comments/">
         Commines {{authorComments.count}}</a></a>
   </li>
@@ -104,11 +111,11 @@
     {% include "blog/post_cards.html" with posts=authorLikes %}
     {%endblock%}
   </div>
-  <div id="authorComments" class=" tab-pane active "><br>
+  <!-- <div id="authorComments" class=" tab-pane active "><br>
     {%block postsComment%}
     {% include "blog/post_cards.html" with posts=postsComment.Post_id %}
     {%endblock%}
-  </div>
+  </div> -->
 </div>
 
 

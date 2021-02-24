@@ -6,7 +6,8 @@
     {%for post in posts%}
     <!-- <h1>{{post.title}}</h1> -->
 
-    <div class="card PostCard homeCard card-custom bg-white border-white card" id='card{{post.id}}'  >
+    <div class="card h-400 PostCard homeCard card-custom bg-white border-white card" style="height: 490px;"
+        id='card{{post.id}}'>
         <div class="card-custom-img" style="background-image: url({{post.post_img.url}});">
         </div>
         <div class="card-custom-avatar">
@@ -14,13 +15,19 @@
         </div>
         <div class="card-body" style="overflow-y: auto">
             <h4 class="card-title"><a href="{% url 'blog-post-show' post.id %}">{{post.title}}</a></h4>
-            <h6 class="card-title"><a href="{% url 'profile' post.author.id %}"  style="color: black;">By: {{post.author.first_name}} {{post.author.last_name}}</a></h6>
+            <h6 class="card-title"><a href="{% url 'profile' post.author.id %}" style="color: black;">By:
+                    {{post.author.first_name}} {{post.author.last_name}}</a></h6>
             <p class="card-text">{{post.date_post}}</p>
-            {%if post.author != user%}
-            {%block like%}
-            {% include "../post/like.html" with post=post %}
-            {%endblock%}
-            {%endif%}
+            <di class="mb-2 pb-2" style="bottom: 5px;">
+
+                {% if user.is_authenticated %}
+                {%if post.author != user%}
+                {%block like%}
+                {% include "../post/like.html" with post=post %}
+                {%endblock%}
+                {%endif%}
+                {%endif%}
+            </di>
 
         </div>
     </div>

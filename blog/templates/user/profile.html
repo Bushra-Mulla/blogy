@@ -7,8 +7,9 @@
       <div class="card mt-5" style="margin: 0 auto; width: 58%;">
             <div class="card-header">
                   <h1 style="float: left;">{{user.first_name}} {{user.last_name}}</h1>
-                  <a class="gradient-button gradient-button-2" style="float: right;"
-                        href="{% url 'user-profile-update' user.id %}"><i class="fas fa-user-edit"></i> Edit</a>
+                  <a class="gradient-button gradient-button-2"
+                        style="float: right; text-decoration: none; color: white;"
+                        href="{% url 'user-profile-update' user.id %}"><i class="fas fa-edit"></i> Edit</a>
             </div>
             <div class="card-body">
                   <div class="row pb-5">
@@ -42,6 +43,7 @@
                                           {{post.count}}
                                     </span>
                               </p>
+                        
                         </div>
                   </div>
             </div>

@@ -1,3 +1,4 @@
+from .models import categorys
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -12,29 +13,42 @@ def add_variable_to_context(request):
 #     reports = report.objects.all().order_by('-id')
 #     return {'reports': reports}
 
+def totalAnnouncement(request):
+    notPublishedPosts = Post.objects.filter(isPublish='notPublished').count()
+    reports = report.objects.filter(is_archived=False).count()
+    totel = notPublishedPosts + reports
+    # print(totel)
+    return {'totalAnnouncement': totel}
+
+
+def countNotPublishedPosts(request):
+    count = Post.objects.filter(isPublish='notPublished').count()
+    # print(countNotPublishedPosts)
+    return {'countNotPublishedPosts': count}
+
 
 def countReports(request):
     countReports = report.objects.all().count()
-    print(countReports)
+    # print(countReports)
     return {'countReports': countReports}
 
 
 def countNotArchivedReport(request):
     countReports = report.objects.filter(is_archived=False).count()
-    print(countReports)
+    # print(countReports)
     return {'countNotArchivedReport': countReports}
 
 
 def countArchivedReport(request):
     countReports = report.objects.filter(is_archived=True).count()
-    print(countReports)
+    # print(countReports)
     return {'countArchivedReport': countReports}
 
 
 def getAllNotArchivedReport(request):
     reports = report.objects.filter(is_archived=False).select_related(
         'user_id__user_profile').all().order_by('-id')
-    print(reports)
+    # print(reports)
     return {'notArchivedReport': reports}
 
 
@@ -45,7 +59,7 @@ def getReports(report):
 def getAllArchivedReport(request):
     reports = report.objects.filter(is_archived=True).select_related(
         'user_id__user_profile').all().order_by('-id')
-    print(reports)
+    # print(reports)
     return {'archivedReport': reports}
 
 
@@ -54,9 +68,23 @@ def all(request):
         'user_id__user_profile').all().order_by('-id')
     return {'allReport': reports}
 
-from .models import categorys
 
 def add_variable_to_context(request):
     return {
         'categorys_list': categorys.objects.all()
     }
+
+
+def countpost(request):
+    posts = Post.objects.filter(isPublish='published').count()
+    return {'countpost': posts}
+
+
+def countnotpublish(request):
+    posts = Post.objects.filter(isPublish='notPublished').count()
+    return {'countnotpublish': posts}
+
+
+def countrefused(request):
+    posts = Post.objects.filter(isPublish='refused').count()
+    return {'countrefused': posts}
