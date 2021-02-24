@@ -31,13 +31,14 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * As admin, I should be able to confirm to publish a post on the website
 * As admin, I should be able to refused publish a post 
 * As admin, I should be able to show list of reports
+* As admin, I should be able to access control panel
 
 
 # User
-* As a User, I should be able to see the article content
-* As a User, I should be able to search by article title
+* As a User, I should be able to see the post content
+* As a User, I should be able to search by post title
 * As a User, I should be able to see author profile
-* As a User, I should be able to filter the article by its categories
+* As a User, I should be able to filter the posts by its categories
 * As a User, I should be able to sign up
 * As a User, I should be able to log in
 * As a User, I should be able to reset password
@@ -45,21 +46,22 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * As a User, I should be able to share post link via Facebook, Twitter or Telegram
 
 # Visited User
-* As a visitors User, I should not be neither able edit, delete on article content or add comments
+* As a visitors User, I should not be neither able edit, delete on post content or add comments
 
 # Logged In User
 * As a logged in user, I should be able to log out
 * As a logged in user, I should be able to see all my posts with filtered by status   
 * As a logged in user, I should be able to create new post
-* As a logged in user, I should be able to edit an exist article
-* As a logged in user, I should be able to delete an exist article
-* As a logged in user, I should be able to add comments to any article
-* As a logged in user, I should be able to add article to user like list
+* As a logged in user, I should be able to edit own post
+* As a logged in user, I should be able to delete own post
+* As a logged in user, I should be able to add comments to any post
+* As a logged in user, I should be able to add likes to the user's posts
+* As a logged in user, I should be able to add unlikes to the user's posts
+* As a logged in user, I should be able to see all likes posts list
 * As a logged in user, I should be able to edit profile information
 * As a logged in user, I should be able to edit own comments
 * As a logged in user, I should be able to delete own comments
 * As a logged in user, I should be able to report any post
-* As a logged in user, H should be able to contact with admin by life chating
 * As a logged in user, H should be able to contact with admin by life chating
 
 ## App Preview
@@ -70,10 +72,14 @@ These are some of the EndPoints we used in this project
 
 | #  |  Action  |  Method |  URL  |  Description  |
 | :------------ | :------------ | :------------ | :------------ | :------------ |
-|   1| View  | get  | / | To view Home page|
+|   1| INDEX  | get  | / | To view Home page|
 |   2|  CRAETE | POST  |   /login |  To login to the user account|
 |   3| CREATE | POST  |/signup   | To create new account|
-|   4| View | POST  |/logOut   | To log out from the account|
+|   4| INDEX | POST  |/logout   | To log out from the account|
+|   5| INDEX | POST  |/profile | To show user's profile|
+|   6| CREATE | POST  |/profile/create | To allow the user signed up to create own profile|
+|   7| UPDATE | POST  |/profile/<int:pk>/update | To allow the user logged in to modify own profile|
+|   8| INDEX | POST  |/profile/<int:user_id>/ | To show specific user profile for others users|
 |   5| CREATE  | post  | /post/create | To create new post|
 |   6| View | get  | /post/post_id | To veiw exist post|
 |   7| EDIT | PATCH  | /post/<int:pk>/update/  | To edit a specific post|
