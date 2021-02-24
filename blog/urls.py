@@ -15,9 +15,11 @@ urlpatterns = [
         template_name='user/profile_form.html'), name='user-profile-create'),
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(template_name='user/profile_form.html'),
          name='user-profile-update'),
-    path('profile/<int:user_id>', views.authoreProfile, name="profile"),
-    path('profile/<int:user_id>/posts/', views.authorePosts, name="authorePosts"),
-    path('profile/<int:user_id>/likes/', views.authoreLikes, name="authoreLikes"),
+    path('profile/<int:user_id>/', views.authoreProfile, name="profile"),
+    path('profile/<int:user_id>/posts/',
+         views.authorePosts, name="authorePosts"),
+    path('profile/<int:user_id>/likes/',
+         views.authoreLikes, name="authoreLikes"),
     path('profile/<int:user_id>/comments/',
          views.authoreComments, name="usercomments"),
 
@@ -51,9 +53,8 @@ urlpatterns = [
 
     path('like/', views.likeview, name='like_post'),
     path('comment/',  views.comments, name='comment'),
-#     path('comment/<int:pk>/',  views.editcommentform, name='editcomment'),
     path('comment/update/',  views.editcomment, name='editcomment'),
-
+    path('comment/delete/',  views.deletecomment, name='editcomment'),
 
     path('report/<int:post_id>/create/', views.reportCreate.as_view(
         template_name='report/reports_form.html'), name="reportCreate"),
