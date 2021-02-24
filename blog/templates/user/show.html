@@ -26,7 +26,7 @@
 
             <!--Image-->
             <div class="view overlay">
-              <img src={{user.user_profile.profile_picture.url}} class="avatar rounded-circle z-depth-1-half"
+              <img src={{authorUser.user_profile.profile_picture.url}} class="avatar rounded-circle z-depth-1-half"
                 width="400px" height="380px"" alt="">
                           <div class=" mask rgba-white-slight">
             </div>
@@ -55,19 +55,19 @@
               <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
             </button>
           </div> -->
-          <p>Joined: {{user.date_joined}}</p>
+          <p>Joined: {{authorUser.date_joined}}</p>
           <a class="gradient-button gradient-button-3"
-            href="mailto: {{ user.email}} ?subject=your title&body=TThe message"
+            href="mailto: {{ authorUser.email}} ?subject=your title&body=TThe message"
             style="width: auto; color: white; text-decoration: none; padding: 15px;">
             <i class="fal fa-envelope"></i> Content With me</a>
           <hr>
 
-          <p class="dark-grey-text mt-4 text-justify">{{user.user_profile.about_me | safe}}</p>
+          <p class="dark-grey-text mt-4 text-justify">{{authorUser.user_profile.about_me | safe}}</p>
           <h5 class="text-right font-weight-bold dark-grey-text mt-5">
-            <em>{{user.first_name}} {{user.last_name}}</em>
+            <em>{{authorUser.first_name}} {{authorUser.last_name}}</em>
           </h5>
           <p class="text-right font-weight-bold dark-grey-text mt-1">
-            <em>{{user.user_profile.position}}</em>
+            <em>{{authorUser.user_profile.position}}</em>
           </p>
 
 
@@ -86,17 +86,17 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a href="#posts">
-      <a class="nav-link" id="authorPosts" href="{% url 'authorePosts' user.id%}">
+      <a class="nav-link" id="authorPosts" href="{% url 'authorePosts' authorUser.id%}">
         Posts</a></a>
   </li>
   <li class="nav-item">
     <a href="#authorLikes">
-      <a class="nav-link" id="authorLikes" href="{% url 'authoreLikes' user.id%}">
+      <a class="nav-link" id="authorLikes" href="{% url 'authoreLikes' authorUser.id%}">
         Likes</a></a>
   </li>
   <li class="nav-item">
     <a href="#authorComments">
-      <a class="nav-link" id="authorCommines" href="{% url 'usercomments' user.id%}">
+      <a class="nav-link" id="authorCommines" href="{% url 'usercomments' authorUser.id%}">
         Commines</a></a>
   </li>
 </ul>
@@ -117,9 +117,36 @@
     {% endif%}
   </div>
   <div id="authorComments" class=" tab-pane active "><br>
-    {%block postsComment%}
-    {% include "./userpostcomment.html" with posts=usercomments %}
-    {%endblock%}
+
+  {%for comment in usercomments %}
+  <div class="row mb-5">
+    <div class="col-sm-2 col-12 mb-3">
+      <img src="{{comment.Post_id.post_img.url}}"
+      class="rounded-right border border-dark"
+        alt="sample image"
+        style="height: 150px; width: 150px; margin-left: 25px;"/>
+    </div>
+    <div class="col-sm-10 col-12">
+      <a href="{% url 'blog-post-show' comment.Post_id.id %}" style="color: black;">
+        <h5 class="user-name font-weight-bold">
+          {{comment.Post_id.title}}
+
+        </h5>
+      </h5>
+ 
+      </a>
+      <div class="card-data">
+        <ul class="list-unstyled">
+          <li class="comment-date font-small">
+            <i class="far fa-clock-o"></i> {{comment.Publish_date}}
+          </li>
+        </ul>
+      </div>
+      <p class="dark-grey-text article">{{comment.content}}</p>
+    </div>
+  </div>
+  <hr>
+  {%endfor%}
   </div>
 </div>
 

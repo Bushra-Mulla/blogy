@@ -76,6 +76,8 @@ These are some of the EndPoints we used in this project
 Follow instructions to install the latest version of python for your platform in the <a href= 'https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python' target="_blank"> python docs </a> 
 #### Django 
 Installing Django by type on command line `pip install Django` 
+#### Requirements 
+Installing all project's requirements by type on command line `pip install -r Requirements.txt` 
 
 #### Running the server
 1- clone the repository using this code:

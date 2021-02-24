@@ -54,36 +54,38 @@ def post_show(request, post_id):
 
 
 def authoreProfile(request, user_id):
-    user = User.objects.get(id=user_id)
-    authorPost = Post.objects.filter(author=user).filter(isPublish='published')
-    authorLikes = Post.objects.filter(likes=user).filter(isPublish='published')
-    authorComments = comment.objects.filter(user_id=user)
+    authorUser = User.objects.get(id=user_id)
+    authorPost = Post.objects.filter(author=authorUser).filter(isPublish='published')
     return render(request, 'user/show.html', {
-        'user': user,
+        'authorUser': authorUser,
         'authorPost': authorPost,
-        'authorLikes': authorLikes,
-        'authorComments': authorComments,
-    })
-
+        })
 
 def authorePosts(request, user_id):
-    authorPost = Post.objects.filter(author=user_id, isPublish='published')
+    authorUser = User.objects.get(id=user_id)
+    authorPost = Post.objects.filter(author=authorUser, isPublish='published')
     return render(request, 'user/show.html', {
+        'authorUser': authorUser,
         'authorPost': authorPost,
-    })
-
+        })
 
 def authoreLikes(request, user_id):
-    authorLikes = Post.objects.filter(likes=user_id, isPublish='published')
+    authorUser = User.objects.get(id=user_id)
+    authorLikes = Post.objects.filter(likes=authorUser, isPublish='published')
     return render(request, 'user/show.html', {
+        'authorUser': authorUser,
         'authorLikes': authorLikes,
-    })
-
-
+        })
+        
+        
 def authoreComments(request, user_id):
-    user = User.objects.get(id=user_id)
-    authorComments = comment.objects.filter(user_id=user)
-    return render(request, 'user/show.html', {'usercomments': authorComments})
+    authorUser = User.objects.get(id=user_id)
+    authorComments = comment.objects.filter(user_id=authorUser)
+    return render(request, 'user/show.html', {
+        'authorUser': authorUser,
+        'usercomments': authorComments
+        })
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -424,6 +426,8 @@ def editcomment(request):
         comment_id = request.POST.get('comment_id')
         content = request.POST.get('content')
         commentt = comment.objects.get(id=comment_id)
-        commentt.content = content
+        commentt.content=content
         commentt.save()
         return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
+
+           
