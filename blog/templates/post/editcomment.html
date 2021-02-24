@@ -1,0 +1,57 @@
+{% block edit %}
+<form method="POST" action="." class="col-12 mt-1 editcommentform{{comment.id}}" id="{{comment.id}}">
+  {% csrf_token %}
+
+  <div class="form-group basic-textarea rounded-corners shadow-textarea">
+    <textarea
+      class="form-control content{{comment.id}}"
+      rows="4"
+      placeholder="{{comment.content}}"
+      required
+    ></textarea>
+  </div>
+  <div class="text-right">
+    <button
+      type="submit"
+      class="gradient-button gradient-button-3 editComment{{comment.id}}"
+      style="margin-left: 50%"
+    >
+      Submit
+    </button>
+  </div>
+</form>
+{% endblock %} {% block script%}
+<script>
+  $(".editcommentform{{comment.id}}").submit(function (e) {
+    e.preventDefault();
+    var comment_id = "{{comment.id}}";
+    var content = $(`.content${comment_id}`).val();
+    if (content == "") {
+      alert("Comments cannot be empty");
+      return;
+    }
+    console.log(comment_id, content);
+    $.ajax({
+      type: "POST",
+      url: `/comment/update/`,
+      data: {
+        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+        content: content,
+        comment_id: comment_id,
+      },
+      dataType: "json",
+      beforeSend: function () {
+        $(".editComment").addClass("disabled").text("saving...");
+      },
+      success: function (data) {
+        window.location.reload();
+        // $(`.content${post_id}`).val("");
+        // $(".editComment").removeClass("disabled").text("Submit");
+      },
+      error: function (response) {
+        console.log("error", response);
+      },
+    });
+  });
+</script>
+{%endblock%}

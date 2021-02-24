@@ -12,17 +12,17 @@
         <div class="card-header">
           <h4>Publish Post Requests List</h4>
         </div>
-        <div class="container">
+        <div class="container reportStyle ">
           <div class="row align-items-start">
-            <div class="col">
+            <div class="col border">
               <a onclick="location.href='{% url 'blog-published' %}'" style="cursor: pointer;">published
                 <span class="badge badge-light">{{countpost}}</span></a>
             </div>
-            <div class="col">
+            <div class="col border">
               <a onclick="location.href='{% url 'notpublish' %}'" style="cursor: pointer;">not publish
                 <span class="badge badge-light">{{countnotpublish}}</span></a>
             </div>
-            <div class="col">
+            <div class="col border">
               <a onclick="location.href='{% url 'refused' %}'" style="cursor: pointer;">refused
                 <span class="badge badge-light">{{countrefused}}</span></a>
             </div>

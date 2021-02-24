@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <!-- templates/cats/detail.html -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
 
 <section>
   <div class="container-fluid white">
@@ -36,7 +43,7 @@
             <strong>About me</strong>
           </h3>
           <p class="gold-text mb-2 text-uppercase font-weight-bold">SOME FACTS ABOUT ME</p>
-          <div>
+          <!-- <div>
             <h5>FIND ME ON: </h5>
             <button type="button" class="btn btn-social-icon btn-facebook">
               <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -47,8 +54,13 @@
             <button type="button" class="btn btn-social-icon">
               <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
             </button>
-          </div>
+          </div> -->
+          <p>Joined: {{user.date_joined}}</p>
+            <a class="gradient-button gradient-button-3" href="mailto: {{ user.email}} ?subject=your title&body=TThe message"
+              style="width: auto; color: white; text-decoration: none; padding: 15px;">
+              <i class="fal fa-envelope"></i> Content With me</a>
           <hr>
+          
           <p class="dark-grey-text mt-4 text-justify">{{user.user_profile.about_me | safe}}</p>
           <h5 class="text-right font-weight-bold dark-grey-text mt-5">
             <em>{{user.first_name}} {{user.last_name}}</em>
@@ -56,6 +68,8 @@
           <p class="text-right font-weight-bold dark-grey-text mt-1">
             <em>{{user.user_profile.position}}</em>
           </p>
+         
+        
         </div>
         <!--Grid column-->
     </div>
@@ -66,22 +80,43 @@
 </div>
 </section>
 
+
+
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a href="#">
-      <a class="nav-link" id="Posts" href="/user/posts/">
-        Posts</a></a>
+    <a href="#posts">
+      <a class="nav-link" id="authorPosts" href="{% url 'authorePosts' user.id%}">
+        Posts {{authorPost.count}}</a></a>
   </li>
   <li class="nav-item">
-    <a href="#">
-      <a class="nav-link" id="Likes" href="/user/posts/notPublished/">
-        Likes</a></a>
+    <a href="#authorLikes">
+      <a class="nav-link" id="authorLikes" href="{% url 'authoreLikes' user.id%}">
+        Likes {{authorLikes.count}}</a></a>
   </li>
   <li class="nav-item">
-    <a href="#">
-      <a class="nav-link" id="Commines" href="/user/posts/refused/">
-        Commines</a></a>
+    <a href="#authorComments">
+      <a class="nav-link" id="authorCommines" href="{% url 'usercomments' user.id%}">
+        Commines {{authorComments.count}}</a></a>
   </li>
 </ul>
 
+<div class="tab-content mt-5">
+  <div id="authorPost" class=" tab-pane active "><br>
+    {%block authorPost%}
+    {% include "blog/post_cards.html" with posts=authorPost %}
+    {%endblock%}
+  </div>
+  <div id="authorLikes" class=" tab-pane active "><br>
+    {%block authorLikes%}
+    {% include "blog/post_cards.html" with posts=authorLikes %}
+    {%endblock%}
+  </div>
+  <div id="authorComments" class=" tab-pane active "><br>
+    {%block postsComment%}
+    {% include "./userpostcomment.html" with posts=usercomments %}
+    {%endblock%}
+  </div>
+</div>
+
+  
 {% endblock %}
