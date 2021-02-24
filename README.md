@@ -109,7 +109,7 @@ These are some of the EndPoints we used in this project
 |   35|    Update |patch   | /published/notpublish/  | To view all not published posts list for the admin|
 |   36|    INDEX |GET  | /search/  | To all the user to search about a post|
 |   37|    INDEX |GET  | /admin/  | To allow the admin to access to the control panel|
-|   37|    UPDATE |PATCH  | /password-reset/  | To allow the user to reset the password|
+|   38|    UPDATE |PATCH  | /password-reset/  | To allow the user to reset the password|
 
 ## Code Installation
 #### Python 3.8
