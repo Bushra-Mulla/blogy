@@ -15,15 +15,15 @@
         <div class="container reportStyle ">
           <div class="row align-items-start">
             <div class="col border">
-              <a onclick="location.href='{% url 'blog-published' %}'" style="cursor: pointer;">published
+              <a onclick="location.href='{% url 'blog-published' %}'" style="cursor: pointer;">Published
                 <span class="badge badge-light">{{countpost}}</span></a>
             </div>
             <div class="col border">
-              <a onclick="location.href='{% url 'notpublish' %}'" style="cursor: pointer;">not publish
+              <a onclick="location.href='{% url 'notpublish' %}'" style="cursor: pointer;">Not Published
                 <span class="badge badge-light">{{countnotpublish}}</span></a>
             </div>
             <div class="col border">
-              <a onclick="location.href='{% url 'refused' %}'" style="cursor: pointer;">refused
+              <a onclick="location.href='{% url 'refused' %}'" style="cursor: pointer;">Refused
                 <span class="badge badge-light">{{countrefused}}</span></a>
             </div>
           </div>
@@ -86,7 +86,7 @@
                 <h6 style="padding-bottom: 5px">{{postDetails.date_post}}</h6>
                 <hr />
 
-                {% if postDetails.ispublish == notPublished %}
+                {% if postDetails.isPublish == 'notPublished' %}
                 <a href="{% url 'update_published' postDetails.id %}" class="gradient-button gradient-button-3"
                   style="width: auto; text-decoration: none; color: white; float: right;">Publish</a>
                 <a href="{% url 'update_refuse' postDetails.id%}" class="gradient-button gradient-button-1"
