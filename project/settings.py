@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['blogyproject.herokuapp.com']
+ALLOWED_HOSTS = ['blogyproject.herokuapp.com', '0.0.0.0', 'localhost', '127.0.0.1']
 
 
 # Application definition
