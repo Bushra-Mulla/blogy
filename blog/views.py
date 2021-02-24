@@ -428,3 +428,13 @@ def editcomment(request):
         return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
 
            
+def deletecomment(request):
+    user = request.user
+    if request.method == 'POST':
+        comment_id = request.POST.get('comment_id')
+        comment = comment.objects.get(id=comment_id)
+        comment.delete()
+        commentt.save()
+        return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
+
+
