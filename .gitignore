@@ -1,8 +1,8 @@
-# Django #
-
-.env
+*.log
+*.pot
 *.pyc
-*/__pycache__/*
-*__pycache__
-*/migrations/*
-
+__pycache__/
+local_settings.py
+venv/
+.env
+env/

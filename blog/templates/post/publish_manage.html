@@ -87,7 +87,7 @@
                 <hr />
 
                 <a href="{% url 'blog-post-show' postDetails.id%}" class="btn btn-success">Jump to post</a>
-                {% if postDetails.ispublish == notPublished %}
+                {% if post.isPublish == 'notPublished'  %}
                 <a href="{% url 'update_published' postDetails.id %}" class="btn btn-default">Make it publish</a>
                 <a href="{% url 'update_refuse' postDetails.id%}" class="btn btn-default">Make it refused</a>
                 {% endif %}
