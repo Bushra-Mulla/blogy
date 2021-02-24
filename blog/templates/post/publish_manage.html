@@ -1,8 +1,9 @@
-{% extends 'base.html' %} {% load static%} {% block content %}
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-
 <link rel="stylesheet" type="text/css" href="{% static 'reports_lists.css' %}" />
 <br />
 <div class="container-fluid">
@@ -33,10 +34,9 @@
           <!-- add tabs -->
           {% if posts %} {%for post in posts%}
           {% if post.isPublish == 'notPublished' %}
-
           <!-- <p>{{post.isPublish }}</p> -->
           <div class="gaadiex-list">
-            <div class="gaadiex-list-item" style="border-left: solid #ff2c9c; background-color: #d3ebff">
+            <div class="gaadiex-list-item" style="border-left: solid #FF2C9C; background-color: #D3EBFF">
               <img class="gaadiex-list-item-img" src="{{post.author.user_profile.profile_picture.url}}"
                 alt="List user" />
               <!-- <i class="fa fa-user"></i> -->
@@ -80,12 +80,10 @@
           <h1>
             <div class="gaadiex-list-item">
               <img class="gaadiex-list-item-img" src="{{postDetails.author.user_profile.profile_picture.url}}" />
-
               <div class="gaadiex-list-item-text">
                 <h3 style="padding-top: 10px">From: {{postDetails.author}}</h3>
                 <h6 style="padding-bottom: 5px">{{postDetails.date_post}}</h6>
                 <hr />
-
                 {% if postDetails.isPublish == 'notPublished' %}
                 <a href="{% url 'update_published' postDetails.id %}" class="gradient-button gradient-button-3"
                   style="width: auto; text-decoration: none; color: white; float: right;">Publish</a>
