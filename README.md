@@ -20,30 +20,47 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * Postages 
 * Python 
 * Django 
-* Trello
+* Ajax
 
 ### User Stories
+# Admin
 * As admin, I should be able to manage blog website
-* As admin, I should be able to confirm to publish a blog on the website
+* As admin, I should be able to craete post and published directly
+* As admin, I should be able to show list of reports
+* As admin, I should be able to show list of publish post requests
+* As admin, I should be able to confirm to publish a post on the website
+* As admin, I should be able to refused publish a post 
+* As admin, I should be able to show list of reports
+
+
+# User
 * As a User, I should be able to see the article content
 * As a User, I should be able to search by article title
 * As a User, I should be able to see author profile
 * As a User, I should be able to filter the article by its categories
 * As a User, I should be able to sign up
 * As a User, I should be able to log in
+* As a User, I should be able to reset password
+* As a User, I should be able to contact with author by email
+* As a User, I should be able to share post link via Facebook, Twitter or Telegram
+
+# Visited User
 * As a visitors User, I should not be neither able edit, delete on article content or add comments
-* As a logged User, I should be able to log out
-* As a logged User, I should be able to see all my posts and its status   
-* As a logged User, I should be able to create new article
-* As a logged User, I should be able to edit an exist article
-* As a logged User, I should be able to delete an exist article
-* As a logged User, I should be able to add comments to any article
-* As a logged User, I should be able to add article to user like list
-* As a logged User, I should be able to edit profile information
-* As a logged User, I should be able to edit own comments
-* As a logged User, I should be able to delete own comments
-* As a logged User, I should be able to report any post
-* As a logged user, H should be able to contact with admin by life chating
+
+# Logged In User
+* As a logged in user, I should be able to log out
+* As a logged in user, I should be able to see all my posts with filtered by status   
+* As a logged in user, I should be able to create new post
+* As a logged in user, I should be able to edit an exist article
+* As a logged in user, I should be able to delete an exist article
+* As a logged in user, I should be able to add comments to any article
+* As a logged in user, I should be able to add article to user like list
+* As a logged in user, I should be able to edit profile information
+* As a logged in user, I should be able to edit own comments
+* As a logged in user, I should be able to delete own comments
+* As a logged in user, I should be able to report any post
+* As a logged in user, H should be able to contact with admin by life chating
+* As a logged in user, H should be able to contact with admin by life chating
 
 ## App Preview
 ### The Website Dimo 
