@@ -25,7 +25,7 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 ### User Stories
 #### Admin
 * As admin, I should be able to manage blog website
-* As admin, I should be able to craete post and published directly
+* As admin, I should be able to create post and published directly
 * As admin, I should be able to show list of reports
 * As admin, I should be able to show list of publish post requests
 * As admin, I should be able to confirm to publish a post on the website
@@ -58,10 +58,8 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * As a logged in user, I should be able to add unlikes to the user's posts
 * As a logged in user, I should be able to see all likes posts list
 * As a logged in user, I should be able to edit profile information
-* As a logged in user, I should be able to edit own comments
-* As a logged in user, I should be able to delete own comments
 * As a logged in user, I should be able to report any post
-* As a logged in user, H should be able to contact with admin by life chating
+* As a logged in user, H should be able to contact with admin via life chat 
 
 ## App Preview
 ### The Website Dimo 
@@ -110,9 +108,9 @@ These are some of the EndPoints we used in this project
 |   36|    INDEX |GET  | /search/  | To all the user to search about a post|
 |   37|    INDEX |GET  | /admin/  | To allow the admin to access to the control panel|
 |   38|    UPDATE |PATCH  | /password-reset/  | To allow the user to reset the password|
-|   39|    INDEX |GET  |  /profile/<int:id>/posts/  |  To view all user's posts list|
-|   40|    INDEX |GET  |  /profile/<int:id>/comments/  | To view all user's comment on posts list|
-|   41|    INDEX |GET  | /profile/<int:id>/likes/  |  To view all user's likes posts list|
+|   39|    INDEX |GET  |  /profile/<int:user.id>/posts/  |  To view all user's posts list|
+|   40|    INDEX |GET  |  /profile/<int:user.id>/comments/  | To view all user's comment on posts list|
+|   41|    INDEX |GET  | /profile/<int:user.id>/likes/  |  To view all user's likes posts list|
 
 ## Code Installation
 #### Python 3.8
@@ -139,8 +137,12 @@ python manage.py runserver
 
 
 ## Future Features:
-- As a User, I should be able to share any articles via social networking like: twitter or Facebook
 - As a logged User, I should be able to replay on exist comments
+- As a logged in user, I should be able to edit own comments
+- As a logged in user, I should be able to delete own comments
+- As a logged in user, I should be able to get a notification when other comments on my posts
+- As a logged in user,  I should be able to subscribe to a selected author blog
+
 
 ## Collaborating
 - <a href= 'https://git.generalassemb.ly/ashwagzabani'>Ashwag Zabani</a>
