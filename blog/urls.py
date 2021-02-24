@@ -9,7 +9,7 @@ urlpatterns = [
     path('logIn/', auth_views.LoginView.as_view(template_name='logIn.html'), name='logIn'),
     path('signup/', views.signup, name='signup'),
     path('logout/', views.logout_view, name="logout"),
-    
+
     path('profile/', views.profile, name="profile"),
     path('profile/create', views.ProfileCreate.as_view(
         template_name='user/profile_form.html'), name='user-profile-create'),

@@ -1,15 +1,10 @@
 {%block postsComment%}
 
-<div class="row mb-5">
-  <div class="col-md">
-      <h3 class=" mb-4 pb-3 mt-5">Comments</h3>
-      {% for post in posts %}
-      <ul class="pr-2">
-          <a class="text-dark" href="{% url 'blog-post-show' post.id %}">{{post.Post_id.title}}</a>
-      </ul>
-      {% empty %}
-      <h4 class="text-center mb-5">no posts</h4>
-      {% endfor %}
-  </div>
+<div class="col-md">
+  {% for post in posts %}
+  <ul class="pr-2">
+    <a class="text-dark" href="{% url 'blog-post-show' post.id %}">{{post.Post_id.title}}</a>
+  </ul>
+  {% endfor %}
 </div>
 {%endblock%}
