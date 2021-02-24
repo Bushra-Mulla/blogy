@@ -36,6 +36,23 @@
                   </ul>
                 </div>
                 <p class="dark-grey-text article">{{comment.content}}</p>
+                <div class="form{{comment.id}} form">
+          {% block edit %}
+          {% include "./editcomment.html" with comment=comment%}
+          {%endblock%}
+        </div>
+      </div>
+      {% if comment.user_id == request.user %}
+      <h6 class="small comment-meta">
+        <button
+          class="gradient-button gradient-button-3 edit{{comment.id}}"
+          type="button"
+        >
+          Edit
+        </button>
+        <!-- Delete -->
+      </h6>
+      {% endif %}
               </div>
             </div>
             <hr>
@@ -90,6 +107,8 @@
               },
               success: function (res) {
                 $(`.content${post_id}`).val("");
+                        // window.location.reload();
+
                 // Append Element
                 var _html =
                   '<div class="row mb-5">\
@@ -133,4 +152,4 @@
 </div>
 </div>
 
-  {% endblock %}
+{% endblock %}

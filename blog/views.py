@@ -79,16 +79,10 @@ def authoreLikes(request, user_id):
         
         
 def authoreComments(request, user_id):
-    usercomments = comment.objects.filter(user_id=user_id)
-    postsComment = Post.objects.filter(id= usercomments.Post_id)
-    return render(request, 'user/show.html', {
-        'usercomments': usercomments,
-        'postsComment': postsComment,
-        })
-        
-        
-    posts = Post.objects.filter(author=user)
-    return render(request, 'user/show.html', {'user': user})
+    user = User.objects.get(id=user_id)
+    authorComments = comment.objects.filter(user_id=user)
+    return render(request, 'user/show.html', {'usercomments': authorComments})
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -421,3 +415,16 @@ def comment_list(request):
     user = request.user
     comments = comment.objects.filter(user_id=user.id).all()
     return render(request, 'profile/comment_list.html', {'comments': comments})
+
+
+def editcomment(request):
+    user = request.user
+    if request.method == 'POST':
+        comment_id = request.POST.get('comment_id')
+        content = request.POST.get('content')
+        commentt = comment.objects.get(id=comment_id)
+        commentt.content=content
+        commentt.save()
+        return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
+
+           

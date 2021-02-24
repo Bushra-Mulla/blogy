@@ -16,9 +16,10 @@ urlpatterns = [
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(template_name='user/profile_form.html'),
          name='user-profile-update'),
     path('profile/<int:user_id>', views.authoreProfile, name="profile"),
-    path('profile/<int:user_id>/posts', views.authorePosts, name="authorePosts"),
-    path('profile/<int:user_id>/likes', views.authoreLikes, name="authoreLikes"),
-    path('profile/<int:user_id>/comments', views.authoreLikes, name="usercomments"),
+    path('profile/<int:user_id>/posts/', views.authorePosts, name="authorePosts"),
+    path('profile/<int:user_id>/likes/', views.authoreLikes, name="authoreLikes"),
+    path('profile/<int:user_id>/comments/',
+         views.authoreComments, name="usercomments"),
 
 
     path('user/likes/', views.likes_list, name='blog_like_list'),
@@ -43,13 +44,15 @@ urlpatterns = [
     path('post/<int:post_id>/', views.post_show, name='blog-post-show'),
     path('post/create/', views.PostCreate.as_view(), name='blog-post-create'),
     path('post/<int:pk>/update/', views.PostUpdate.as_view(),
-         name='blog-post-Update'),
+         name='blog-post-C'),
     path('post/<int:pk>/delete/', views.PostDelete.as_view(),
          name='blog-post-delete'),
 
 
     path('like/', views.likeview, name='like_post'),
     path('comment/',  views.comments, name='comment'),
+#     path('comment/<int:pk>/',  views.editcommentform, name='editcomment'),
+    path('comment/update/',  views.editcomment, name='editcomment'),
 
 
     path('report/<int:post_id>/create/', views.reportCreate.as_view(
