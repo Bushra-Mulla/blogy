@@ -16,9 +16,10 @@ urlpatterns = [
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(template_name='user/profile_form.html'),
          name='user-profile-update'),
     path('profile/<int:user_id>', views.authoreProfile, name="profile"),
-    path('profile/<int:user_id>/posts', views.authorePosts, name="authorePosts"),
-    path('profile/<int:user_id>/likes', views.authoreLikes, name="authoreLikes"),
-    path('profile/<int:user_id>/comments', views.authoreLikes, name="usercomments"),
+    path('profile/<int:user_id>/posts/', views.authorePosts, name="authorePosts"),
+    path('profile/<int:user_id>/likes/', views.authoreLikes, name="authoreLikes"),
+    path('profile/<int:user_id>/comments/',
+         views.authoreComments, name="usercomments"),
 
 
     path('user/likes/', views.likes_list, name='blog_like_list'),

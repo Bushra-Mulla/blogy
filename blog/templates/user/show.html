@@ -85,17 +85,17 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a href="#posts">
-      <a class="nav-link" id="authorPosts" href="{{ request.get_full_path }}/posts/">
+      <a class="nav-link" id="authorPosts" href="{% url 'authorePosts' user.id%}">
         Posts {{authorPost.count}}</a></a>
   </li>
   <li class="nav-item">
     <a href="#authorLikes">
-      <a class="nav-link" id="authorLikes" href="{{ request.get_full_path }}/likes/">
+      <a class="nav-link" id="authorLikes" href="{% url 'authoreLikes' user.id%}">
         Likes {{authorLikes.count}}</a></a>
   </li>
   <li class="nav-item">
     <a href="#authorComments">
-      <a class="nav-link" id="authorCommines" href="{{ request.get_full_path }}/comments/">
+      <a class="nav-link" id="authorCommines" href="{% url 'usercomments' user.id%}">
         Commines {{authorComments.count}}</a></a>
   </li>
 </ul>
@@ -111,26 +111,12 @@
     {% include "blog/post_cards.html" with posts=authorLikes %}
     {%endblock%}
   </div>
-  <!-- <div id="authorComments" class=" tab-pane active "><br>
+  <div id="authorComments" class=" tab-pane active "><br>
     {%block postsComment%}
-    {% include "blog/post_cards.html" with posts=postsComment.Post_id %}
+    {% include "./userpostcomment.html" with posts=usercomments %}
     {%endblock%}
-  </div> -->
-</div>
-
-
-<!-- <div class="row mb-5">
-  <div class="col-md">
-      <h3 class=" mb-4 pb-3 mt-5">Comments</h3>
-      {% for post in authorComments %}
-      <ul class="pr-2">
-          <a class="text-dark" href="{% url 'blog-post-show' post.id %}">{{post.Post_id.title}}</a>
-      </ul>
-      {% empty %}
-      <h4 class="text-center mb-5">no posts</h4>
-      {% endfor %}
   </div>
-</div> -->
+</div>
 
   
 {% endblock %}
