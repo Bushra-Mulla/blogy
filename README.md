@@ -162,6 +162,11 @@ python manage.py runserver
 - As a logged in user, I should be able to get a notification when other comments on my posts
 - As a logged in user,  I should be able to subscribe to a selected author blog
 
+## ReSources
+- https://docs.djangoproject.com/en/3.1/topics/db/models/
+- https://docs.djangoproject.com/en/3.1/ref/models/querysets/
+- https://code.djangoproject.com/ticket/27017
+- https://www.xspdf.com/resolution/60078270.html
 
 ## Collaborating
 - <a href= 'https://git.generalassemb.ly/ashwagzabani'>Ashwag Zabani</a>
