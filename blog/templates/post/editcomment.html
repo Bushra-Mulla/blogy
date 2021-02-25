@@ -1,21 +1,11 @@
 {% block edit %}
 <form method="POST" action="." class="col-12 mt-1 editcommentform{{comment.id}}" id="{{comment.id}}">
   {% csrf_token %}
-
   <div class="form-group basic-textarea rounded-corners shadow-textarea">
-    <textarea
-      class="form-control content{{comment.id}}"
-      rows="4"
-      placeholder="{{comment.content}}"
-      required
-    ></textarea>
+    <textarea class="form-control content{{comment.id}}" rows="4" placeholder="{{comment.content}}" required></textarea>
   </div>
   <div class="text-right">
-    <button
-      type="submit"
-      class="gradient-button gradient-button-3 editComment{{comment.id}}"
-      style="margin-left: 50%"
-    >
+    <button type="submit" class="gradient-button gradient-button-3 editComment{{comment.id}}" style="margin-left: 50%">
       Submit
     </button>
   </div>
@@ -44,9 +34,7 @@
         $(".editComment").addClass("disabled").text("saving...");
       },
       success: function (data) {
-        // window.location.reload();
-        $(`.content${post_id}`).val("");
-        $(".editComment").removeClass("disabled").text("Submit");
+        window.location.reload();
       },
       error: function (response) {
         console.log("error", response);

@@ -1,8 +1,6 @@
 {%block like%}
-​
 <form action="{% url 'like_post' %}" method="POST" class='like_form' id='{{post.id}}'>
   {% csrf_token %}
-  ​
   <input type="hidden" name="post_id" class='btn btn-warning btn-sm' value="{{post.id}}">
   <button type='submit' class='like_button{{post.id}} gradient-button gradient-button-2 thumbs-up' style="width: auto;">
     {% if user not in post.likes.all %}
@@ -16,9 +14,7 @@
 <p class='like_count{{post.id}}'>{{post.like_count}}</p>
 {%endif%}
 {% endblock %}
-<p class="mylike{{post.id}}">{{mylike}}</p>
-
-
+<!-- <p class="mylike{{post.id}}">{{mylike}}</p> -->
 {% block script %}
 <script>
   $('.like_form').submit(function (e) {
@@ -43,7 +39,7 @@
         if (trim === 'Unlike') {
           $(`.like_button${post_id}`).text(' Like')
           res = trimCount - 1
-          if (mylikes == 'True') {
+          if ('{{mylike}}' == 'True') {
             console.log(`#card${post_id}`)
             $(`#card${post_id}`).hide()
           }

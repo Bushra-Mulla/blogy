@@ -54,34 +54,37 @@ def post_show(request, post_id):
 
 
 def authoreProfile(request, user_id):
-    user = User.objects.get(id=user_id)
-    authorPost = Post.objects.filter(author=user).filter(isPublish='published')
-    authorLikes = Post.objects.filter(likes=user).filter(isPublish='published')
-    authorComments = comment.objects.filter(user_id=user)
+    authorUser = User.objects.get(id=user_id)
+    authorPost = Post.objects.filter(author=authorUser).filter(isPublish='published')
     return render(request, 'user/show.html', {
-        'user': user,
+        'authorUser': authorUser,
         'authorPost': authorPost,
-        'authorLikes': authorLikes,
-        'authorComments': authorComments,
         })
 
 def authorePosts(request, user_id):
-    authorPost = Post.objects.filter(author=user_id, isPublish='published')
+    authorUser = User.objects.get(id=user_id)
+    authorPost = Post.objects.filter(author=authorUser, isPublish='published')
     return render(request, 'user/show.html', {
+        'authorUser': authorUser,
         'authorPost': authorPost,
         })
 
 def authoreLikes(request, user_id):
-    authorLikes = Post.objects.filter(likes=user_id, isPublish='published')
+    authorUser = User.objects.get(id=user_id)
+    authorLikes = Post.objects.filter(likes=authorUser, isPublish='published')
     return render(request, 'user/show.html', {
+        'authorUser': authorUser,
         'authorLikes': authorLikes,
         })
         
         
 def authoreComments(request, user_id):
-    user = User.objects.get(id=user_id)
-    authorComments = comment.objects.filter(user_id=user)
-    return render(request, 'user/show.html', {'usercomments': authorComments})
+    authorUser = User.objects.get(id=user_id)
+    authorComments = comment.objects.filter(user_id=authorUser)
+    return render(request, 'user/show.html', {
+        'authorUser': authorUser,
+        'usercomments': authorComments
+        })
 
 
 
@@ -415,3 +418,29 @@ def comment_list(request):
     user = request.user
     comments = comment.objects.filter(user_id=user.id).all()
     return render(request, 'profile/comment_list.html', {'comments': comments})
+
+
+def editcomment(request):
+    user = request.user
+    if request.method == 'POST':
+        comment_id = request.POST.get('comment_id')
+        content = request.POST.get('content')
+        commentt = comment.objects.get(id=comment_id)
+        commentt.content=content
+        commentt.save()
+        return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
+
+
+def deletecomment(request):
+    user = request.user
+    if request.method == 'POST':
+        comment_id = request.POST.get('comment_id')
+        comment = comment.objects.get(id=comment_id)
+        comment.delete()
+        comment.save()
+        return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
+
+
+def publish_all(request):
+    publish_all = Post.objects.filter(isPublish='notPublished').update(isPublish='published')
+    return render(request, 'post/publish_manage.html', {'publish_all': publish_all, 'posts': allposts()})

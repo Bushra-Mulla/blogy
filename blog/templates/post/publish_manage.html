@@ -2,43 +2,63 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-
-<link rel="stylesheet" type="text/css" href="{% static 'reports_lists.css' %}" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'reports_lists.css' %}"
+/>
 <br />
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-header">
           <h4>Publish Post Requests List</h4>
         </div>
-        <div class="container reportStyle ">
+        <div class="container reportStyle">
           <div class="row align-items-start">
             <div class="col border">
-              <a onclick="location.href='{% url 'blog-published' %}'" style="cursor: pointer;">published
-                <span class="badge badge-light">{{countpost}}</span></a>
+              <a
+                onclick="location.href='{% url 'blog-published' %}'"
+                style="cursor: pointer"
+                >Published
+                <span class="badge badge-light">{{countpost}}</span></a
+              >
             </div>
             <div class="col border">
-              <a onclick="location.href='{% url 'notpublish' %}'" style="cursor: pointer;">not publish
-                <span class="badge badge-light">{{countnotpublish}}</span></a>
+              <a
+                onclick="location.href='{% url 'notpublish' %}'"
+                style="cursor: pointer"
+                >Not Published
+                <span class="badge badge-light">{{countnotpublish}}</span></a
+              >
             </div>
             <div class="col border">
-              <a onclick="location.href='{% url 'refused' %}'" style="cursor: pointer;">refused
-                <span class="badge badge-light">{{countrefused}}</span></a>
+              <a
+                onclick="location.href='{% url 'refused' %}'"
+                style="cursor: pointer"
+                >Refused
+                <span class="badge badge-light">{{countrefused}}</span></a
+              >
             </div>
           </div>
         </div>
         <div class="card-body">
           <br />
           <!-- add tabs -->
-          {% if posts %} {%for post in posts%}
-          {% if post.isPublish == 'notPublished' %}
-
+          {% if posts %} {%for post in posts%} {% if post.isPublish ==
+          'notPublished' %}
           <!-- <p>{{post.isPublish }}</p> -->
           <div class="gaadiex-list">
-            <div class="gaadiex-list-item" style="border-left: solid #ff2c9c; background-color: #d3ebff">
-              <img class="gaadiex-list-item-img" src="{{post.author.user_profile.profile_picture.url}}"
-                alt="List user" />
+            <div
+              class="gaadiex-list-item"
+              style="border-left: solid #ff2c9c; background-color: #d3ebff"
+            >
+              <img
+                class="gaadiex-list-item-img"
+                src="{{post.author.user_profile.profile_picture.url}}"
+                alt="List user"
+              />
               <!-- <i class="fa fa-user"></i> -->
               <div class="gaadiex-list-item-text">
                 <h3>
@@ -52,8 +72,11 @@
           {% else %}
           <div class="gaadiex-list">
             <div class="gaadiex-list-item">
-              <img class="gaadiex-list-item-img" src="{{post.author.user_profile.profile_picture.url}}"
-                alt="List user" />
+              <img
+                class="gaadiex-list-item-img"
+                src="{{post.author.user_profile.profile_picture.url}}"
+                alt="List user"
+              />
               <!-- <i class="fa fa-user"></i> -->
               <div class="gaadiex-list-item-text">
                 <h3>
@@ -74,22 +97,57 @@
       <div class="card">
         <div class="card-header">
           {% if postDetails %}
-          <h4>{{postDetails.title}}</h4>
+          <h4>
+            <a href="{% url 'blog-post-show' postDetails.id%}"
+              >{{postDetails.title}}</a
+            >
+          </h4>
         </div>
         <div class="card-body">
           <h1>
             <div class="gaadiex-list-item">
-              <img class="gaadiex-list-item-img" src="{{postDetails.author.user_profile.profile_picture.url}}" />
-
+              <img
+                class="gaadiex-list-item-img"
+                src="{{postDetails.author.user_profile.profile_picture.url}}"
+              />
               <div class="gaadiex-list-item-text">
                 <h3 style="padding-top: 10px">From: {{postDetails.author}}</h3>
                 <h6 style="padding-bottom: 5px">{{postDetails.date_post}}</h6>
                 <hr />
-
-                <a href="{% url 'blog-post-show' postDetails.id%}" class="btn btn-success">Jump to post</a>
-                {% if post.isPublish == 'notPublished'  %}
-                <a href="{% url 'update_published' postDetails.id %}" class="btn btn-default">Make it publish</a>
-                <a href="{% url 'update_refuse' postDetails.id%}" class="btn btn-default">Make it refused</a>
+                {% if postDetails.isPublish == 'notPublished' %}
+                <a
+                  href="{% url 'update_published' postDetails.id %}"
+                  class="gradient-button gradient-button-3"
+                  style="
+                    width: auto;
+                    text-decoration: none;
+                    color: white;
+                    float: right;
+                  "
+                  >Publish</a
+                >
+                <a
+                  href="{% url 'update_refuse' postDetails.id%}"
+                  class="gradient-button gradient-button-1"
+                  style="
+                    width: auto;
+                    text-decoration: none;
+                    color: white;
+                    float: left;
+                  "
+                  >Refused</a
+                >
+                <a
+                  href="{% url 'publish_all'  %}"
+                  class="gradient-button gradient-button-3"
+                  style="
+                    width: auto;
+                    text-decoration: none;
+                    color: white;
+                    float: right;
+                  "
+                  >Publish All</a
+                >
                 {% endif %}
               </div>
             </div>

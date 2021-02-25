@@ -10,7 +10,7 @@
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     <h4>Reports List</h4>
@@ -81,7 +81,7 @@
             <div class="card">
                 <div class="card-header">
                     {% if report_details %}
-                    <h4>{{report_details.title}}</h4>
+                    <h4><a href="{% url 'blog-post-show' report_details.Post_id.id%}">{{report_details.title}}</a></h4>
                 </div>
                 <div class="card-body">
                     <h1>
@@ -95,13 +95,12 @@
                                 <hr />
 
                                 <p>{{report_details.message}}</p>
-                                <a href="{% url 'blog-post-show' report_details.Post_id.id%}"
-                                    class="btn btn-success">Jump
-                                    to post</a>
                                 <!-- <p>{{report_details.user_id.user_profile.profile_picture.url}}</p> -->
 
                                 {% if not report_details.is_archived %}
-                                <a href="{% url 'archiveReport' report_details.id%}" class="btn btn-default">Make
+                                <a href="{% url 'archiveReport' report_details.id%}"
+                                    class="gradient-button gradient-button-3"
+                                    style="width: auto; text-decoration: none; color: white;">Make
                                     resolve and archive</a>
                                 {% endif %}
                             </div>
