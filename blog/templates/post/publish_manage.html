@@ -33,7 +33,7 @@
           <br />
           <!-- add tabs -->
           {% if posts %} {% if post.isPublish == 'notPublished' %}<a href="{% url 'publish_all'  %}" class="gradient-button gradient-button-3"
-                  style="width: auto; text-decoration: none; color: white; float: right;">Publish All</a> {%for post in posts%}
+                  style="width: auto; text-decoration: none; color: white; float: right;">Publish All</a> {%endif%}{%for post in posts%}
           {% if post.isPublish == 'notPublished' %}
           <!-- <p>{{post.isPublish }}</p> -->
           <div class="gaadiex-list">
