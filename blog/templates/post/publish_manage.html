@@ -32,7 +32,8 @@
         <div class="card-body">
           <br />
           <!-- add tabs -->
-          {% if posts %} {%for post in posts%}
+          {% if posts %} {% if post.isPublish == 'notPublished' %}<a href="{% url 'publish_all'  %}" class="gradient-button gradient-button-3"
+                  style="width: auto; text-decoration: none; color: white; float: right;">Publish All</a> {%for post in posts%}
           {% if post.isPublish == 'notPublished' %}
           <!-- <p>{{post.isPublish }}</p> -->
           <div class="gaadiex-list">
