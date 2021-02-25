@@ -81,7 +81,7 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 
 
 
-### The Website Dimo 
+### The Website Demo 
 You can visit Blogy website [link here](https://blogyproject.herokuapp.com/)
 
 ## API Endpoints
