@@ -1,0 +1,89 @@
+
+footer .logo h3 {
+  font-size: 2.2rem;
+  color: #FFF;
+  margin-top: 30px;
+  text-transform: uppercase;
+}
+
+footer p {
+  font-size: 1.2rem;
+  padding: 10px 0;
+  color: #FFF;
+
+}
+
+footer p:last-child {
+  font-size: 0.8rem;
+}
+
+
+footer ul {
+  list-style: none;
+  display: flex;
+  margin: 1%;
+}
+
+footer ul li {
+  display: inline-block;
+  width: 20%;
+  height: 20%;
+  margin: 0 10px;
+}
+
+footer ul li :hover {
+  transform: scale(1.1);
+}
+
+#footer {
+  width: 100%;
+  height: 250px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  display: flex;
+  bottom: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: #061542;
+}
+
+
+
+.gradient-button {
+  margin: 5px;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #FFF;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  width: 90px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
+  display: inline-block;
+}
+.gradient-button:hover{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  margin: 8px 10px 12px;
+}
+.gradient-button-1 {background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97 51%, #DD5E89 100%)}
+.gradient-button-1:hover { background-position: right center; }
+
+.gradient-button-2 {background-image: linear-gradient(to right, #2BC0E4 0%, #EAECC6 51%, #2BC0E4 100%)}
+.gradient-button-2:hover { background-position: right center; }
+
+.gradient-button-3 {background-image: linear-gradient(to right, #7474BF 0%, #348AC7 51%, #7474BF 100%)}
+.gradient-button-3:hover { background-position: right center; }
+
+.gradient-button-4 {background-image: linear-gradient(to right, #00d2ff 0%, #3a7bd5 51%, #00d2ff 100%)}
+.gradient-button-4:hover { background-position: right center; }
