@@ -43,10 +43,14 @@
             console.log(`#card${post_id}`)
             $(`#card${post_id}`).hide()
           }
+           var _html ='<i class="fa fa-thumbs-up"></i>'
+           $(".like_button" + post_id).append(_html);
           // $(`.like_button${post_id}`).hide();
         } else {
           $(`.like_button${post_id}`).text('Unlike')
           res = trimCount + 1
+          var _html ='<i class="fa fa-thumbs-down"></i>'
+          $(".like_button" + post_id).append(_html);
         }
         $(`.like_count${post_id}`).text(res)
       },
