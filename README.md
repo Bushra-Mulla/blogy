@@ -1,8 +1,7 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Blogy Project 
 
 ## Introduction
-A blog is an online diary or journal located on a website. Users can create their own blog and post content that typically articles or sharing any information with others for engaging with them.
-
+Blogy It is an online diary or journal located that shows you a list of posts in different categories you can filter the post by any category you want. Also, you can create your own account and profile then shares your opinions and ideas in your specialty or anything you want with others. In addition, you can engage with others' posts by add comments or like their posts. Users cannot post anything without admin permission to publish and users can report any inappropriate content so Blogy Admin can check and solved it.
 ### Wireframe
 Started the app by designing its layout framework by <a href= 'https://wireframepro.mockflow.com/'>mockflow</a>. 
 
