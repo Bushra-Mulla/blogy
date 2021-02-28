@@ -1,7 +1,8 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Blogy Project 
 
 ## Introduction
-Blogy It is an online diary or journal located that shows you a list of posts in different categories you can filter the post by any category you want. Also, you can create your own account and profile then shares your opinions and ideas in your specialty or anything you want with others. In addition, you can engage with others' posts by add comments or like their posts. Users cannot post anything without admin permission to publish and users can report any inappropriate content so Blogy Admin can check and solved it.
+Blogy It is an online diary or journal located that shows you a list of posts in different categories you can filter the post by any category you want. Also, you can create your own account and shares your opinions and ideas in your specialty or anything you want with others. In addition, you can engage with others' posts by add comments or like their posts. Users cannot post anything without admin permission to publish and users can report any inappropriate content so Blogy Admin can check and solved it. Implementation using HTML, CSS, Bootstrap, Python, Ajax, Django, and Postgres.
+
 ### Wireframe
 Started the app by designing its layout framework by <a href= 'https://wireframepro.mockflow.com/'>mockflow</a>. 
 
