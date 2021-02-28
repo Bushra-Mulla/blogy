@@ -441,3 +441,6 @@ def deletecomment(request):
         return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
 
 
+def publish_all(request):
+    publish_all = Post.objects.filter(isPublish='notPublished').update(isPublish='published')
+    return render(request, 'post/publish_manage.html', {'publish_all': publish_all, 'posts': allposts()})

@@ -162,13 +162,25 @@ python manage.py runserver
 - As a logged in user, I should be able to get a notification when other comments on my posts
 - As a logged in user,  I should be able to subscribe to a selected author blog
 
-## ReSources
-- https://docs.djangoproject.com/en/3.1/topics/db/models/
-- https://docs.djangoproject.com/en/3.1/ref/models/querysets/
-- https://code.djangoproject.com/ticket/27017
-- https://www.xspdf.com/resolution/60078270.html
+## Resources
+### Coding 
+- <a href='https://docs.djangoproject.com/en/3.1/topics/db/models/'>Models Django</a>
+- <a href='https://docs.djangoproject.com/en/3.1/ref/models/querysets/'>QuerySet API reference</a>
+- <a href='https://code.djangoproject.com/ticket/27017'>Closed Uncategorized</a>
+- <a href='https://www.xspdf.com/resolution/60078270.html'>Resolution</a>
+- <a href='https://www.tidio.com/panel/bots'>Tidio</a>
+- <a href='https://pypi.org/project/django-richtextfield/'>RichTextField</a>
+
+
+### Designing  
+- <a href= 'https://getbootstrap.com/'>Bootstrap</a>
+- <a href= 'https://fontawesome.com/icons?d=gallery&p=2&q=email'>Font Awesome</a>
+- <a href='https://www.freepik.com/'>Freepik</a>
+- <a href='https://unsplash.com/'>Unsplash</a>
+- <a href='https://slidesgo.com/search?q=blog'>Slidesgo</a>
+- <a href='https://storyset.com/'>Storyset</a>
 
 ## Collaborating
-- <a href= 'https://git.generalassemb.ly/ashwagzabani'>Ashwag Zabani</a>
-- <a href='https://git.generalassemb.ly/bushra-mulla'>Bushra Mulla</a>
-- <a href= 'https://git.generalassemb.ly/fatmahhelal'>Fatimah Alhelal</a>
+- <a href= 'https://www.linkedin.com/in/ashwagzabani/'>Ashwag Zabani</a>
+- <a href='https://www.linkedin.com/in/bushra-mulla/'>Bushra Mulla</a>
+- <a href= 'https://www.linkedin.com/in/fatimahalhelal/'>Fatimah Alhelal</a>

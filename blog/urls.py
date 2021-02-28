@@ -96,4 +96,5 @@ urlpatterns = [
 
     path('search/', views.search, name='search'),
     path('admin/', admin.site.urls, name='admin'),
+    path('published/publish_all',views.publish_all, name='publish_all'),
 ]
