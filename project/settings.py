@@ -28,7 +28,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['blogyproject.herokuapp.com', '0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['blogyproject.herokuapp.com',
+                 '0.0.0.0', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -122,7 +123,7 @@ DATABASES['default'].update(db_from_env)
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'bushra',
+    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
     'API_KEY': os.environ.get('API_KEY'),
     'API_SECRET': os.environ.get('API_SECRET')
 }
