@@ -1,7 +1,7 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Blogy Project 
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) <img src="img/logo2.png" width="50px"> Blogy Project 
 
 ## Introduction
-A blog is an online diary or journal located on a website. Users can create their own blog and post content that typically articles or sharing any information with others for engaging with them.
+Blogy It is an online diary or journal located that shows you a list of posts in different categories you can filter the post by any category you want. Also, you can create your own account and shares your opinions and ideas in your specialty or anything you want with others. In addition, you can engage with others' posts by add comments or like their posts. Users cannot post anything without admin permission to publish and users can report any inappropriate content so Blogy Admin can check and solved it. Implementation using HTML, CSS, Bootstrap, Python, Ajax, Django, and Postgres.
 
 ### Wireframe
 Started the app by designing its layout framework by <a href= 'https://wireframepro.mockflow.com/'>mockflow</a>. 
@@ -81,7 +81,7 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 
 
 
-### The Website Dimo 
+### The Website Demo 
 You can visit Blogy website [link here](https://blogyproject.herokuapp.com/)
 
 ## API Endpoints
@@ -162,8 +162,25 @@ python manage.py runserver
 - As a logged in user, I should be able to get a notification when other comments on my posts
 - As a logged in user,  I should be able to subscribe to a selected author blog
 
+## Resources
+### Coding 
+- <a href='https://docs.djangoproject.com/en/3.1/topics/db/models/'>Models Django</a>
+- <a href='https://docs.djangoproject.com/en/3.1/ref/models/querysets/'>QuerySet API reference</a>
+- <a href='https://code.djangoproject.com/ticket/27017'>Closed Uncategorized</a>
+- <a href='https://www.xspdf.com/resolution/60078270.html'>Resolution</a>
+- <a href='https://www.tidio.com/panel/bots'>Tidio</a>
+- <a href='https://pypi.org/project/django-richtextfield/'>RichTextField</a>
+
+
+### Designing  
+- <a href= 'https://getbootstrap.com/'>Bootstrap</a>
+- <a href= 'https://fontawesome.com/icons?d=gallery&p=2&q=email'>Font Awesome</a>
+- <a href='https://www.freepik.com/'>Freepik</a>
+- <a href='https://unsplash.com/'>Unsplash</a>
+- <a href='https://slidesgo.com/search?q=blog'>Slidesgo</a>
+- <a href='https://storyset.com/'>Storyset</a>
 
 ## Collaborating
-- <a href= 'https://git.generalassemb.ly/ashwagzabani'>Ashwag Zabani</a>
-- <a href='https://git.generalassemb.ly/bushra-mulla'>Bushra Mulla</a>
-- <a href= 'https://git.generalassemb.ly/fatmahhelal'>Fatimah Alhelal</a>
+- <a href= 'https://www.linkedin.com/in/ashwagzabani/'>Ashwag Zabani</a>
+- <a href='https://www.linkedin.com/in/bushra-mulla/'>Bushra Mulla</a>
+- <a href= 'https://www.linkedin.com/in/fatimahalhelal/'>Fatimah Alhelal</a>

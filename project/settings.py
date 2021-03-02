@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'ckeditor',
     'django_social_share',
     'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
 
 ]
 
@@ -120,6 +123,14 @@ DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+    'API_KEY': os.environ.get('API_KEY'),
+    'API_SECRET': os.environ.get('API_SECRET')
+}
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -161,6 +172,7 @@ STATICFILES_DIRS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # STATICFILES_DIRS =(
 #     os.path.join(BASE_DIR, 'static')
