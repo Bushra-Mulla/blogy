@@ -55,11 +55,13 @@ def post_show(request, post_id):
 
 def authoreProfile(request, user_id):
     authorUser = User.objects.get(id=user_id)
-    authorPost = Post.objects.filter(author=authorUser).filter(isPublish='published')
+    authorPost = Post.objects.filter(
+        author=authorUser).filter(isPublish='published')
     return render(request, 'user/show.html', {
         'authorUser': authorUser,
         'authorPost': authorPost,
-        })
+    })
+
 
 def authorePosts(request, user_id):
     authorUser = User.objects.get(id=user_id)
@@ -67,7 +69,8 @@ def authorePosts(request, user_id):
     return render(request, 'user/show.html', {
         'authorUser': authorUser,
         'authorPost': authorPost,
-        })
+    })
+
 
 def authoreLikes(request, user_id):
     authorUser = User.objects.get(id=user_id)
@@ -75,17 +78,16 @@ def authoreLikes(request, user_id):
     return render(request, 'user/show.html', {
         'authorUser': authorUser,
         'authorLikes': authorLikes,
-        })
-        
-        
+    })
+
+
 def authoreComments(request, user_id):
     authorUser = User.objects.get(id=user_id)
     authorComments = comment.objects.filter(user_id=authorUser)
     return render(request, 'user/show.html', {
         'authorUser': authorUser,
         'usercomments': authorComments
-        })
-
+    })
 
 
 @method_decorator(login_required, name='dispatch')
@@ -426,7 +428,7 @@ def editcomment(request):
         comment_id = request.POST.get('comment_id')
         content = request.POST.get('content')
         commentt = comment.objects.get(id=comment_id)
-        commentt.content=content
+        commentt.content = content
         commentt.save()
         return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
 
@@ -437,10 +439,11 @@ def deletecomment(request):
         comment_id = request.POST.get('comment_id')
         comment = comment.objects.get(id=comment_id)
         comment.delete()
-        comment.save()
+        commentt.save()
         return JsonResponse({'status': 'Success', 'msg': 'save successfully'})
 
 
 def publish_all(request):
-    publish_all = Post.objects.filter(isPublish='notPublished').update(isPublish='published')
+    publish_all = Post.objects.filter(
+        isPublish='notPublished').update(isPublish='published')
     return render(request, 'post/publish_manage.html', {'publish_all': publish_all, 'posts': allposts()})

@@ -77,8 +77,8 @@ urlpatterns = [
     path('published/refused',
          views.refused, name="refused"),
     path('published/notpublish',
-         views.notpublish, name="notpublish"), 
-    path('published/publish_all',views.publish_all, name='publish_all'),
+         views.notpublish, name="notpublish"),
+
 
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
@@ -96,5 +96,5 @@ urlpatterns = [
 
     path('search/', views.search, name='search'),
     path('admin/', admin.site.urls, name='admin'),
-    
+    path('published/publish_all', views.publish_all, name='publish_all'),
 ]
