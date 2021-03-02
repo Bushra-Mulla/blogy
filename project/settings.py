@@ -42,7 +42,6 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 INSTALLED_APPS = [
-
     'blog.apps.BlogConfig',
     'crispy_forms',
     'django.contrib.admin',
@@ -54,10 +53,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'django_social_share',
     'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles',
     'cloudinary_storage',
     'cloudinary',
-
 ]
 
 MIDDLEWARE = [
