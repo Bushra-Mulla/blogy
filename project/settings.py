@@ -122,7 +122,7 @@ DATABASES['default'].update(db_from_env)
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+    'CLOUD_NAME': 'bushra',
     'API_KEY': os.environ.get('API_KEY'),
     'API_SECRET': os.environ.get('API_SECRET')
 }
